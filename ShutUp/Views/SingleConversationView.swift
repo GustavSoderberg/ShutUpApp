@@ -23,7 +23,7 @@ struct SingleConversationView: View {
         
         Divider()
         
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             
             Spacer()
             
@@ -33,7 +33,10 @@ struct SingleConversationView: View {
                     
                     ForEach(conversation!.messages) { message in
                         
-                        Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
+                        MessageBubble(convoM: convoM, message: message)
+                        
+                        
+                        //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
                         
                     }
                     
@@ -48,11 +51,14 @@ struct SingleConversationView: View {
         }
         
         
+        
         HStack {
             
             TextField("message", text: $message).padding()
             
             Button {
+                
+                
                 
                 convoM.sendMessage(message: message, user: convoM.currentUser, conversation: conversation!)
                 message = ""
@@ -87,8 +93,42 @@ struct GetMembers {
     
 }
 
+struct MessageBubble : View{
+    
+    var convoM : ConversationManager
+    var message: Message
+    
+    var body: some View {
+        
+        VStack(alignment: convoM.currentUser == message.sender ? .trailing : .leading){
+            
+            HStack{
+                Text(message.text)
+                    .fontWeight(.medium)
+                    .foregroundColor(Color.white)
+                    .padding()
+                    .background(convoM.currentUser == message.sender ? Color.blue : Color.gray)
+                    .cornerRadius(30)
+                
+            }
+            .frame(maxWidth: 300, alignment: convoM.currentUser == message.sender ? .trailing : .leading)
+            
+        }
+        .frame(maxWidth: .infinity, alignment: convoM.currentUser == message.sender ? .trailing : .leading)
+        .padding(convoM.currentUser == message.sender ? .trailing : .leading)
+        
+        
+    }
+        
+        
+    
+}
+
+
+
 //struct SingleConversationView_Previews: PreviewProvider {
+//
 //    static var previews: some View {
-//        SingleConversationView()
+//        SingleConversationView(convoM: <#ConversationManager#>)
 //    }
 //}

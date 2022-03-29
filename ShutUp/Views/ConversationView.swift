@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ConversationView: View {
     
-    @ObservedObject var convoM = ConversationManager(user: User(name: "Gustav", username: "gustav", password: "123"))
+    @ObservedObject var convoM = ConversationManager(user: User(name: "you", username: "gustav", password: "123"))
+    @State var newConversationSheet = false
+    @State var convoName = ""
     
     var body: some View {
         
@@ -25,7 +27,7 @@ struct ConversationView: View {
                         
                     } label: {
                         
-                        Text("\(convo.id)")
+                        Text("\(convo.name)")
                         
                     }
                     
@@ -36,21 +38,99 @@ struct ConversationView: View {
                 
                 Button {
                     
-                    convoM.newConversation(members: [convoM.currentUser,
-                                                     User(name: "Andreas", username: "test", password: "test"),
-                                                     User(name: "Calle", username: "test", password: "test")])
+                    newConversationSheet = true
                     
                 } label: {
                     
                     Text("New conversation")
                 }
                 
+            }.sheet(isPresented: $newConversationSheet) {
+                if convoM.selectedUsers.count > 0 {
+                    convoM.newConversation(name: convoName)
+                    convoName = ""
+                }
+            } content: {
+                NewConversationView(newConversationSheet: $newConversationSheet, convoName: $convoName, convoM: convoM)
             }
+
             
         }
         
         
     }
+}
+
+struct NewConversationView : View{
+    
+    @Binding var newConversationSheet: Bool
+    @Binding var convoName: String
+    @ObservedObject var convoM: ConversationManager
+    
+    var body: some View {
+        
+        Spacer()
+        
+        ForEach(convoM.listOfUsers) { user in
+            
+            Button {
+                if !convoM.selectedUsers.contains(user) {
+                    convoM.select(user: user)
+                } else if convoM.selectedUsers.contains(user) {
+                    convoM.unselect(userToRemove: user)
+                }
+                
+                for user in convoM.selectedUsers {
+                    print(user.name)
+                }
+                
+            } label: {
+                
+                if !convoM.selectedUsers.contains(user) {
+                    Text(user.name).padding()
+                } else if convoM.selectedUsers.contains(user) {
+                    Text(user.name)
+                        .padding()
+                        .foregroundColor(Color.white)
+                        .background(Color.blue)
+                        .cornerRadius(20)
+                }
+            }
+            
+        }
+        
+        Spacer()
+        
+        Text("Conversation name:")
+        TextField("Type here...", text: $convoName)
+            .multilineTextAlignment(.center)
+            .padding()
+        
+        Button {
+            if convoM.selectedUsers.count > 0 {
+                if convoName.isEmpty {
+                    
+                    var temp = ""
+                    
+                    for user in convoM.selectedUsers {
+                        
+                        temp += "\(user.name) & "
+                        
+                    }
+                    
+                    convoName += temp.dropLast(3)
+                    
+                            
+                }
+                newConversationSheet = false
+            }
+        } label: {
+            Text("Continue")
+        }
+
+        
+    }
+    
 }
 
 //struct ConversationView_Previews: PreviewProvider {

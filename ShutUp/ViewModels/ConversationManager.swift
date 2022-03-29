@@ -11,6 +11,7 @@ class ConversationManager: ObservableObject {
     
     let currentUser: User
     var listOfUsers = [User]()
+    var selectedUsers = [User]()
     @Published var listOfConversations = [Conversation]()
     @Published var refresh = 0
     
@@ -18,11 +19,17 @@ class ConversationManager: ObservableObject {
         
         self.currentUser = user
         
+        listOfUsers.append(User(name: "Andreas", username: "test", password: "test"))
+        listOfUsers.append(User(name: "Calle", username: "test", password: "test"))
+        listOfUsers.append(User(name: "Gustav", username: "test", password: "test"))
+        
     }
     
-    func newConversation(members: [User]) {
+    func newConversation(name: String) {
         
-        let conversation = Conversation(members: members)
+        selectedUsers.append(currentUser)
+        let conversation = Conversation(name: name, members: selectedUsers)
+        selectedUsers.removeAll()
         
         self.listOfConversations.append(conversation)
         
@@ -35,4 +42,19 @@ class ConversationManager: ObservableObject {
         
     }
     
+    func select(user: User) {
+        self.selectedUsers.append(user)
+        self.refresh += 1
+    }
+    
+    func unselect(userToRemove: User) {
+        
+        for index in 0...selectedUsers.count-1 {
+            if userToRemove == selectedUsers[index] {
+                self.selectedUsers.remove(at: index)
+                self.refresh += 1
+                break
+            }
+        }
+    }
 }

@@ -10,12 +10,14 @@ import Foundation
 class Conversation: Identifiable {
     
     let id: UUID
+    var name: String
     var members: [User]
     var messages: [Message]
     
-    init(members: [User]) {
+    init(name: String, members: [User]) {
         
         self.id = UUID()
+        self.name = name
         self.members = members
         self.messages = [Message]()
         

@@ -18,7 +18,7 @@ struct SingleConversationView: View {
     var body: some View {
         
         
-        Text("This is a conversation between:\n\(getMembers.everybody(members: conversation!.members))".dropLast(5))
+        Text("This is a conversation between\n\(getMembers.everybody(members: conversation!.members))".dropLast(5))
             .multilineTextAlignment(.center)
         
         Divider()
@@ -34,8 +34,6 @@ struct SingleConversationView: View {
                     ForEach(conversation!.messages) { message in
                         
                         MessageBubble(convoM: convoM, message: message)
-                        
-                        
                         //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
                         
                     }

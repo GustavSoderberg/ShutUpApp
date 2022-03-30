@@ -59,11 +59,7 @@ struct ConversationView: View {
             } content: {
                 NewConversationView(newConversationSheet: $newConversationSheet, convoName: $convoName, convoM: convoM)
             }
-
-            
         }
-        
-        
     }
 }
 
@@ -125,7 +121,6 @@ struct NewConversationView : View{
                     }
                     
                     convoName += temp.dropLast(3)
-                    
 
                 }
                 newConversationSheet = false
@@ -134,7 +129,6 @@ struct NewConversationView : View{
             Text("Continue")
         }
 
-        
     }
     
 }

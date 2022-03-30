@@ -12,12 +12,11 @@ struct SingleConversationView: View {
     @ObservedObject var convoM: ConversationManager
     @State var conversation: Conversation?
     var getMembers = GetMembers()
-    
+
     @State var message = ""
     
     var body: some View {
-        
-        
+
         Text("This is a conversation between\n\(getMembers.everybody(members: conversation!.members))")
             .multilineTextAlignment(.center)
         
@@ -35,29 +34,19 @@ struct SingleConversationView: View {
                         
                         MessageBubble(convoM: convoM, message: message)
                         //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
-                        
                     }
-                    
                 }
-                
                 Spacer()
-                
             }
-            
             Spacer()
-            
         }
-        
-        
-        
+
         HStack {
             
             TextField("message", text: $message).padding()
             
             Button {
-                
-                
-                
+
                 convoM.sendMessage(message: message, user: convoM.currentUser, conversation: conversation!)
                 message = ""
                 
@@ -94,13 +83,6 @@ struct GetMembers {
             else {
                 rMembers += "\(member.name), "
             }
-            
-            
-            
-            
-            
-            
-            
 
 //            if numberOfMembers >= 2 {
 //
@@ -112,7 +94,6 @@ struct GetMembers {
 //                rMembers += "\(member.name) and "
 //
 //            }
-
         }
         
         return rMembers

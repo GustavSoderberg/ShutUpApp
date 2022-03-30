@@ -26,12 +26,14 @@ struct ConversationView: View {
                         SingleConversationView(convoM: convoM, conversation: convo)
                         
                     } label: {
-                        
-                        Text("\(convo.name)")
+                        ChatPreview()
+                        //Text("\(convo.name)")
                         
                     }
 
                 }.padding()
+                
+                ChatPreview()
                 
                 Spacer()
                 
@@ -59,11 +61,7 @@ struct ConversationView: View {
             } content: {
                 NewConversationView(newConversationSheet: $newConversationSheet, convoName: $convoName, convoM: convoM)
             }
-
-            
         }
-        
-        
     }
 }
 
@@ -125,7 +123,6 @@ struct NewConversationView : View{
                     }
                     
                     convoName += temp.dropLast(3)
-                    
 
                 }
                 newConversationSheet = false
@@ -134,7 +131,6 @@ struct NewConversationView : View{
             Text("Continue")
         }
 
-        
     }
     
 }

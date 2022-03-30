@@ -18,7 +18,7 @@ struct SingleConversationView: View {
     var body: some View {
         
         
-        Text("This is a conversation between\n\(getMembers.everybody(members: conversation!.members))".dropLast(5))
+        Text("This is a conversation between\n\(getMembers.everybody(members: conversation!.members))")
             .multilineTextAlignment(.center)
         
         Divider()
@@ -78,22 +78,40 @@ struct GetMembers {
     func everybody(members: [User]) -> String {
         
         var rMembers = ""
-        var numberOfMembers = members.count
+        let secondLastIndex = members.count - 1
+        let thirdLastIndex = members.count - 2
+        
+        
         
         for member in members {
 
-            numberOfMembers = numberOfMembers - 1
-
-            if numberOfMembers >= 2 {
-
-                rMembers += "\(member.name), "
-//                numberOfMembers -= 1
-
-            } else if numberOfMembers <= 1{
-
-                rMembers += "\(member.name) and "
-
+//            rMembers += ""
+            if members[secondLastIndex] == member{
+                rMembers += "and \(member.name)"
+            }else if members[thirdLastIndex] == member{
+                rMembers += "\(member.name) "
             }
+            else {
+                rMembers += "\(member.name), "
+            }
+            
+            
+            
+            
+            
+            
+            
+
+//            if numberOfMembers >= 2 {
+//
+//                rMembers += "\(member.name), "
+////                numberOfMembers -= 1
+//
+//            } else if numberOfMembers <= 1{
+//
+//                rMembers += "\(member.name) and "
+//
+//            }
 
         }
         

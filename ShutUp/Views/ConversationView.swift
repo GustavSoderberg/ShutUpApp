@@ -30,8 +30,7 @@ struct ConversationView: View {
                         Text("\(convo.name)")
                         
                     }
-                    
-                    
+
                 }.padding()
                 
                 Spacer()
@@ -41,8 +40,15 @@ struct ConversationView: View {
                     newConversationSheet = true
                     
                 } label: {
-                    
-                    Text("New conversation")
+
+                    //Text("New conversation")
+
+                    ZStack{
+                        Text("New conversation")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(Color.blue.opacity(1))
+                        TextShimmer(text: "New conversation")
+                    }
                 }
                 
             }.sheet(isPresented: $newConversationSheet) {
@@ -120,7 +126,7 @@ struct NewConversationView : View{
                     
                     convoName += temp.dropLast(3)
                     
-                            
+
                 }
                 newConversationSheet = false
             }

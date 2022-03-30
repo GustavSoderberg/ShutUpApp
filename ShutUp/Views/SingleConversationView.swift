@@ -78,11 +78,23 @@ struct GetMembers {
     func everybody(members: [User]) -> String {
         
         var rMembers = ""
+        var numberOfMembers = members.count
         
         for member in members {
-            
-            rMembers += "\(member.name) and "
-            
+
+            numberOfMembers = numberOfMembers - 1
+
+            if numberOfMembers >= 2 {
+
+                rMembers += "\(member.name), "
+//                numberOfMembers -= 1
+
+            } else if numberOfMembers <= 1{
+
+                rMembers += "\(member.name) and "
+
+            }
+
         }
         
         return rMembers

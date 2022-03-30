@@ -26,12 +26,14 @@ struct ConversationView: View {
                         SingleConversationView(convoM: convoM, conversation: convo)
                         
                     } label: {
-                        
-                        Text("\(convo.name)")
+                        ChatPreview()
+                        //Text("\(convo.name)")
                         
                     }
 
                 }.padding()
+                
+                ChatPreview()
                 
                 Spacer()
                 

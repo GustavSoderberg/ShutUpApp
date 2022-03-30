@@ -16,6 +16,7 @@
 		3FAE94D527F201CD00957C61 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE94D427F201CD00957C61 /* Conversation.swift */; };
 		3FAE94D827F2044300957C61 /* ConversationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE94D727F2044300957C61 /* ConversationManager.swift */; };
 		3FAE94DA27F2123600957C61 /* SingleConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE94D927F2123600957C61 /* SingleConversationView.swift */; };
+		B359E8E227F3A07F00035660 /* RainbowShimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8E127F3A07F00035660 /* RainbowShimmer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		3FAE94D427F201CD00957C61 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		3FAE94D727F2044300957C61 /* ConversationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationManager.swift; sourceTree = "<group>"; };
 		3FAE94D927F2123600957C61 /* SingleConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleConversationView.swift; sourceTree = "<group>"; };
+		B359E8E127F3A07F00035660 /* RainbowShimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainbowShimmer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		3FAE94CE27F2017A00957C61 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B359E8E027F3A06B00035660 /* Components */,
 				3FAE94C227F2012900957C61 /* ConversationView.swift */,
 				3FAE94D927F2123600957C61 /* SingleConversationView.swift */,
 			);
@@ -104,6 +107,14 @@
 				3FAE94D727F2044300957C61 /* ConversationManager.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B359E8E027F3A06B00035660 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B359E8E127F3A07F00035660 /* RainbowShimmer.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +193,7 @@
 				3FAE94D527F201CD00957C61 /* Conversation.swift in Sources */,
 				3FAE94D827F2044300957C61 /* ConversationManager.swift in Sources */,
 				3FAE94D127F201A600957C61 /* User.swift in Sources */,
+				B359E8E227F3A07F00035660 /* RainbowShimmer.swift in Sources */,
 				3FAE94DA27F2123600957C61 /* SingleConversationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

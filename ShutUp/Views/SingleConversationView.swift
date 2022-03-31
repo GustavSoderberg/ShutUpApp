@@ -9,16 +9,15 @@ import SwiftUI
 
 struct SingleConversationView: View {
     
-    @ObservedObject var convoM: ConversationManager
+    @ObservedObject var convoM = cm
     @State var conversation: Conversation?
     var getMembers = GetMembers()
-    
+
     @State var message = ""
     
     var body: some View {
-        
-        
-        Text("This is a conversation between\n\(getMembers.everybody(members: conversation!.members))".dropLast(5))
+
+        Text("This is a conversation between\n\(getMembers.everybody(members: conversation!.members))")
             .multilineTextAlignment(.center)
         
         Divider()
@@ -33,31 +32,21 @@ struct SingleConversationView: View {
                     
                     ForEach(conversation!.messages) { message in
                         
-                        MessageBubble(convoM: convoM, message: message)
+                        MessageBubble(message: message)
                         //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
-                        
                     }
-                    
                 }
-                
                 Spacer()
-                
             }
-            
             Spacer()
-            
         }
-        
-        
-        
+
         HStack {
             
             TextField("message", text: $message).padding()
             
             Button {
-                
-                
-                
+
                 convoM.sendMessage(message: message, user: convoM.currentUser, conversation: conversation!)
                 message = ""
                 
@@ -78,11 +67,33 @@ struct GetMembers {
     func everybody(members: [User]) -> String {
         
         var rMembers = ""
+        let secondLastIndex = members.count - 1
+        let thirdLastIndex = members.count - 2
+        
+        
         
         for member in members {
-            
-            rMembers += "\(member.name) and "
-            
+
+//            rMembers += ""
+            if members[secondLastIndex] == member{
+                rMembers += "and \(member.name)"
+            }else if members[thirdLastIndex] == member{
+                rMembers += "\(member.name) "
+            }
+            else {
+                rMembers += "\(member.name), "
+            }
+
+//            if numberOfMembers >= 2 {
+//
+//                rMembers += "\(member.name), "
+////                numberOfMembers -= 1
+//
+//            } else if numberOfMembers <= 1{
+//
+//                rMembers += "\(member.name) and "
+//
+//            }
         }
         
         return rMembers
@@ -93,7 +104,7 @@ struct GetMembers {
 
 struct MessageBubble : View{
     
-    var convoM : ConversationManager
+    var convoM = cm
     var message: Message
     
     var body: some View {

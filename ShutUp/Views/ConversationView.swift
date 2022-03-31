@@ -7,57 +7,88 @@
 
 import SwiftUI
 
+//Global instance of a Singleton object
+var cm = ConversationManager()
+
 struct ConversationView: View {
     
-    @ObservedObject var convoM = ConversationManager(user: User(name: "you", username: "gustav", password: "123"))
+    @ObservedObject var convoM = cm
     @State var newConversationSheet = false
     @State var convoName = ""
-    
+    @State var searchText = ""
+    var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
+
     var body: some View {
         
         NavigationView {
-            
-            VStack{
+            VStack {
                 
-                ForEach(convoM.listOfConversations) { convo in
+                HStack {
                     
-                    NavigationLink {
-                        
-                        SingleConversationView(convoM: convoM, conversation: convo)
-                        
+                    
+                        AsyncImage(url: imageURL) { image in
+                            image.resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 50, height: 50)
+                                .cornerRadius(50)
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    
+                    Label() {
+                        TextField("Search here...", text: $searchText)
+                    } icon: {
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .scaledToFit()
+                    }.padding()
+                    
+                    Button {
+                        newConversationSheet = true
                     } label: {
-                        
-                        Text("\(convo.name)")
+                        Image(systemName: "square.and.pencil")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .scaledToFit()
                         
                     }
-                    
+
                     
                 }.padding()
                 
-                Spacer()
-                
-                Button {
+                ScrollView {
                     
-                    newConversationSheet = true
+                    VStack{
+                        
+                        ForEach(convoM.listOfConversations) { convo in
+                            
+                            NavigationLink {
+                                
+                                SingleConversationView(conversation: convo)
+                                
+                            } label: {
+                                ChatPreview()
+                                //Text("\(convo.name)")
+                                
+                            }
+                            
+                        }.padding()
+                        
+                        ChatPreview()
+                        
+                        Spacer()
+                        
+                    }.navigationBarHidden(true)
+                        .sheet(isPresented: $newConversationSheet) {
+                        NewConversationView(newConversationSheet: $newConversationSheet, convoName: $convoName)
+                    }
+                }
                     
-                } label: {
-                    
-                    Text("New conversation")
                 }
                 
-            }.sheet(isPresented: $newConversationSheet) {
-                if convoM.selectedUsers.count > 0 {
-                    convoM.newConversation(name: convoName)
-                    convoName = ""
-                }
-            } content: {
-                NewConversationView(newConversationSheet: $newConversationSheet, convoName: $convoName, convoM: convoM)
-            }
-
-            
+                
         }
-        
-        
     }
 }
 
@@ -65,7 +96,7 @@ struct NewConversationView : View{
     
     @Binding var newConversationSheet: Bool
     @Binding var convoName: String
-    @ObservedObject var convoM: ConversationManager
+    @ObservedObject var convoM = cm
     
     var body: some View {
         
@@ -116,18 +147,18 @@ struct NewConversationView : View{
                         
                         temp += "\(user.name) & "
                         
+                        convoName += temp.dropLast(3)
+                        convoM.newConversation(name: convoName)
                     }
                     
-                    convoName += temp.dropLast(3)
-                    
-                            
                 }
+                
+                convoName = ""
                 newConversationSheet = false
             }
         } label: {
             Text("Continue")
         }
-
         
     }
     

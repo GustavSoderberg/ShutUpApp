@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ChatPreview: View {
-
+    
+    var name: String
     var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
-    var name = "Dummy Jonasson"
 
     var body: some View {
         HStack(spacing: 20) {
@@ -79,10 +79,3 @@ struct ChatPreview: View {
         }
     }
 }
-
-struct ChatPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatPreview()
-    }
-}
-

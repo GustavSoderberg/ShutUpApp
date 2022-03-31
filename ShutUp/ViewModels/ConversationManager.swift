@@ -15,9 +15,9 @@ class ConversationManager: ObservableObject {
     @Published var listOfConversations = [Conversation]()
     @Published var refresh = 0
     
-    init(user: User) {
+    init() {
         
-        self.currentUser = user
+        self.currentUser = User(name: "you", username: "gustav", password: "123")
         
         listOfUsers.append(User(name: "Andreas", username: "test", password: "test"))
         listOfUsers.append(User(name: "Calle", username: "test", password: "test"))

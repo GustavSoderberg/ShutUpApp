@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SingleConversationView: View {
     
-    @ObservedObject var convoM: ConversationManager
+    @ObservedObject var convoM = cm
     @State var conversation: Conversation?
     var getMembers = GetMembers()
 
@@ -32,7 +32,7 @@ struct SingleConversationView: View {
                     
                     ForEach(conversation!.messages) { message in
                         
-                        MessageBubble(convoM: convoM, message: message)
+                        MessageBubble(message: message)
                         //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
                     }
                 }
@@ -104,7 +104,7 @@ struct GetMembers {
 
 struct MessageBubble : View{
     
-    var convoM : ConversationManager
+    var convoM = cm
     var message: Message
     
     var body: some View {

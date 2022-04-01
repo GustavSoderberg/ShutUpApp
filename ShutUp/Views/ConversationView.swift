@@ -13,6 +13,7 @@ var cm = ConversationManager()
 struct ConversationView: View {
     
     @ObservedObject var convoM = cm
+    @State var showWelcomeView = true
     @State var newConversationSheet = false
     @State var convoName = ""
     @State var searchText = ""
@@ -110,8 +111,12 @@ struct ConversationView: View {
                     }
                 }
 
-            }
-
+                    
+                }
+                
+                
+        }.sheet(isPresented: $showWelcomeView) {
+            WelcomeView(showWelcomeView: $showWelcomeView)
 
         }
     }

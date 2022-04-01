@@ -16,50 +16,74 @@ struct ConversationView: View {
     @State var newConversationSheet = false
     @State var convoName = ""
     @State var searchText = ""
+    @State var onTapped = false
+
     var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
 
     var body: some View {
         
         NavigationView {
+
             VStack {
                 
                 HStack {
-                    
-                    
-                        AsyncImage(url: imageURL) { image in
-                            image.resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 50, height: 50)
-                                .cornerRadius(50)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                    
-                    Label() {
-                        TextField("Search here...", text: $searchText)
-                    } icon: {
-                        Image(systemName: "magnifyingglass")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .scaledToFit()
-                    }.padding()
-                    
+
+                    AsyncImage(url: imageURL) { image in
+                        image.resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 40, height: 40)
+                            .cornerRadius(50)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    Spacer()
+
+                    Text("Chattar")
+                        .font(.title2)
+
+                    Spacer()
+
                     Button {
                         newConversationSheet = true
                     } label: {
-                        Image(systemName: "square.and.pencil")
+                        Image(systemName: "pencil.circle.fill")
                             .resizable()
-                            .frame(width: 40, height: 40)
+                            .frame(width: 30, height: 30)
                             .scaledToFit()
+                            .foregroundColor(Color(UIColor(named: "customGray")!))
+                            .offset(x: -10)
+
                         
                     }
 
-                    
                 }.padding()
                 
                 ScrollView {
                     
-                    VStack{
+                    VStack(alignment: .leading){
+
+                        Label() {
+                            TextField("Search here...", text: $searchText)
+
+                                .foregroundColor(Color.black)
+                                .accentColor(Color.white)
+                            
+
+                        } icon: {
+                            Image(systemName: "magnifyingglass")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .scaledToFit()
+                        }
+                        .textFieldStyle(.roundedBorder)
+                        .padding(10)
+                        .background(Color.white)
+                        .cornerRadius(50)
+                        .onTapGesture {
+                            onTapped.toggle()
+
+                        }
+
                         
                         ForEach(convoM.listOfConversations) { convo in
                             
@@ -69,6 +93,7 @@ struct ConversationView: View {
                                 
                             } label: {
                                 ChatPreview(name: convo.name)
+
                                 //Text("\(convo.name)")
                                 
                             }
@@ -77,15 +102,17 @@ struct ConversationView: View {
                         
                         Spacer()
                         
-                    }.navigationBarHidden(true)
-                        .sheet(isPresented: $newConversationSheet) {
+                    }
+                    .padding(20)
+                    .navigationBarHidden(true)
+                    .sheet(isPresented: $newConversationSheet) {
                         NewConversationView(newConversationSheet: $newConversationSheet, convoName: $convoName)
                     }
                 }
-                    
-                }
-                
-                
+
+            }
+
+
         }
     }
 }

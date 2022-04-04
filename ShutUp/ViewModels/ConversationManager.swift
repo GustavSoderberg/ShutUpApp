@@ -18,11 +18,10 @@ class ConversationManager: ObservableObject {
     init() {
         
         self.currentUser = User(name: "you", username: "gustav", password: "123")
-        
         listOfUsers.append(User(name: "Andreas", username: "test", password: "test"))
         listOfUsers.append(User(name: "Calle", username: "test", password: "test"))
         listOfUsers.append(User(name: "Gustav", username: "test", password: "test"))
-        
+
     }
     
     func newConversation(name: String) {

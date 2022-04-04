@@ -13,10 +13,13 @@ struct ChatPreview: View {
     var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
 
     var body: some View {
+
         HStack(spacing: 20) {
             
             ZStack{
+
                 AsyncImage(url: imageURL) { image in
+
                     image.resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
@@ -48,10 +51,8 @@ struct ChatPreview: View {
                 } placeholder: {
                     ProgressView()
                 }
-                
-                
+
             }
-            
 
             VStack(alignment: .leading){
                 Text(name)
@@ -69,12 +70,6 @@ struct ChatPreview: View {
                 }.padding(.top, -15)
                 
             }
-
-//            Image(systemName: "phone.fill")
-//                .foregroundColor(.gray)
-//                .padding(10)
-//                .background(.white)
-//                .cornerRadius(50)
 
         }
     }

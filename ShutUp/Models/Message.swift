@@ -14,4 +14,7 @@ struct Message: Identifiable {
     let sender: User
     let text: String
     
+    
+    
+    
 }

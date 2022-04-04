@@ -60,17 +60,13 @@ struct WelcomeView: View {
                             Text("Sign in with your email")
                                 .bold()
                                 .foregroundColor(Color.black)
-                                .multilineTextAlignment(.leading)
-                                .padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
                                 .frame(width: 250, height: 50)
-                                .background(Color.white)
-                                .shadow(color: Color.blue, radius: 20, x:10, y:10)
-                                .cornerRadius(50)
-                                .clipShape(Capsule())
 
                                 Image(systemName: "envelope.fill")
                                     .foregroundColor(Color.blue)
-                            }                        
+                            }.padding()
+                            .shadow(color: Color.blue, radius: 20, x:0, y:0)
+                            .clipShape(Capsule())
                     }
                     
                 }

@@ -11,12 +11,13 @@ struct SingleConversationView: View {
     
     @ObservedObject var convoM = cm
     @State var conversation: Conversation?
+    @State var showSettingsView = false
     var getMembers = GetMembers()
-
+    
     @State var message = ""
     
     var body: some View {
-
+        
         Text("This is a conversation between\n\(getMembers.everybody(members: conversation!.members))")
             .multilineTextAlignment(.center)
         
@@ -40,13 +41,13 @@ struct SingleConversationView: View {
             }
             Spacer()
         }
-
+        
         HStack {
             
             TextField("message", text: $message).padding()
             
             Button {
-
+                
                 convoM.sendMessage(message: message, user: convoM.currentUser, conversation: conversation!)
                 message = ""
                 
@@ -56,6 +57,15 @@ struct SingleConversationView: View {
                 
             }.padding()
             
+        }.toolbar {
+            Button {
+                showSettingsView = true
+            } label: {
+                Image(systemName: "gear")
+            }
+
+        }.sheet(isPresented: $showSettingsView) {
+            SettingsView(showSettingsView: $showSettingsView)
         }
         
     }
@@ -73,8 +83,8 @@ struct GetMembers {
         
         
         for member in members {
-
-//            rMembers += ""
+            
+            //            rMembers += ""
             if members[secondLastIndex] == member{
                 rMembers += "and \(member.name)"
             }else if members[thirdLastIndex] == member{
@@ -83,17 +93,17 @@ struct GetMembers {
             else {
                 rMembers += "\(member.name), "
             }
-
-//            if numberOfMembers >= 2 {
-//
-//                rMembers += "\(member.name), "
-////                numberOfMembers -= 1
-//
-//            } else if numberOfMembers <= 1{
-//
-//                rMembers += "\(member.name) and "
-//
-//            }
+            
+            //            if numberOfMembers >= 2 {
+            //
+            //                rMembers += "\(member.name), "
+            ////                numberOfMembers -= 1
+            //
+            //            } else if numberOfMembers <= 1{
+            //
+            //                rMembers += "\(member.name) and "
+            //
+            //            }
         }
         
         return rMembers
@@ -116,7 +126,7 @@ struct MessageBubble : View{
                     .fontWeight(.medium)
                     .foregroundColor(Color.white)
                     .padding()
-                    .background(convoM.currentUser == message.sender ? Color.blue : Color.gray)
+                    .background(convoM.currentUser == message.sender ? sm.themes[Conversation.theme]![0] : sm.themes["space"]![1])
                     .cornerRadius(30)
                 
             }
@@ -128,8 +138,8 @@ struct MessageBubble : View{
         
         
     }
-        
-        
+    
+    
     
 }
 

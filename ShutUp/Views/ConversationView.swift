@@ -9,6 +9,9 @@ import SwiftUI
 
 //Global instance of a Singleton object
 var cm = ConversationManager()
+var sm = SettingsManager()
+
+
 
 struct ConversationView: View {
     
@@ -112,7 +115,7 @@ struct ConversationView: View {
                 }
 
                     
-                }
+            }
                 
                 
         }.sheet(isPresented: $showWelcomeView) {

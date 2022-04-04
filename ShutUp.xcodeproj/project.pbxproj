@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F05FDFF27FB0B550058FACF /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F05FDFE27FB0B550058FACF /* SettingsManager.swift */; };
+		3F05FE0127FB184D0058FACF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F05FE0027FB184D0058FACF /* SettingsView.swift */; };
 		3FAE94C127F2012900957C61 /* ShutUpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE94C027F2012900957C61 /* ShutUpApp.swift */; };
 		3FAE94C327F2012900957C61 /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE94C227F2012900957C61 /* ConversationView.swift */; };
 		3FAE94C527F2012A00957C61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FAE94C427F2012A00957C61 /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F05FDFE27FB0B550058FACF /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		3F05FE0027FB184D0058FACF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3FAE94BD27F2012900957C61 /* ShutUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShutUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FAE94C027F2012900957C61 /* ShutUpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutUpApp.swift; sourceTree = "<group>"; };
 		3FAE94C227F2012900957C61 /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 				3FAE94C227F2012900957C61 /* ConversationView.swift */,
 				3FAE94D927F2123600957C61 /* SingleConversationView.swift */,
 				3FE554FE27F6E75F00325B17 /* WelcomeView.swift */,
+				3F05FE0027FB184D0058FACF /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				3FE554FC27F6E5DF00325B17 /* DataManager.swift */,
+				3F05FDFE27FB0B550058FACF /* SettingsManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -208,11 +214,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FAE94C327F2012900957C61 /* ConversationView.swift in Sources */,
+				3F05FDFF27FB0B550058FACF /* SettingsManager.swift in Sources */,
 				3FAE94D327F201B600957C61 /* Message.swift in Sources */,
 				3FAE94C127F2012900957C61 /* ShutUpApp.swift in Sources */,
 				3FAE94D527F201CD00957C61 /* Conversation.swift in Sources */,
 				B359E8E627F460C800035660 /* ChatPreview.swift in Sources */,
 				3FAE94D827F2044300957C61 /* ConversationManager.swift in Sources */,
+				3F05FE0127FB184D0058FACF /* SettingsView.swift in Sources */,
 				3FAE94D127F201A600957C61 /* User.swift in Sources */,
 				3FE554FF27F6E75F00325B17 /* WelcomeView.swift in Sources */,
 				B359E8E227F3A07F00035660 /* RainbowShimmer.swift in Sources */,
@@ -347,7 +355,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ShutUp/Preview Content\"";
-				DEVELOPMENT_TEAM = 4S7BBW6D46;
+				DEVELOPMENT_TEAM = KWQ4QJC9D4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -361,7 +369,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.callehoglund.ShutUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gustavsoderberg.ShutUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -377,7 +385,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ShutUp/Preview Content\"";
-				DEVELOPMENT_TEAM = 4S7BBW6D46;
+				DEVELOPMENT_TEAM = KWQ4QJC9D4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -391,7 +399,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.callehoglund.ShutUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gustavsoderberg.ShutUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

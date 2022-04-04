@@ -13,6 +13,7 @@ class Conversation: Identifiable {
     var name: String
     var members: [User]
     var messages: [Message]
+    static var theme = "space"
     
     init(name: String, members: [User]) {
         

@@ -21,17 +21,17 @@ struct ConversationView: View {
     @State var convoName = ""
     @State var searchText = ""
     @State var onTapped = false
-
+    
     var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
-
+    
     var body: some View {
         
         NavigationView {
-
+            
             VStack {
                 
                 HStack {
-
+                    
                     AsyncImage(url: imageURL) { image in
                         image.resizable()
                             .aspectRatio(contentMode: .fill)
@@ -41,12 +41,12 @@ struct ConversationView: View {
                         ProgressView()
                     }
                     Spacer()
-
+                    
                     Text("Chattar")
                         .font(.title2)
-
+                    
                     Spacer()
-
+                    
                     Button {
                         newConversationSheet = true
                     } label: {
@@ -56,23 +56,23 @@ struct ConversationView: View {
                             .scaledToFit()
                             .foregroundColor(Color(UIColor(named: "customGray")!))
                             .offset(x: -10)
-
+                        
                         
                     }
-
+                    
                 }.padding()
                 
                 ScrollView {
                     
                     VStack(alignment: .leading){
-
+                        
                         Label() {
                             TextField("Search here...", text: $searchText)
-
+                            
                                 .foregroundColor(Color.black)
                                 .accentColor(Color.white)
                             
-
+                            
                         } icon: {
                             Image(systemName: "magnifyingglass")
                                 .resizable()
@@ -85,9 +85,9 @@ struct ConversationView: View {
                         .cornerRadius(50)
                         .onTapGesture {
                             onTapped.toggle()
-
+                            
                         }
-
+                        
                         
                         ForEach(convoM.listOfConversations) { convo in
                             
@@ -97,7 +97,7 @@ struct ConversationView: View {
                                 
                             } label: {
                                 ChatPreview(name: convo.name)
-
+                                
                                 //Text("\(convo.name)")
                                 
                             }
@@ -113,14 +113,14 @@ struct ConversationView: View {
                         NewConversationView(newConversationSheet: $newConversationSheet, convoName: $convoName)
                     }
                 }
-
-                    
+                
+                
             }
-                
-                
+            
+            
         }.sheet(isPresented: $showWelcomeView) {
             WelcomeView(showWelcomeView: $showWelcomeView)
-
+            
         }
     }
 }
@@ -178,9 +178,15 @@ struct NewConversationView : View{
                     
                     for user in convoM.selectedUsers {
                         
-                        temp += "\(user.name) & "
-                        convoName += temp.dropLast(3)
+                        if user.name != cm.currentUser.name {
+                            
+                            temp = "\(user.name), "
+                            convoName += temp
+                            
+                        }
                     }
+                    
+                    convoName =  String(convoName.dropLast(2))
                 }
                 
                 convoM.newConversation(name: convoName)

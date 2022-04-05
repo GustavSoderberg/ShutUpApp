@@ -18,9 +18,6 @@ struct SingleConversationView: View {
     
     var body: some View {
         
-        Text("This is a conversation between\n\(getMembers.everybody(members: conversation!.members))")
-            .multilineTextAlignment(.center)
-        
         Divider()
         
         ScrollView(showsIndicators: false) {
@@ -64,7 +61,9 @@ struct SingleConversationView: View {
                 Image(systemName: "gear")
             }
 
-        }.sheet(isPresented: $showSettingsView) {
+        }
+        .navigationBarTitle("\(getMembers.everybody(members: conversation!.members))".dropLast(2)).navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showSettingsView) {
             SettingsView(showSettingsView: $showSettingsView)
         }
         
@@ -77,33 +76,16 @@ struct GetMembers {
     func everybody(members: [User]) -> String {
         
         var rMembers = ""
-        let secondLastIndex = members.count - 1
-        let thirdLastIndex = members.count - 2
         
         
         
         for member in members {
             
-            //            rMembers += ""
-            if members[secondLastIndex] == member{
-                rMembers += "and \(member.name)"
-            }else if members[thirdLastIndex] == member{
-                rMembers += "\(member.name) "
-            }
-            else {
+            if member.name != cm.currentUser.name {
+                
                 rMembers += "\(member.name), "
+                
             }
-            
-            //            if numberOfMembers >= 2 {
-            //
-            //                rMembers += "\(member.name), "
-            ////                numberOfMembers -= 1
-            //
-            //            } else if numberOfMembers <= 1{
-            //
-            //                rMembers += "\(member.name) and "
-            //
-            //            }
         }
         
         return rMembers

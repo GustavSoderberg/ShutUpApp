@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class Conversation: Identifiable {
     
@@ -13,7 +14,7 @@ class Conversation: Identifiable {
     var name: String
     var members: [User]
     var messages: [Message]
-    static var theme = "space"
+    var theme: Theme
     
     init(name: String, members: [User]) {
         
@@ -21,6 +22,7 @@ class Conversation: Identifiable {
         self.name = name
         self.members = members
         self.messages = [Message]()
+        self.theme = Theme(name: "Space", top: Color.black, background: Color.black, bottom: Color.black, bubbleS: Color.black, bubbleR: Color.black)
         
     }
     

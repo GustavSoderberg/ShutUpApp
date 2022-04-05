@@ -126,7 +126,7 @@ struct MessageBubble : View{
                     .fontWeight(.medium)
                     .foregroundColor(Color.white)
                     .padding()
-                    .background(convoM.currentUser == message.sender ? sm.themes[Conversation.theme]![0] : sm.themes["space"]![1])
+                    .background(convoM.currentUser == message.sender ? sm.currentTheme!.bubbleS : sm.currentTheme!.bubbleR)
                     .cornerRadius(30)
                 
             }

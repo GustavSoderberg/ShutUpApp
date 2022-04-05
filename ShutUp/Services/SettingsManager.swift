@@ -10,14 +10,37 @@ import SwiftUI
 
 class SettingsManager {
     
-    var space = [Color.black, Color.blue]
-    var space1 = [Color.black, Color.blue]
-    var space2 = [Color.black, Color.blue]
+    var themes = [Theme]()
+    var currentTheme: Theme?
     
-    var themes = ["space"  : [Color.black , Color.brown],
-               "flower"  : [Color.green , Color.red],
-               "sun"  : [Color.yellow , Color.purple]]
+    init() {
+        
+        self.createThemes()
+        currentTheme = themes[0]
+        
+    }
     
+    func createThemes() {
+        
+        themes.append(Theme(name: "Space", top: Color.black, background: Color.black, bottom: Color.black, bubbleS: Color.black, bubbleR: Color.black))
+        themes.append(Theme(name: "Flower", top: Color.green, background: Color.green, bottom: Color.green, bubbleS: Color.green, bubbleR: Color.green))
+        themes.append(Theme(name: "Sun", top: Color.yellow, background: Color.yellow, bottom: Color.yellow, bubbleS: Color.yellow, bubbleR: Color.yellow))
+        
+    }
     
+    func setCurrentTheme(name: String) {
+        
+        switch name {
+        case "space".lowercased():
+            currentTheme = themes[0]
+        case "flower".lowercased():
+            currentTheme = themes[1]
+        case "sun".lowercased():
+            currentTheme = themes[2]
+        default:
+            currentTheme = themes[0]
+        }
+        
+    }
     
 }

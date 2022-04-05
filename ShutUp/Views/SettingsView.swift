@@ -33,10 +33,8 @@ struct SelectionView: View {
     var body: some View {
         
         Button {
-            Conversation.theme = settings
-            print(showSettingsView)
+            sm.setCurrentTheme(name: settings)
             showSettingsView = false
-            print(showSettingsView)
         } label: {
             HStack{
                 Spacer()

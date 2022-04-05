@@ -56,7 +56,9 @@ struct ChatPreview: View {
 
             VStack(alignment: .leading){
                 Text(name)
-                    .font(.title).bold()
+                    .font(.headline)
+                    .fontWeight(.thin)
+                    .lineLimit(1)
 
                 HStack{
                     Text("Senaste meddelandet...")

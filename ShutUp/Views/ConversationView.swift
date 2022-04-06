@@ -18,7 +18,12 @@ var dm = DataManager()
 
 struct ConversationView: View {
     
-    
+    init() {
+        auth.signInAnonymously { authResult, error in
+            guard let _ = authResult?.user else { return }
+            dm.listenToFirestore()
+        }
+    }
     
     @ObservedObject var convoM = cm
     @State var showWelcomeView = true

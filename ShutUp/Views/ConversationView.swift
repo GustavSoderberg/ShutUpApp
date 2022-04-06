@@ -161,15 +161,15 @@ struct NewConversationView : View{
             } label: {
                 
                 if !convoM.selectedUsers.contains(user) {
-                    Text(user.name).padding()
+                    TitleRow(user: user)
                 } else if convoM.selectedUsers.contains(user) {
-                    Text(user.name)
-                        .padding()
+                    TitleRow(user: user)
                         .foregroundColor(Color.white)
                         .background(Color.blue)
                         .cornerRadius(20)
                 }
             }
+            .frame(width: 150, height: 70, alignment: .center)
             
         }
         

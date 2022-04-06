@@ -13,6 +13,13 @@ struct ShutUpApp: App {
     
     init() {
         FirebaseApp.configure()
+        
+        let auth = Auth.auth()
+        
+        auth.signInAnonymously { authResult, error in
+            guard let _ = authResult?.user else { return }
+            dm.listenToFirestore()
+        }
     }
     
     var body: some Scene {

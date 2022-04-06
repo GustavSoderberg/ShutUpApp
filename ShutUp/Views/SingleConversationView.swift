@@ -64,7 +64,7 @@ struct SingleConversationView: View {
         }
         .navigationBarTitle("\(getMembers.everybody(members: conversation!.members))".dropLast(2)).navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showSettingsView) {
-            SettingsView(showSettingsView: $showSettingsView)
+            SettingsView(showSettingsView: $showSettingsView, conversation: conversation!)
         }
         
     }

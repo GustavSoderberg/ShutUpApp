@@ -10,15 +10,34 @@ import SwiftUI
 struct SettingsView: View {
     
     @Binding var showSettingsView: Bool
+    var conversation: Conversation
     
     var body: some View {
         
         VStack {
             
+            Spacer()
+            
             SelectionView(name: "Space theme", settings: "space", color: Color.black, showSettingsView: $showSettingsView)
             SelectionView(name: "Flower theme", settings: "flower", color: Color.green, showSettingsView: $showSettingsView)
             SelectionView(name: "Sunny theme", settings: "sun", color: Color.yellow, showSettingsView: $showSettingsView)
             
+            Spacer()
+            
+            Button(action: {
+                
+                dm.deleteFromFirestore(conversation: conversation)
+                showSettingsView = false
+                
+            }){
+                Text("Remove conversation")
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: 300)
+            }
+            .padding()
+            .background(Color.red)
+            .cornerRadius(10)
         }
     }
 }

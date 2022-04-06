@@ -6,14 +6,24 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestoreSwift
 
-//Global instance of a Singleton object
-var cm = ConversationManager()
+//Global instances of a Singleton object
+var auth = Auth.auth()
+
+var cm = ConversationManager(uid: auth.currentUser!.uid)
 var sm = SettingsManager()
-
-
+var dm = DataManager()
 
 struct ConversationView: View {
+    
+    init() {
+        auth.signInAnonymously { authResult, error in
+            guard let _ = authResult?.user else { return }
+            dm.listenToFirestore()
+        }
+    }
     
     @ObservedObject var convoM = cm
     @State var showWelcomeView = true

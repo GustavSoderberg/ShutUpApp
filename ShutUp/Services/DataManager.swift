@@ -6,7 +6,82 @@
 //
 
 import Foundation
+import Firebase
 
 class DataManager {
     
+    let db = Firestore.firestore()
+    
+    func listenToFirestore() {
+        
+        db.collection("convos").addSnapshotListener { snapshot, err in
+            guard let snapshot = snapshot else { return }
+            
+            if let err = err {
+                print("Error getting convo document \(err)")
+                
+            } else {
+                cm.listOfConversations.removeAll()
+                for document in snapshot.documents {
+                    let result = Result {
+                        
+                        try document.data(as: Conversation.self)
+                        
+                    }
+                    
+                    switch result {
+                    case.success(let convo) :
+                        cm.listOfConversations.append(convo)
+                        
+                    case.failure(let error) :
+                        print("Error decoding convo \(error)")
+                    }
+                }
+            }
+        }
+    }
+    
+    func saveToFirestore(convo: Conversation) {
+        
+        do {
+            _ = try db.collection("convos").addDocument(from: convo)
+        } catch {
+            print("Error saving to db")
+        }
+    }
+    
+    
+    func updateFirestore(conversation: Conversation, message: Message) {
+        
+        //Code to get auth UID : guard let uid = auth.currentUser?.uid else { return }
+        //let xSender = ["id" : "\(uid)", TODO: Switch to UID when registration/listOfUsers + authentication is live
+        
+        let xSender = ["id" : "\(message.sender.id)",
+                       "name" : message.sender.name,
+                       "username" : message.sender.username,
+                       "password" : message.sender.password]
+        
+        let xMessage = ["id" : "\(message.id)",
+                        "sender" : xSender,
+                        "text" : message.text,
+                        "timeStamp" : message.timeStamp] as [String : Any]
+        
+        if let id = conversation.id {
+            db.collection("convos").document(id)
+        
+                .updateData([
+                    "messages": FieldValue.arrayUnion([xMessage])
+                    
+                ])
+        }
+        
+    }
+    
+    func deleteFromFirestore(conversation: Conversation) {
+        
+        if let id = conversation.id {
+            db.collection("convos").document(id).delete()
+        }
+        
+    }
 }

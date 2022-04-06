@@ -7,14 +7,11 @@
 
 import Foundation
 
-struct Message: Identifiable {
+struct Message: Identifiable, Codable {
     
     let id = UUID()
     let timeStamp: Date
     let sender: User
     let text: String
-    
-    
-    
     
 }

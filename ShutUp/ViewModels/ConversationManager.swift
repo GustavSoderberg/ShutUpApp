@@ -15,12 +15,12 @@ class ConversationManager: ObservableObject {
     @Published var listOfConversations = [Conversation]()
     @Published var refresh = 0
     
-    init() {
+    init(uid: String) {
         
-        self.currentUser = User(name: "you", username: "gustav", password: "123")
-        listOfUsers.append(User(name: "Andreas", username: "test", password: "test"))
-        listOfUsers.append(User(name: "Calle", username: "test", password: "test"))
-        listOfUsers.append(User(name: "Gustav", username: "test", password: "test"))
+        self.currentUser = User(id: uid, name: "you", username: "gustav", password: "123")
+        listOfUsers.append(User(id: "tempId2", name: "Andreas", username: "test", password: "test"))
+        listOfUsers.append(User(id: "tempId3", name: "Calle", username: "test", password: "test"))
+        listOfUsers.append(User(id: "tempId4", name: "Gustav", username: "test", password: "test"))
 
     }
     
@@ -30,13 +30,17 @@ class ConversationManager: ObservableObject {
         let conversation = Conversation(name: name, members: selectedUsers)
         selectedUsers.removeAll()
         
+        dm.saveToFirestore(convo: conversation)
         self.listOfConversations.append(conversation)
         
     }
     
     func sendMessage(message: String, user: User, conversation: Conversation) {
         
-        conversation.messages.append(Message(timeStamp: Date.now, sender: user, text: message))
+        let newMessage = Message(timeStamp: Date.now, sender: user, text: message)
+        conversation.messages.append(newMessage)
+        dm.updateFirestore(conversation: conversation, message: newMessage)
+        
         self.refresh += 1
         
     }

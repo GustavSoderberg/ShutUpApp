@@ -7,10 +7,11 @@
 
 import Foundation
 import SwiftUI
+import FirebaseFirestoreSwift
 
-class Conversation: Identifiable {
+class Conversation: Identifiable, Codable {
     
-    let id: UUID
+    @DocumentID var id : String?
     var name: String
     var members: [User]
     var messages: [Message]
@@ -18,7 +19,6 @@ class Conversation: Identifiable {
     
     init(name: String, members: [User]) {
         
-        self.id = UUID()
         self.name = name
         self.members = members
         self.messages = [Message]()

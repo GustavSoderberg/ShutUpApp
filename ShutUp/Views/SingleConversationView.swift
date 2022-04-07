@@ -76,9 +76,7 @@ struct GetMembers {
     func everybody(members: [User]) -> String {
         
         var rMembers = ""
-        
-        
-        
+
         for member in members {
             
             if member.name != cm.currentUser!.name {

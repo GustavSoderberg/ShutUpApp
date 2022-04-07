@@ -30,8 +30,6 @@
 		B359E8E627F460C800035660 /* ChatPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8E527F460C800035660 /* ChatPreview.swift */; };
 		B359E8E827FEF0AD00035660 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8E727FEF0AD00035660 /* ProfileView.swift */; };
 		B359E8EA27FEF87500035660 /* ProfileViewItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8E927FEF87500035660 /* ProfileViewItems.swift */; };
-		B359E8ED27FEFBDB00035660 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8EC27FEFBDB00035660 /* DarkMode.swift */; };
-		B359E8EF27FF010100035660 /* ActivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8EE27FF010100035660 /* ActivityStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,8 +54,6 @@
 		B359E8E527F460C800035660 /* ChatPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPreview.swift; sourceTree = "<group>"; };
 		B359E8E727FEF0AD00035660 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B359E8E927FEF87500035660 /* ProfileViewItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewItems.swift; sourceTree = "<group>"; };
-		B359E8EC27FEFBDB00035660 /* DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
-		B359E8EE27FF010100035660 /* ActivityStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +112,6 @@
 		3FAE94CE27F2017A00957C61 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B359E8EB27FEFBC100035660 /* ProfileViewItems */,
 				B359E8E027F3A06B00035660 /* ViewComponents */,
 				3FAE94C227F2012900957C61 /* ConversationView.swift */,
 				3FAE94D927F2123600957C61 /* SingleConversationView.swift */,
@@ -164,15 +159,6 @@
 				B359E8E527F460C800035660 /* ChatPreview.swift */,
 			);
 			path = ViewComponents;
-			sourceTree = "<group>";
-		};
-		B359E8EB27FEFBC100035660 /* ProfileViewItems */ = {
-			isa = PBXGroup;
-			children = (
-				B359E8EC27FEFBDB00035660 /* DarkMode.swift */,
-				B359E8EE27FF010100035660 /* ActivityStatus.swift */,
-			);
-			path = ProfileViewItems;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,7 +241,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FAE94C327F2012900957C61 /* ConversationView.swift in Sources */,
-				B359E8EF27FF010100035660 /* ActivityStatus.swift in Sources */,
 				3F05FDFF27FB0B550058FACF /* SettingsManager.swift in Sources */,
 				3FAE94D327F201B600957C61 /* Message.swift in Sources */,
 				3FAE94C127F2012900957C61 /* ShutUpApp.swift in Sources */,
@@ -267,7 +252,6 @@
 				B359E8E827FEF0AD00035660 /* ProfileView.swift in Sources */,
 				3FAE94D127F201A600957C61 /* User.swift in Sources */,
 				3FE554FF27F6E75F00325B17 /* WelcomeView.swift in Sources */,
-				B359E8ED27FEFBDB00035660 /* DarkMode.swift in Sources */,
 				B359E8E227F3A07F00035660 /* RainbowShimmer.swift in Sources */,
 				3FE554FD27F6E5DF00325B17 /* DataManager.swift in Sources */,
 				3FD294B027FC240100DF8ACD /* Theme.swift in Sources */,

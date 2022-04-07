@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct WelcomeView: View {
     
     @Binding var showWelcomeView : Bool
     @State private var username: String = ""
     @State private var password: String = ""
+    var auth = Auth.auth()
     
     var body: some View {
         
@@ -51,7 +53,11 @@ struct WelcomeView: View {
                     
                     Button(action: {
                         
-                        showWelcomeView = false
+                        if cm.login() {
+                            
+                            showWelcomeView = false
+                            
+                        }
                         
                     }) {
 

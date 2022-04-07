@@ -45,7 +45,7 @@ struct SingleConversationView: View {
             
             Button {
                 
-                convoM.sendMessage(message: message, user: convoM.currentUser, conversation: conversation!)
+                convoM.sendMessage(message: message, user: convoM.currentUser!, conversation: conversation!)
                 message = ""
                 
             } label: {
@@ -81,7 +81,7 @@ struct GetMembers {
         
         for member in members {
             
-            if member.name != cm.currentUser.name {
+            if member.name != cm.currentUser!.name {
                 
                 rMembers += "\(member.name), "
                 
@@ -96,7 +96,7 @@ struct GetMembers {
 
 struct MessageBubble : View{
     
-    var convoM = cm
+    @ObservedObject var convoM = cm
     var message: Message
     
     var body: some View {

@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 //Global instances of a Singleton object
 var auth = Auth.auth()
 
-var cm = ConversationManager(uid: auth.currentUser!.uid)
+var cm = ConversationManager()
 var sm = SettingsManager()
 var dm = DataManager()
 
@@ -188,7 +188,7 @@ struct NewConversationView : View{
                     
                     for user in convoM.selectedUsers {
                         
-                        if user.name != cm.currentUser.name {
+                        if user.name != cm.currentUser!.name {
                             
                             temp = "\(user.name), "
                             convoName += temp

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestoreSwift
 
 struct SingleConversationView: View {
     
@@ -20,13 +22,22 @@ struct SingleConversationView: View {
         
         Divider()
         
-        ScrollView(showsIndicators: false) {
+        ScrollView() {
             
             Spacer()
             
             HStack{
                 
                 VStack {
+                    
+                    Button {
+                            if let newconversation = cm.updateConversation(id: conversation!.id) {
+                                conversation = newconversation
+                            
+                            }
+                        } label: {
+                            Text("Update conversation")
+                        }
                     
                     ForEach(conversation!.messages) { message in
                         
@@ -45,7 +56,7 @@ struct SingleConversationView: View {
             
             Button {
                 
-                convoM.sendMessage(message: message, user: convoM.currentUser, conversation: conversation!)
+                convoM.sendMessage(message: message, user: convoM.currentUser!, conversation: conversation!)
                 message = ""
                 
             } label: {
@@ -76,12 +87,10 @@ struct GetMembers {
     func everybody(members: [User]) -> String {
         
         var rMembers = ""
-        
-        
-        
+
         for member in members {
             
-            if member.name != cm.currentUser.name {
+            if member.name != cm.currentUser!.name {
                 
                 rMembers += "\(member.name), "
                 
@@ -96,7 +105,7 @@ struct GetMembers {
 
 struct MessageBubble : View{
     
-    var convoM = cm
+    @ObservedObject var convoM = cm
     var message: Message
     
     var body: some View {

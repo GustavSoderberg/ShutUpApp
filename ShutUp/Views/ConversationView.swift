@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 //Global instances of a Singleton object
 var auth = Auth.auth()
 
-var cm = ConversationManager(uid: auth.currentUser!.uid)
+var cm = ConversationManager()
 var sm = SettingsManager()
 var dm = DataManager()
 
@@ -26,7 +26,9 @@ struct ConversationView: View {
     }
     
     @ObservedObject var convoM = cm
-    @State var showWelcomeView = true
+    @State private var showProfileView = false
+    @State private var showWelcomeView = true
+
     @State var newConversationSheet = false
     @State var convoName = ""
     @State var searchText = ""
@@ -41,15 +43,23 @@ struct ConversationView: View {
             VStack {
                 
                 HStack {
-                    
-                    AsyncImage(url: imageURL) { image in
-                        image.resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 40, height: 40)
-                            .cornerRadius(50)
-                    } placeholder: {
-                        ProgressView()
+
+                    Button{
+                        showProfileView.toggle()
+                    } label: {
+
+                        AsyncImage(url: imageURL) { image in
+                            image.resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 40, height: 40)
+                                .cornerRadius(50)
+                        } placeholder: {
+                            ProgressView()
+                        }
+
                     }
+                    
+
                     Spacer()
                     
                     Text("Chattar")
@@ -108,8 +118,6 @@ struct ConversationView: View {
                             } label: {
                                 ChatPreview(name: convo.name)
                                 
-                                //Text("\(convo.name)")
-                                
                             }
                             
                         }.padding()
@@ -128,9 +136,12 @@ struct ConversationView: View {
             }
             
             
-        }.sheet(isPresented: $showWelcomeView) {
+        }
+        .sheet(isPresented: $showWelcomeView) {
             WelcomeView(showWelcomeView: $showWelcomeView)
-            
+        }
+        .sheet(isPresented: $showProfileView) {
+            ProfileView(showProfileView: $showProfileView)
         }
     }
 }
@@ -188,12 +199,12 @@ struct NewConversationView : View{
                     
                     for user in convoM.selectedUsers {
                         
-                        if user.name != cm.currentUser.name {
+                       if user.name != cm.currentUser!.name {
                             
                             temp = "\(user.name), "
                             convoName += temp
                             
-                        }
+                     }
                     }
                     
                     convoName =  String(convoName.dropLast(2))

@@ -14,6 +14,7 @@ class ConversationManager: ObservableObject {
     var selectedUsers = [User]()
     @Published var listOfConversations = [Conversation]()
     @Published var refresh = 0
+    var index = 0
     
     init() {
         

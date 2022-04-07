@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestoreSwift
 
 struct SingleConversationView: View {
     
@@ -20,13 +22,22 @@ struct SingleConversationView: View {
         
         Divider()
         
-        ScrollView(showsIndicators: false) {
+        ScrollView() {
             
             Spacer()
             
             HStack{
                 
                 VStack {
+                    
+                    Button {
+                            if let newconversation = cm.updateConversation(id: conversation!.id) {
+                                conversation = newconversation
+                            
+                            }
+                        } label: {
+                            Text("Update conversation")
+                        }
                     
                     ForEach(conversation!.messages) { message in
                         

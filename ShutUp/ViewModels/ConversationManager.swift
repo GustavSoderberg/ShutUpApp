@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseFirestoreSwift
 
 class ConversationManager: ObservableObject {
     
@@ -52,6 +54,21 @@ class ConversationManager: ObservableObject {
         let newMessage = Message(timeStamp: Date.now, sender: user, text: message)
         conversation.messages.append(newMessage)
         dm.updateFirestore(conversation: conversation, message: newMessage)
+        
+    }
+    
+    func updateConversation(id: Conversation.ID) -> Conversation? {
+        
+        for conversation in listOfConversations {
+            
+            if conversation.id == id {
+                return conversation
+                refresh += 1
+            }
+            
+        }
+        
+        return nil
         
     }
     

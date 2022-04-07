@@ -118,8 +118,6 @@ struct ConversationView: View {
                             } label: {
                                 ChatPreview(name: convo.name)
                                 
-                                //Text("\(convo.name)")
-                                
                             }
                             
                         }.padding()

@@ -47,8 +47,6 @@ struct ProfileView: View {
                 ScrollView {
 
                     ProfileViewItems(name: "Mörkt Läge", image: "moon.circle.fill")
-                    DarkMode()
-                    ActivityStatus()
                     ProfileViewItems(name: "Mörkt Läge", image: "moon.circle.fill")
                     ProfileViewItems(name: "Mörkt Läge", image: "moon.circle.fill")
 

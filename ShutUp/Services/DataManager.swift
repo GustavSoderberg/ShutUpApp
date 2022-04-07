@@ -31,7 +31,10 @@ class DataManager {
                     
                     switch result {
                     case.success(let convo) :
+                        
                         cm.listOfConversations.append(convo)
+                        cm.refresh += 1
+                        print(cm.refresh)
                         
                     case.failure(let error) :
                         print("Error decoding convo \(error)")
@@ -73,6 +76,7 @@ class DataManager {
                     "messages": FieldValue.arrayUnion([xMessage])
                     
                 ])
+            
         }
         
     }

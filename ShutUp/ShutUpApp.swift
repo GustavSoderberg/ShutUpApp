@@ -18,6 +18,7 @@ struct ShutUpApp: App {
     var body: some Scene {
         WindowGroup {
             ConversationView()
+                //.environment(\.colorScheme, .dark)
         }
     }
 }

@@ -158,7 +158,7 @@ struct ConversationView: View {
                                         
                                         
                                         
-                                 }.background(Color.blue)
+                                 }
                                 
                                 Spacer()
                                     

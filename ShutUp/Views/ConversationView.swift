@@ -28,11 +28,14 @@ struct ConversationView: View {
     @ObservedObject var convoM = cm
     @State private var showProfileView = false
     @State private var showWelcomeView = true
+    @State private var showDelete = false
+    @State private var selectedConvo = -1
 
     @State var newConversationSheet = false
     @State var convoName = ""
     @State var searchText = ""
     @State var onTapped = false
+    
     
     var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
     
@@ -45,7 +48,10 @@ struct ConversationView: View {
                 HStack {
 
                     Button{
-                        showProfileView.toggle()
+                        withAnimation{
+                            showProfileView.toggle()
+                        }
+                        
                     } label: {
 
                         AsyncImage(url: imageURL) { image in
@@ -68,7 +74,7 @@ struct ConversationView: View {
                     Spacer()
                     
                     Button {
-                        newConversationSheet = true
+                            newConversationSheet = true
                     } label: {
                         Image(systemName: "pencil.circle.fill")
                             .resizable()
@@ -109,14 +115,70 @@ struct ConversationView: View {
                         }
                         
                         
-                        ForEach(convoM.listOfConversations) { convo in
+                        ForEach(Array(convoM.listOfConversations.enumerated()), id: \.offset) { index, convo in
                             
                             NavigationLink {
                                 
-                                SingleConversationView(conversation: convo)
+                                SingleConversationView(index: index, conversation: convo)
+                                    .onAppear(perform: {
+                                        showDelete = false
+                                        
+                                    })
+                                    
+                                    
+                                    
+                                
                                 
                             } label: {
-                                ChatPreview(name: convo.name)
+                                
+                                HStack{
+                                    ChatPreview(name: convo.name)
+                                        
+                                        .gesture(DragGesture(minimumDistance: 100, coordinateSpace: .local)
+                                        .onEnded({ value in
+                                            if value.translation.width < 0 {
+                                                
+                                                selectedConvo = index
+                                                withAnimation{
+                                                    showDelete = true
+                                                }
+                                                
+                                            }
+                                            if value.translation.width > 0 {
+                                                withAnimation{
+                                                    showDelete = false
+                                                }
+                                                
+                                            }
+                                        }))
+                                    
+                                    Spacer()
+                                    
+                                    if showDelete {
+                                        if selectedConvo == index{
+                                            
+                                            Image(systemName: "trash.fill")
+                                                .foregroundColor(Color.white)
+                                                .frame(width: 20, height: 20)
+                                                .scaledToFit()
+                                                .onTapGesture {
+                                                    dm.deleteFromFirestore(conversation: convo)
+                                                    selectedConvo = -1
+                                                }
+                                                .frame(width: 50, height: 50)
+                                                .background(Color.red)
+                                                .cornerRadius(25)
+                                                .transition(.scale)
+                                                
+                                                
+                                            
+                                        }
+                                        
+                                       
+                                    }
+                                    
+                                }
+                                
                                 
                             }
                             
@@ -129,6 +191,7 @@ struct ConversationView: View {
                     .navigationBarHidden(true)
                     .sheet(isPresented: $newConversationSheet) {
                         NewConversationView(newConversationSheet: $newConversationSheet, convoName: $convoName)
+                            
                     }
                 }
                 

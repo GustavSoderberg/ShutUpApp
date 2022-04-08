@@ -24,6 +24,8 @@ struct ProfileView: View {
 
         Spacer()
 
+        ZStack{ //incase we need a background
+
             VStack {
 
                 Spacer()
@@ -39,29 +41,20 @@ struct ProfileView: View {
 
                 Spacer()
 
-                    Text("Andreas Jonasson")
+                Text("Andreas Jonasson")
                     .font(.system(size: 26, weight: .light, design: .serif))
-                        .italic()
-
 
                 ScrollView {
 
-                    ProfileViewItems(name: "Mörkt Läge", image: "moon.circle.fill")
-                    ProfileViewItems(name: "Mörkt Läge", image: "moon.circle.fill")
-                    ProfileViewItems(name: "Mörkt Läge", image: "moon.circle.fill")
+                    DarkMode()
+                    DarkMode()
+                    ActivityStatus()
+                    DarkMode()
+                    ActivityStatus()
 
                 }
             }
-
-      //  Spacer()
-
+        }
     }
 }
 
-//struct ProfileView_Previews: PreviewProvider {
-//
-//
-//    static var previews: some View {
-//        ProfileView()
-//    }
-//}

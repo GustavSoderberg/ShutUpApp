@@ -109,14 +109,21 @@ struct ConversationView: View {
                         }
                         
                         
-                        ForEach(convoM.listOfConversations) { convo in
+                        ForEach(Array(convoM.listOfConversations.enumerated()), id: \.offset) { index, convo in
                             
                             NavigationLink {
                                 
-                                SingleConversationView(conversation: convo)
+                                SingleConversationView(index: index, conversation: convo)
                                 
                             } label: {
+                                
                                 ChatPreview(name: convo.name)
+                                    .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                    .onEnded({ value in
+                                        if value.translation.width < 0 {
+                                            print("vänster")
+                                        }
+                                    }))
                                 
                             }
                             

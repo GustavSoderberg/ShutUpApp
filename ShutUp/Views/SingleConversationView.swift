@@ -11,6 +11,7 @@ import FirebaseFirestoreSwift
 
 struct SingleConversationView: View {
     
+    var index: Int
     @ObservedObject var convoM = cm
     @State var conversation: Conversation?
     @State var showSettingsView = false
@@ -30,16 +31,7 @@ struct SingleConversationView: View {
                 
                 VStack {
                     
-                    Button {
-                            if let newconversation = cm.updateConversation(id: conversation!.id) {
-                                conversation = newconversation
-                            
-                            }
-                        } label: {
-                            Text("Update conversation")
-                        }
-                    
-                    ForEach(conversation!.messages) { message in
+                    ForEach(convoM.listOfConversations[index].messages) { message in
                         
                         MessageBubble(message: message)
                         //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
@@ -56,8 +48,10 @@ struct SingleConversationView: View {
             
             Button {
                 
-                convoM.sendMessage(message: message, user: convoM.currentUser!, conversation: conversation!)
-                message = ""
+                if !message.isEmpty {
+                    convoM.sendMessage(message: message, user: convoM.currentUser!, conversation: conversation!)
+                    message = ""
+                }
                 
             } label: {
                 

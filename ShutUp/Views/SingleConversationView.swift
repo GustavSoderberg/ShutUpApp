@@ -90,11 +90,8 @@ struct GetMembers {
                 
             }
         }
-        
         return rMembers
-        
     }
-    
 }
 
 struct MessageBubble : View{
@@ -120,19 +117,7 @@ struct MessageBubble : View{
         }
         .frame(maxWidth: .infinity, alignment: convoM.currentUser == message.sender ? .trailing : .leading)
         .padding(convoM.currentUser == message.sender ? .trailing : .leading)
-        
-        
+
     }
-    
-    
-    
 }
 
-
-
-//struct SingleConversationView_Previews: PreviewProvider {
-//
-//    static var previews: some View {
-//        SingleConversationView(convoM: <#ConversationManager#>)
-//    }
-//}

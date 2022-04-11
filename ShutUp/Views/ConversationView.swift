@@ -113,8 +113,7 @@ struct ConversationView: View {
                             onTapped.toggle()
                             
                         }
-                        
-                        
+
                         ForEach(Array(convoM.listOfConversations.enumerated()), id: \.offset) { index, convo in
                             
                             NavigationLink {
@@ -124,11 +123,7 @@ struct ConversationView: View {
                                         showDelete = false
                                         
                                     })
-                                    
-                                    
-                                    
-                                
-                                
+
                             } label: {
                                 
                                 HStack{

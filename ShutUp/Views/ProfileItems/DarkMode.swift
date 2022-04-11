@@ -11,20 +11,21 @@ struct DarkMode: View {
 
     var body: some View {
 
-
         HStack{
 
             Image(systemName: "moon.circle.fill")
+                .font(.system(size: 25))
                 .padding()
+                .foregroundColor(Color.black)
             Spacer()
             Text("Dark Mode")
                 Spacer()
             Image(systemName: "lessthan")
                 .padding() 
 
-        }.frame(width: 0.8 * UIScreen.main.bounds.width, height: 30)
+        }.frame(width: 0.95 * UIScreen.main.bounds.width, height: 45)
             .background(Color(UIColor(named: "customGray")!))
-            //.cornerRadius(15)
+            .cornerRadius(10)
 
     }
 }

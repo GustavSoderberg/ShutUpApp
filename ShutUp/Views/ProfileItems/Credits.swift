@@ -1,5 +1,5 @@
 //
-//  Sekretess.swift
+//  CreditView.swift
 //  ShutUp
 //
 //  Created by Yolanda Jonasson on 2022-04-08.
@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct Sekretess: View {
+struct Credits: View {
 
     var body: some View {
 
         HStack{
 
-            Image(systemName: "hand.raised.circle.fill")
+            Image(systemName: "scribble.variable")
                 .font(.system(size: 25))
                 .padding()
-                .foregroundColor(Color.gray)
+                .foregroundColor(Color.purple)
             Spacer()
-            Text("Sekretess")
+            Text("Credits")
                 Spacer()
 //            Image(systemName: "greaterthan")
 //                .padding()
@@ -30,3 +30,4 @@ struct Sekretess: View {
 
     }
 }
+

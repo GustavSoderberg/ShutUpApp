@@ -1,24 +1,24 @@
 //
-//  Sekretess.swift
+//  MessageRequests.swift
 //  ShutUp
 //
-//  Created by Yolanda Jonasson on 2022-04-08.
+//  Created by Yolanda Jonasson on 2022-04-11.
 //
 
 import SwiftUI
 
-struct Sekretess: View {
+struct MessageRequests: View {
 
     var body: some View {
 
         HStack{
 
-            Image(systemName: "hand.raised.circle.fill")
+            Image(systemName: "message.circle.fill")
                 .font(.system(size: 25))
                 .padding()
-                .foregroundColor(Color.gray)
+                .foregroundColor(Color.blue)
             Spacer()
-            Text("Sekretess")
+            Text("Meddelandeförfrågningar")
                 Spacer()
 //            Image(systemName: "greaterthan")
 //                .padding()

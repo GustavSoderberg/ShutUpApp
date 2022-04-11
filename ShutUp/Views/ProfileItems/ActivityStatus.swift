@@ -15,12 +15,21 @@ struct ActivityStatus: View {
         HStack{
 
             Image(systemName: "person.crop.circle.fill")
+                .font(.system(size: 25))
+                .padding()
+                .foregroundColor(Color.purple)
+            Spacer()
             Text("Kontoinställningar")
-            Image(systemName: "lessthan")
+            Spacer()
+//            Image(systemName: "greaterthan")
+//                .padding()
 
-        }.frame(width: 0.8 * UIScreen.main.bounds.width, height: 30)
-            .background(Color(UIColor(named: "customGray")!))
-           // .cornerRadius(15)
+        }
+        //.frame(width: 0.95 * UIScreen.main.bounds.width, height: 45)
+            .background(Color.white)
+            .cornerRadius(10)
 
     }
 }
+
+

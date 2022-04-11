@@ -1,5 +1,5 @@
 //
-//  DarkMode.swift
+//  CreditView.swift
 //  ShutUp
 //
 //  Created by Yolanda Jonasson on 2022-04-08.
@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct DarkMode: View {
+struct Credits: View {
 
     var body: some View {
 
         HStack{
 
-            Image(systemName: "moon.circle.fill")
+            Image(systemName: "scribble.variable")
                 .font(.system(size: 25))
                 .padding()
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.purple)
             Spacer()
-            Text("Dark Mode")
+            Text("Credits")
                 Spacer()
 //            Image(systemName: "greaterthan")
 //                .padding()
@@ -30,3 +30,4 @@ struct DarkMode: View {
 
     }
 }
+

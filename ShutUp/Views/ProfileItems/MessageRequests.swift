@@ -1,24 +1,24 @@
 //
-//  DarkMode.swift
+//  MessageRequests.swift
 //  ShutUp
 //
-//  Created by Yolanda Jonasson on 2022-04-08.
+//  Created by Yolanda Jonasson on 2022-04-11.
 //
 
 import SwiftUI
 
-struct DarkMode: View {
+struct MessageRequests: View {
 
     var body: some View {
 
         HStack{
 
-            Image(systemName: "moon.circle.fill")
+            Image(systemName: "message.circle.fill")
                 .font(.system(size: 25))
                 .padding()
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.blue)
             Spacer()
-            Text("Dark Mode")
+            Text("Meddelandeförfrågningar")
                 Spacer()
 //            Image(systemName: "greaterthan")
 //                .padding()

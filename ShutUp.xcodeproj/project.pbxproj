@@ -32,6 +32,11 @@
 		B359E8EA27FEF87500035660 /* ProfileViewItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8E927FEF87500035660 /* ProfileViewItems.swift */; };
 		B359E8F22800364200035660 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8F12800364200035660 /* DarkMode.swift */; };
 		B359E8F42800369400035660 /* ActivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8F32800369400035660 /* ActivityStatus.swift */; };
+		B359E8F62800490100035660 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8F52800490100035660 /* Credits.swift */; };
+		B359E8F82800491100035660 /* Sekretess.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8F72800491100035660 /* Sekretess.swift */; };
+		B359E8FA280068F100035660 /* ChangeAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E8F9280068F100035660 /* ChangeAccount.swift */; };
+		B359E93328030FC500035660 /* DarkModeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E93228030FC500035660 /* DarkModeSettings.swift */; };
+		B359E9352804637C00035660 /* MessageRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E9342804637C00035660 /* MessageRequests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +63,11 @@
 		B359E8E927FEF87500035660 /* ProfileViewItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewItems.swift; sourceTree = "<group>"; };
 		B359E8F12800364200035660 /* DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 		B359E8F32800369400035660 /* ActivityStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatus.swift; sourceTree = "<group>"; };
+		B359E8F52800490100035660 /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
+		B359E8F72800491100035660 /* Sekretess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sekretess.swift; sourceTree = "<group>"; };
+		B359E8F9280068F100035660 /* ChangeAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAccount.swift; sourceTree = "<group>"; };
+		B359E93228030FC500035660 /* DarkModeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeSettings.swift; sourceTree = "<group>"; };
+		B359E9342804637C00035660 /* MessageRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRequests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +126,7 @@
 		3FAE94CE27F2017A00957C61 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B359E93128030FAD00035660 /* ProfileViewDestinations */,
 				B359E8F0280035FC00035660 /* ProfileItems */,
 				B359E8E027F3A06B00035660 /* ViewComponents */,
 				3FAE94C227F2012900957C61 /* ConversationView.swift */,
@@ -171,8 +182,20 @@
 			children = (
 				B359E8F12800364200035660 /* DarkMode.swift */,
 				B359E8F32800369400035660 /* ActivityStatus.swift */,
+				B359E8F52800490100035660 /* Credits.swift */,
+				B359E8F72800491100035660 /* Sekretess.swift */,
+				B359E8F9280068F100035660 /* ChangeAccount.swift */,
+				B359E9342804637C00035660 /* MessageRequests.swift */,
 			);
 			path = ProfileItems;
+			sourceTree = "<group>";
+		};
+		B359E93128030FAD00035660 /* ProfileViewDestinations */ = {
+			isa = PBXGroup;
+			children = (
+				B359E93228030FC500035660 /* DarkModeSettings.swift */,
+			);
+			path = ProfileViewDestinations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,15 +286,20 @@
 				B359E8E627F460C800035660 /* ChatPreview.swift in Sources */,
 				3FAE94D827F2044300957C61 /* ConversationManager.swift in Sources */,
 				B359E8EA27FEF87500035660 /* ProfileViewItems.swift in Sources */,
+				B359E8F82800491100035660 /* Sekretess.swift in Sources */,
+				B359E8F62800490100035660 /* Credits.swift in Sources */,
 				3F05FE0127FB184D0058FACF /* SettingsView.swift in Sources */,
 				B359E8E827FEF0AD00035660 /* ProfileView.swift in Sources */,
+				B359E8FA280068F100035660 /* ChangeAccount.swift in Sources */,
 				3FAE94D127F201A600957C61 /* User.swift in Sources */,
 				3FE554FF27F6E75F00325B17 /* WelcomeView.swift in Sources */,
 				B359E8F22800364200035660 /* DarkMode.swift in Sources */,
+				B359E9352804637C00035660 /* MessageRequests.swift in Sources */,
 				B359E8E227F3A07F00035660 /* RainbowShimmer.swift in Sources */,
 				3FE554FD27F6E5DF00325B17 /* DataManager.swift in Sources */,
 				3FD294B027FC240100DF8ACD /* Theme.swift in Sources */,
 				3FAE94DA27F2123600957C61 /* SingleConversationView.swift in Sources */,
+				B359E93328030FC500035660 /* DarkModeSettings.swift in Sources */,
 				B359E8E427F452C400035660 /* TitleRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

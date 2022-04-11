@@ -11,7 +11,7 @@ struct Message: Identifiable, Codable {
     
     let id = UUID()
     let timeStamp: Date
-    let sender: User
+    let senderID: String
     let text: String
     
 }

@@ -59,13 +59,8 @@ class DataManager {
         //Code to get auth UID : guard let uid = auth.currentUser?.uid else { return }
         //let xSender = ["id" : "\(uid)", TODO: Switch to UID when registration/listOfUsers + authentication is live
         
-        let xSender = ["id" : "\(message.sender.id)",
-                       "name" : message.sender.name,
-                       "username" : message.sender.username,
-                       "password" : message.sender.password]
-        
         let xMessage = ["id" : "\(message.id)",
-                        "sender" : xSender,
+                        "senderID" : message.senderID,
                         "text" : message.text,
                         "timeStamp" : message.timeStamp] as [String : Any]
         

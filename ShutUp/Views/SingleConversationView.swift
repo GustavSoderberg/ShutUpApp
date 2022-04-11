@@ -111,22 +111,22 @@ struct MessageBubble : View{
     
     var body: some View {
         
-        VStack(alignment: convoM.currentUser == message.sender ? .trailing : .leading){
+        VStack(alignment: convoM.currentUser!.id == message.senderID ? .trailing : .leading){
             
             HStack{
                 Text(message.text)
                     .fontWeight(.medium)
                     .foregroundColor(Color.white)
                     .padding()
-                    .background(convoM.currentUser == message.sender ? sm.currentTheme!.bubbleS : sm.currentTheme!.bubbleR)
+                    .background(convoM.currentUser!.id == message.senderID ? sm.currentTheme!.bubbleS : sm.currentTheme!.bubbleR)
                     .cornerRadius(30)
                 
             }
-            .frame(maxWidth: 300, alignment: convoM.currentUser == message.sender ? .trailing : .leading)
+            .frame(maxWidth: 300, alignment: convoM.currentUser!.id == message.senderID ? .trailing : .leading)
             
         }
-        .frame(maxWidth: .infinity, alignment: convoM.currentUser == message.sender ? .trailing : .leading)
-        .padding(convoM.currentUser == message.sender ? .trailing : .leading)
+        .frame(maxWidth: .infinity, alignment: convoM.currentUser!.id == message.senderID ? .trailing : .leading)
+        .padding(convoM.currentUser!.id == message.senderID ? .trailing : .leading)
 
     }
 }

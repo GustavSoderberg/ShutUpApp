@@ -20,11 +20,12 @@ struct DarkMode: View {
             Spacer()
             Text("Dark Mode")
                 Spacer()
-            Image(systemName: "lessthan")
-                .padding() 
+//            Image(systemName: "greaterthan")
+//                .padding()
 
-        }.frame(width: 0.95 * UIScreen.main.bounds.width, height: 45)
-            .background(Color(UIColor(named: "customGray")!))
+        }
+        //.frame(width: 0.95 * UIScreen.main.bounds.width, height: 45)
+            .background(Color.white)
             .cornerRadius(10)
 
     }

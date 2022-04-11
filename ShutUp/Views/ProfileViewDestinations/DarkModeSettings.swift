@@ -9,12 +9,33 @@ import SwiftUI
 
 struct DarkModeSettings: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+
+        ZStack{
+
+            List{
+
+                Button {
+
+                } label: {
+                    Text("På")
+                }
+
+                Button {
+
+                } label: {
+                    Text("Av")
+                }
+
+                Button {
+
+                } label: {
+                    Text("System")
+                }
+            }
+        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(UIColor(named: "customGrayTwo")!))
+
     }
 }
 
-//struct DarkModeSettings_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DarkModeSettings()
-//    }
-//}
+

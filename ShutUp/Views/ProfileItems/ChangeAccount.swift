@@ -20,18 +20,19 @@ struct ChangeAccount: View {
 
         HStack{
 
-            Image(systemName: "switch.2")
+            Image(systemName: "repeat.circle.fill")
                 .font(.system(size: 25))
                 .padding()
                 .foregroundColor(Color.green)
             Spacer()
             Text("Byt Användare")
             Spacer()
-            Image(systemName: "lessthan")
-                .padding()
+//            Image(systemName: "greaterthan")
+//                .padding()
 
-        }.frame(width: 0.95 * UIScreen.main.bounds.width, height: 40)
-            .background(Color(UIColor(named: "customGray")!))
+        }
+        //.frame(width: 0.95 * UIScreen.main.bounds.width, height: 40)
+            .background(Color.white)
             .cornerRadius(10)
 
     }

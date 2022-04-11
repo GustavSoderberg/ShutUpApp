@@ -23,54 +23,165 @@ struct ProfileView: View {
 
     var body: some View {
 
-        Spacer()
-
         ZStack{
+
             NavigationView {
 
-            VStack {
+                VStack(spacing: 0) {
 
-                Spacer()
+                    Spacer()
 
-                VStack {
-
-                    AsyncImage(url: imageURL) { image in
-                        image.resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(50)
-
-                    } placeholder: {
-                        ProgressView()
+//MARK: KLAR Knappen ------------------------------------------------------------------------
+                    
+                    HStack{
+                    Spacer()
+                    Button(action: {
+                        showProfileView = false
+                    }, label: {
+                        Text("Klar")
+                            .foregroundColor(Color.blue)
+                    }).padding(.trailing, 20.0)
+                      .padding(.top, 20.0)
                     }
 
-                    //Spacer()
+//MARK: PROFILE IMAGE VSTACK ----------------------------------------------------------------
 
-                    Text("Andreas Jonasson")
-                    // .font(.system(size: 26, weight: .light, design: .serif))
-                        .font(.headline)
-                }
-                //.offset(y:20)
+                    VStack(spacing: 0) {
 
-                    ScrollView {
+                        AsyncImage(url: imageURL) { image in
+                            image.resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(50)
 
-                        //Kontoinställningar
-                        //NavigationLink(DarkMode(), destination: DarkModeSettings())
-                        DarkMode()
-                        ActivityStatus()
-                        ChangeAccount()
-                        ActivityStatus()
+                        } placeholder: {
+                            ProgressView()
+                        }
 
-                        //Sekretess
-                        DarkMode()
-                        ActivityStatus()
-                        DarkMode()
-                        ChangeAccount()
-                        ActivityStatus()
+                        Text("Andreas Jonasson")
+                        //.font(.headline)
+                            .font(.system(size: 28))
+
                     }
-                    .navigationTitle("Back")
-                    .navigationBarTitleDisplayMode(.automatic)
+
+
+                    List {
+
+
+                        Section(header: Text("Important Tasks")) {
+
+//MARK: DarkModeSettings -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                DarkMode()
+                            }.buttonStyle(PlainButtonStyle())
+
+//MARK: Toggle ActivityStatus -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                ActivityStatus()
+                            }.buttonStyle(PlainButtonStyle())
+
+//MARK: Change account -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                ChangeAccount()
+                            }.buttonStyle(PlainButtonStyle())
+
+//MARK: Credits -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                Credits()
+                            }.buttonStyle(PlainButtonStyle())
+
+//MARK: Sekretess -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                Sekretess()
+                            }.buttonStyle(PlainButtonStyle())
+
+//MARK: Meddelandeförfrågningar -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                MessageRequests()
+                            }.buttonStyle(PlainButtonStyle())
+
+                        }
+
+//MARK: SECTION TWO LETS GO
+
+                        Section(header: Text("Less Important Tasks")) {
+
+//MARK: DarkModeSettings -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                DarkMode()
+                            }.buttonStyle(PlainButtonStyle())
+
+//MARK: Toggle ActivityStatus -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                ActivityStatus()
+                            }.buttonStyle(PlainButtonStyle())
+
+//MARK: Change account -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                ChangeAccount()
+                            }.buttonStyle(PlainButtonStyle())
+
+//MARK: Credits -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                Credits()
+                            }.buttonStyle(PlainButtonStyle())
+
+//MARK: Sekretess -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                Sekretess()
+                            }.buttonStyle(PlainButtonStyle())
+
+//MARK: Meddelandeförfrågningar -------------------------------------
+
+                            NavigationLink {
+                                DarkModeSettings()
+                            } label: {
+                                MessageRequests()
+                            }.buttonStyle(PlainButtonStyle())
+                        }
+                    }
                 }
+                .navigationBarHidden(true)
+                .navigationBarItems(trailing: Button(action: {
+                    showProfileView = false
+                }, label: {
+                    Text("Klart")
+                }))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color(UIColor(named: "customGrayTwo")!))
             }
         }
     }

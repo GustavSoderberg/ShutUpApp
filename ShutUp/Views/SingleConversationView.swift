@@ -31,11 +31,21 @@ struct SingleConversationView: View {
                 
                 VStack {
                     
-                    ForEach(convoM.listOfConversations[index].messages) { message in
+                    
+                    
                         
-                        MessageBubble(message: message)
+                        ForEach(convoM.listOfConversations[index].messages) { message in
+                        
+                        
+                            
+                            MessageBubble(message: message)
+                        
+                            }
+                            
+                        
+                        
                         //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
-                    }
+                    
                 }
                 Spacer()
             }

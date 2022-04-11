@@ -49,6 +49,7 @@ struct ConversationView: View {
 
                     Button{
                         withAnimation{
+                            
                             showProfileView.toggle()
                         }
                         
@@ -116,66 +117,93 @@ struct ConversationView: View {
 
                         ForEach(Array(convoM.listOfConversations.enumerated()), id: \.offset) { index, convo in
                             
-                            NavigationLink {
+                            
+                            HStack(spacing: 10){
                                 
-                                SingleConversationView(index: index, conversation: convo)
-                                    .onAppear(perform: {
-                                        showDelete = false
+                                NavigationLink {
+                                    
+            
+                                        SingleConversationView(index: index, conversation: convo)
+                                            .onAppear(perform: {
+                                                showDelete = false
+                                                print("navigationlink")
+                                                
+                                            })
+                                    
+                                 } label:{
+                                    
+                                    
+                                        ChatPreview(name: convo.name)
+                                            
+                                            .gesture(DragGesture(minimumDistance: 100, coordinateSpace: .local)
+                                            .onEnded({ value in
+                                                if value.translation.width < 0 {
+                                                    
+                                                    selectedConvo = index
+                                                    withAnimation{
+                                                        showDelete = true
+                                                    }
+                                                    
+                                                }
+                                                if value.translation.width > 0 {
+                                                    withAnimation{
+                                                        showDelete = false
+                                                    }
+                                                    
+                                                }
+                                            }))
+                                        
+                                        
+                                        
+                                        
+                                        
+                                 }
+                                
+                                Spacer()
+                                    
+                            if showDelete {
+                                if selectedConvo == index{
+                                    
+                                    
+                                    Button(action: {
+                                        dm.deleteFromFirestore(conversation: convo)
+                                        selectedConvo = -1
+                                        print("deletebutton")
+                                        
+                                    }, label: {
+                                        
+                                        Image(systemName: "trash.fill")
+                                            .foregroundColor(Color.white)
+                                            .frame(width: 20, height: 20)
+                                            .scaledToFit()
                                         
                                     })
-
-                            } label: {
-                                
-                                HStack{
-                                    ChatPreview(name: convo.name)
-                                        
-                                        .gesture(DragGesture(minimumDistance: 100, coordinateSpace: .local)
-                                        .onEnded({ value in
-                                            if value.translation.width < 0 {
-                                                
-                                                selectedConvo = index
-                                                withAnimation{
-                                                    showDelete = true
-                                                }
-                                                
-                                            }
-                                            if value.translation.width > 0 {
-                                                withAnimation{
-                                                    showDelete = false
-                                                }
-                                                
-                                            }
-                                        }))
+                                        .frame(width: 50, height: 50)
+                                        .background(Color.red)
+                                        .cornerRadius(25)
+                                        .transition(.scale)
                                     
-                                    Spacer()
-                                    
-                                    if showDelete {
-                                        if selectedConvo == index{
-                                            
-                                            Image(systemName: "trash.fill")
-                                                .foregroundColor(Color.white)
-                                                .frame(width: 20, height: 20)
-                                                .scaledToFit()
-                                                .onTapGesture {
-                                                    dm.deleteFromFirestore(conversation: convo)
-                                                    selectedConvo = -1
-                                                }
-                                                .frame(width: 50, height: 50)
-                                                .background(Color.red)
-                                                .cornerRadius(25)
-                                                .transition(.scale)
-                                                
-                                                
-                                            
-                                        }
+//                                        .onTapGesture {
+//                                            
+//                                        }
                                         
-                                       
-                                    }
+                                        
+                                        
                                     
                                 }
                                 
                                 
+                                
+                               
                             }
+                                
+                            }
+                            
+                            
+                                
+                                
+                            
+                            
                             
                         }.padding()
                         

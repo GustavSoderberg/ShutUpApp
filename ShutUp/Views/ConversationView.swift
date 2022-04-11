@@ -114,8 +114,7 @@ struct ConversationView: View {
                             onTapped.toggle()
                             
                         }
-                        
-                        
+
                         ForEach(Array(convoM.listOfConversations.enumerated()), id: \.offset) { index, convo in
                             
                             

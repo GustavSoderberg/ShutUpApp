@@ -61,7 +61,7 @@ struct ChatPreview: View {
                     .fontWeight(.thin)
                     .lineLimit(1)
                 
-                HStack{
+                HStack{ 
                     if convo.messages.count > 0 {
                         Text("\(convo.messages.last!.text)")
                             .font(.caption)

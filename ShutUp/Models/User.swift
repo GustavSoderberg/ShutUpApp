@@ -10,8 +10,6 @@ import Foundation
 struct User: Identifiable, Equatable, Codable {
     
     let id: String
-    var name: String
     let username: String
-    var password: String
     
 }

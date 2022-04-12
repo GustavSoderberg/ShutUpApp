@@ -97,11 +97,14 @@ struct GetMembers {
 
         for member in members {
             
-            if member.username != um.currentUser!.username {
-                
-                rMembers += "\(member.username), "
-                
+            if let cu = um.currentUser {
+                if member.username != cu.username {
+                    
+                    rMembers += "\(member.username), "
+                    
+                }
             }
+            
         }
         return rMembers
     }

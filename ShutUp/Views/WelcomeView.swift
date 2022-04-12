@@ -39,7 +39,7 @@ struct WelcomeView: View {
                     
                     Button(action: {
                         
-                        if um.login(username: username) {
+                        if !username.isEmpty && um.login(username: username) {
                             
                             showWelcomeView = false
                             

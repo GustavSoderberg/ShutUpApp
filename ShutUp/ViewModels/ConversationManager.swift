@@ -51,7 +51,7 @@ class ConversationManager: ObservableObject {
     
     func sendMessage(message: String, user: User, conversation: Conversation) {
         
-        let newMessage = Message(timeStamp: Date.now, senderID: user.id, text: message)
+        let newMessage = Message(id: UUID(), timeStamp: Date.now, senderID: user.id, text: message)
         conversation.messages.append(newMessage)
         dm.updateFirestore(conversation: conversation, message: newMessage)
         
@@ -62,8 +62,8 @@ class ConversationManager: ObservableObject {
         for conversation in listOfConversations {
             
             if conversation.id == id {
-                return conversation
                 refresh += 1
+                return conversation
             }
             
         }

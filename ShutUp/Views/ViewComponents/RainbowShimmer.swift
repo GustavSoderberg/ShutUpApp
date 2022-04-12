@@ -21,15 +21,15 @@ struct TextShimmer: View {
 
             //Multicolor text...
 
-            HStack(spacing: 0) {
-                ForEach(0..<text.count){index in
-
-                    Text(String(text[text.index(text.startIndex, offsetBy:
-                                                    index)]))
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(randomColor())
-                }
-           }
+//            HStack(spacing: 0) {
+//                ForEach(0..<text.count){index in
+//                    
+//                    Text(String(text[text.index(text.startIndex, offsetBy:
+//                                                    index)]))
+//                        .font(.system(size: 20, weight: .bold))
+//                        .foregroundColor(randomColor())
+//                }
+//           }
 
             // Masking for shimmer effect
             .mask(

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Sekretess: View {
+struct Privacy: View {
 
     var body: some View {
 
@@ -18,7 +18,7 @@ struct Sekretess: View {
                 .padding()
                 .foregroundColor(Color.gray)
             Spacer()
-            Text("Sekretess")
+            Text("Privacy")
                 Spacer()
 //            Image(systemName: "greaterthan")
 //                .padding()

@@ -19,7 +19,7 @@ struct ActivityStatus: View {
                 .padding()
                 .foregroundColor(Color.purple)
             Spacer()
-            Text("Kontoinställningar")
+            Text("Account Settings")
             Spacer()
 //            Image(systemName: "greaterthan")
 //                .padding()

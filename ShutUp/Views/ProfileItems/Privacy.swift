@@ -17,6 +17,7 @@ struct Privacy: View {
                 .font(.system(size: 25))
                 .padding()
                 .foregroundColor(Color.gray)
+                .symbolRenderingMode(.multicolor)
             Spacer()
             Text("Privacy")
                 Spacer()

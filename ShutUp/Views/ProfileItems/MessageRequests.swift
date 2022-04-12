@@ -17,6 +17,7 @@ struct MessageRequests: View {
                 .font(.system(size: 25))
                 .padding()
                 .foregroundColor(Color.blue)
+                .symbolRenderingMode(.multicolor)
             Spacer()
             Text("Message Requests")
                 Spacer()

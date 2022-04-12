@@ -17,6 +17,7 @@ struct Credits: View {
                 .font(.system(size: 25))
                 .padding()
                 .foregroundColor(Color.purple)
+                .symbolRenderingMode(.multicolor)
             Spacer()
             Text("Credits")
                 Spacer()

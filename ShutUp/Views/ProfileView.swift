@@ -97,7 +97,7 @@ struct ProfileView: View {
                             //MARK: Change account -------------------------------------
                             
                             NavigationLink {
-                                DarkModeSettings()
+                                LogoutView(showingAlert: false)
                             } label: {
                                 ChangeAccount()
                             }.buttonStyle(PlainButtonStyle())

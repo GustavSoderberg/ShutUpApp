@@ -17,14 +17,13 @@ struct DarkMode: View {
                 .font(.system(size: 25))
                 .padding()
                 .foregroundColor(Color.black)
+                .symbolRenderingMode(.multicolor)
             Spacer()
             Text("Dark Mode")
                 Spacer()
-//            Image(systemName: "greaterthan")
-//                .padding()
 
         }
-        //.frame(width: 0.95 * UIScreen.main.bounds.width, height: 45)
+
             .background(Color.white)
             .cornerRadius(10)
 

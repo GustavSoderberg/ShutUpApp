@@ -18,6 +18,7 @@ struct ActivityStatus: View {
                 .font(.system(size: 25))
                 .padding()
                 .foregroundColor(Color.purple)
+                .symbolRenderingMode(.multicolor)
             Spacer()
             Text("Account Settings")
             Spacer()

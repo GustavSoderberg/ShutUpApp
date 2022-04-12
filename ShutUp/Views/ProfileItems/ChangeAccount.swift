@@ -24,6 +24,7 @@ struct ChangeAccount: View {
                 .font(.system(size: 25))
                 .padding()
                 .foregroundColor(Color.green)
+                .symbolRenderingMode(.multicolor)
             Spacer()
             Text("Switch User")
             Spacer()

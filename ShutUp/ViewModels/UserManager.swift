@@ -38,5 +38,6 @@ class UserManager {
         
         return true
     }
+
     
 }

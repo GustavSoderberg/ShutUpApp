@@ -11,36 +11,14 @@ import FirebaseFirestoreSwift
 
 class ConversationManager: ObservableObject {
     
-    var currentUser: User? = nil
-    var listOfUsers = [User]()
     var selectedUsers = [User]()
     @Published var listOfConversations = [Conversation]()
     @Published var refresh = 0
     var index = 0
     
-    init() {
-        
-        listOfUsers.append(User(id: "tempId1", name: "Andreas", username: "test1", password: "test1"))
-        listOfUsers.append(User(id: "tempId2", name: "Calle", username: "test2", password: "test2"))
-        listOfUsers.append(User(id: "tempId3", name: "Gustav", username: "test3", password: "test3"))
-
-    }
-    
-    func login() -> Bool {
-        
-        if let uid = auth.currentUser?.uid {
-            self.currentUser = User(id: uid, name: "you", username: "you", password: "i'm you")
-            return true
-        }
-        else {
-            return false
-        }
-        
-    }
-    
     func newConversation(name: String) {
         
-        selectedUsers.append(currentUser!)
+        selectedUsers.append(um.currentUser!)
         let conversation = Conversation(name: name, members: selectedUsers)
         selectedUsers.removeAll()
         

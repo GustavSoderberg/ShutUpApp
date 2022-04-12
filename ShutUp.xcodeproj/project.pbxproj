@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F05FDFF27FB0B550058FACF /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F05FDFE27FB0B550058FACF /* SettingsManager.swift */; };
 		3F05FE0127FB184D0058FACF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F05FE0027FB184D0058FACF /* SettingsView.swift */; };
+		3F664E082805937200EC6CE7 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F664E072805937200EC6CE7 /* UserManager.swift */; };
 		3FAE94C127F2012900957C61 /* ShutUpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE94C027F2012900957C61 /* ShutUpApp.swift */; };
 		3FAE94C327F2012900957C61 /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE94C227F2012900957C61 /* ConversationView.swift */; };
 		3FAE94C527F2012A00957C61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FAE94C427F2012A00957C61 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		3F05FDFE27FB0B550058FACF /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		3F05FE0027FB184D0058FACF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		3F664E072805937200EC6CE7 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		3FAE94BD27F2012900957C61 /* ShutUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShutUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FAE94C027F2012900957C61 /* ShutUpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutUpApp.swift; sourceTree = "<group>"; };
 		3FAE94C227F2012900957C61 /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			children = (
 				3F05FDFE27FB0B550058FACF /* SettingsManager.swift */,
 				3FAE94D727F2044300957C61 /* ConversationManager.swift */,
+				3F664E072805937200EC6CE7 /* UserManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				3FE554FF27F6E75F00325B17 /* WelcomeView.swift in Sources */,
 				B359E8F22800364200035660 /* DarkMode.swift in Sources */,
 				B359E9352804637C00035660 /* MessageRequests.swift in Sources */,
+				3F664E082805937200EC6CE7 /* UserManager.swift in Sources */,
 				B359E8E227F3A07F00035660 /* RainbowShimmer.swift in Sources */,
 				3FE554FD27F6E5DF00325B17 /* DataManager.swift in Sources */,
 				3FD294B027FC240100DF8ACD /* Theme.swift in Sources */,

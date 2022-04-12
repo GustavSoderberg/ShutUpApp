@@ -15,8 +15,11 @@ var auth = Auth.auth()
 var cm = ConversationManager()
 var sm = SettingsManager()
 var dm = DataManager()
+var um = UserManager()
 
 struct ConversationView: View {
+    
+    var show = false
     
     init() {
         auth.signInAnonymously { authResult, error in
@@ -27,7 +30,7 @@ struct ConversationView: View {
     
     @ObservedObject var convoM = cm
     @State private var showProfileView = false
-    @State private var showWelcomeView = true
+    @State private var showWelcomeView = false
     @State private var showDelete = false
     @State private var selectedConvo = -1
 
@@ -223,6 +226,12 @@ struct ConversationView: View {
             
             
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                
+                showWelcomeView = um.loginCheck(uid: auth.currentUser!.uid)
+            }
+        }
         .sheet(isPresented: $showWelcomeView) {
             WelcomeView(showWelcomeView: $showWelcomeView)
         }
@@ -242,7 +251,7 @@ struct NewConversationView : View{
         
         Spacer()
         
-        ForEach(convoM.listOfUsers) { user in
+        ForEach(um.listOfUsers) { user in
             
             Button {
                 if !convoM.selectedUsers.contains(user) {
@@ -251,9 +260,6 @@ struct NewConversationView : View{
                     convoM.unselect(userToRemove: user)
                 }
                 
-                for user in convoM.selectedUsers {
-                    print(user.name)
-                }
                 
             } label: {
                 
@@ -285,9 +291,9 @@ struct NewConversationView : View{
                     
                     for user in convoM.selectedUsers {
                         
-                       if user.name != cm.currentUser!.name {
+                        if user.username != um.currentUser!.username {
                             
-                            temp = "\(user.name), "
+                            temp = "\(user.username), "
                             convoName += temp
                             
                      }

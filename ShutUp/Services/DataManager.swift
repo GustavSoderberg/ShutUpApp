@@ -37,6 +37,35 @@ class DataManager {
                         print(cm.refresh)
                         
                     case.failure(let error) :
+                        print("Error decoding user \(error)")
+                    }
+                }
+            }
+        }
+        
+        db.collection("users").addSnapshotListener { snapshot, err in
+            guard let snapshot = snapshot else { return }
+            
+            if let err = err {
+                print("Error getting user document \(err)")
+                
+            } else {
+                um.listOfUsers.removeAll()
+                for document in snapshot.documents {
+                    let result = Result {
+                        
+                        try document.data(as: User.self)
+                        
+                    }
+                    
+                    switch result {
+                    case.success(let user) :
+                        
+                        um.listOfUsers.append(user)
+                        print(um.listOfUsers.count)
+                        cm.refresh += 1
+                        
+                    case.failure(let error) :
                         print("Error decoding convo \(error)")
                     }
                 }
@@ -48,6 +77,15 @@ class DataManager {
         
         do {
             _ = try db.collection("convos").addDocument(from: convo)
+        } catch {
+            print("Error saving to db")
+        }
+    }
+    
+    func saveUserToFirestore(user: User) {
+        
+        do {
+            _ = try db.collection("users").addDocument(from: user)
         } catch {
             print("Error saving to db")
         }

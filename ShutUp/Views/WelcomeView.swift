@@ -12,7 +12,6 @@ struct WelcomeView: View {
     
     @Binding var showWelcomeView : Bool
     @State private var username: String = ""
-    @State private var password: String = ""
     var auth = Auth.auth()
     
     var body: some View {
@@ -37,23 +36,10 @@ struct WelcomeView: View {
                     .padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
                     .padding(/*@START_MENU_TOKEN@*/.horizontal, 45.0/*@END_MENU_TOKEN@*/)
                     
-                    SecureField(
-                        "Password",
-                        text: $password
-                    ) {
-                        //handleLogin(username: username, password: password)
-                        
-                    }
-                    .foregroundColor(Color.black)
-                    .multilineTextAlignment(.leading)
-                    .submitLabel(.done)
-                    .frame(width: 250.0)
-                    .padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
-                    .padding(/*@START_MENU_TOKEN@*/.horizontal, 45.0/*@END_MENU_TOKEN@*/)
                     
                     Button(action: {
                         
-                        if cm.login() {
+                        if um.login(username: username) {
                             
                             showWelcomeView = false
                             

@@ -291,12 +291,16 @@ struct NewConversationView : View{
                     
                     for user in convoM.selectedUsers {
                         
-                        if user.username != um.currentUser!.username {
+                        if let cu = um.currentUser {
                             
-                            temp = "\(user.username), "
-                            convoName += temp
-                            
-                     }
+                            if user.username != cu.username {
+                                
+                                temp = "\(user.username), "
+                                convoName += temp
+                                
+                         }
+                        }
+                        
                     }
                     
                     convoName =  String(convoName.dropLast(2))

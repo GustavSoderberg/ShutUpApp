@@ -17,7 +17,7 @@ class UserManager {
         if let uid = auth.currentUser?.uid {
             
             dm.saveUserToFirestore(user: User(id: uid, username: username))
-//            self.currentUser = User(id: uid, username: username)
+            self.currentUser = User(id: uid, username: username)
             return true
         }
         else {

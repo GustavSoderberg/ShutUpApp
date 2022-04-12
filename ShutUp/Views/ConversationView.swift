@@ -19,8 +19,6 @@ var um = UserManager()
 
 struct ConversationView: View {
     
-    var show = false
-    
     init() {
         auth.signInAnonymously { authResult, error in
             guard let _ = authResult?.user else { return }
@@ -53,7 +51,9 @@ struct ConversationView: View {
                     Button{
                         withAnimation{
                             
-                            showProfileView.toggle()
+                            if let cu = um.currentUser {
+                                showProfileView.toggle()
+                            }
                         }
                         
                     } label: {
@@ -232,7 +232,7 @@ struct ConversationView: View {
             
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 
                 showWelcomeView = um.loginCheck(uid: auth.currentUser!.uid)
                 cm.refresh += 1
@@ -243,7 +243,7 @@ struct ConversationView: View {
             WelcomeView(showWelcomeView: $showWelcomeView)
         }
         .sheet(isPresented: $showProfileView) {
-            ProfileView(showProfileView: $showProfileView)
+            ProfileView(showProfileView: $showProfileView, user: um.currentUser!)
         }
     }
 }

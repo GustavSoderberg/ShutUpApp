@@ -19,7 +19,10 @@ struct ProfileView: View {
     
     @Binding var showProfileView : Bool
     
+    var user: User
+    
     var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
+    
     
     var body: some View {
         
@@ -59,7 +62,7 @@ struct ProfileView: View {
                                 ProgressView()
                             }
                             
-                            Text("Andreas Jonasson")
+                            Text(user.username)
                             //.font(.headline)
                                 .font(.system(size: 28))
                                 .padding(.bottom, 25)

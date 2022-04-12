@@ -25,9 +25,6 @@ struct Privacy: View {
 //                .padding()
 
         }
-        //.frame(width: 0.95 * UIScreen.main.bounds.width, height: 45)
-            .background(Color.white)
-            .cornerRadius(10)
 
     }
 }

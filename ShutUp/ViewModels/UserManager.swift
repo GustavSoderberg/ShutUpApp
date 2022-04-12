@@ -27,15 +27,17 @@ class UserManager {
     }
     
     func loginCheck(uid: String) -> Bool {
-        print(listOfUsers.count)
+        
         for user in listOfUsers {
             
             if user.id == uid {
                 self.currentUser = user
+                print("Logged in as \(currentUser!.username)")
                 return false
             }
         }
         
+        print("⚠️ New user detected ⚠️")
         return true
     }
 

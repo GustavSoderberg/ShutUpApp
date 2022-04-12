@@ -28,7 +28,7 @@ struct TitleRow: View {
             }
 
             VStack(alignment: .leading){
-                Text("\(user.name)")
+                Text("\(user.username)")
                     .font(.title).bold()
                     .lineLimit(1)
 

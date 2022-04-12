@@ -33,6 +33,7 @@ struct SingleConversationView: View {
                     
                     
                     
+                    if !convoM.listOfConversations.isEmpty {
                         
                         ForEach(convoM.listOfConversations[index].messages) { message in
                         
@@ -41,6 +42,8 @@ struct SingleConversationView: View {
                             MessageBubble(message: message)
                         
                             }
+                    }
+                        
                             
                         
                         
@@ -59,7 +62,7 @@ struct SingleConversationView: View {
             Button {
                 
                 if !message.isEmpty {
-                    convoM.sendMessage(message: message, user: convoM.currentUser!, conversation: conversation!)
+                    convoM.sendMessage(message: message, user: um.currentUser!, conversation: conversation!)
                     message = ""
                 }
                 
@@ -94,11 +97,14 @@ struct GetMembers {
 
         for member in members {
             
-            if member.name != cm.currentUser!.name {
-                
-                rMembers += "\(member.name), "
-                
+            if let cu = um.currentUser {
+                if member.username != cu.username {
+                    
+                    rMembers += "\(member.username), "
+                    
+                }
             }
+            
         }
         return rMembers
     }
@@ -111,22 +117,22 @@ struct MessageBubble : View{
     
     var body: some View {
         
-        VStack(alignment: convoM.currentUser!.id == message.senderID ? .trailing : .leading){
+        VStack(alignment: um.currentUser!.id == message.senderID ? .trailing : .leading){
             
             HStack{
                 Text(message.text)
                     .fontWeight(.medium)
                     .foregroundColor(Color.white)
                     .padding()
-                    .background(convoM.currentUser!.id == message.senderID ? sm.currentTheme!.bubbleS : sm.currentTheme!.bubbleR)
+                    .background(um.currentUser!.id == message.senderID ? sm.currentTheme!.bubbleS : sm.currentTheme!.bubbleR)
                     .cornerRadius(30)
                 
             }
-            .frame(maxWidth: 300, alignment: convoM.currentUser!.id == message.senderID ? .trailing : .leading)
+            .frame(maxWidth: 300, alignment: um.currentUser!.id == message.senderID ? .trailing : .leading)
             
         }
-        .frame(maxWidth: .infinity, alignment: convoM.currentUser!.id == message.senderID ? .trailing : .leading)
-        .padding(convoM.currentUser!.id == message.senderID ? .trailing : .leading)
+        .frame(maxWidth: .infinity, alignment: um.currentUser!.id == message.senderID ? .trailing : .leading)
+        .padding(um.currentUser!.id == message.senderID ? .trailing : .leading)
 
     }
 }

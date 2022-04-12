@@ -24,8 +24,5 @@ struct DarkMode: View {
 
         }
 
-            .background(Color.white)
-            .cornerRadius(10)
-
     }
 }

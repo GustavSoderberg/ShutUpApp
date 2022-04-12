@@ -34,7 +34,6 @@ class DataManager {
                         
                         cm.listOfConversations.append(convo)
                         cm.refresh += 1
-                        print(cm.refresh)
                         
                     case.failure(let error) :
                         print("Error decoding user \(error)")
@@ -62,7 +61,6 @@ class DataManager {
                     case.success(let user) :
                         
                         um.listOfUsers.append(user)
-                        print(um.listOfUsers.count)
                         cm.refresh += 1
                         
                     case.failure(let error) :

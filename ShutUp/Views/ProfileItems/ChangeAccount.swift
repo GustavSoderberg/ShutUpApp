@@ -32,9 +32,6 @@ struct ChangeAccount: View {
 //                .padding()
 
         }
-        //.frame(width: 0.95 * UIScreen.main.bounds.width, height: 40)
-            .background(Color.white)
-            .cornerRadius(10)
 
     }
 }

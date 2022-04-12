@@ -9,17 +9,18 @@ import SwiftUI
 
 struct ChatPreview: View {
     
-    var name: String
+    var convo: Conversation
+    
     var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
-
+    
     var body: some View {
-
+        
         HStack(spacing: 20) {
             
             ZStack{
-
+                
                 AsyncImage(url: imageURL) { image in
-
+                    
                     image.resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
@@ -51,28 +52,30 @@ struct ChatPreview: View {
                 } placeholder: {
                     ProgressView()
                 }
-
+                
             }
-
+            
             VStack(alignment: .leading){
-                Text(name)
+                Text(convo.name)
                     .font(.headline)
                     .fontWeight(.thin)
                     .lineLimit(1)
-
+                
                 HStack{
-                    Text("Senaste meddelandet...")
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                    if convo.messages.count > 0 {
+                        Text("\(convo.messages.last!.text)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
                     
                     Circle()
                         .fill(Color.blue)
                         .frame(width: 8, height: 8)
                     
-                }.padding(.top, -15)
+                }.padding(.top, -12)
                 
             }
-
+            
         }
     }
 }

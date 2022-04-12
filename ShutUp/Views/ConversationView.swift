@@ -139,7 +139,7 @@ struct ConversationView: View {
                                      } label:{
                                         
                                         
-                                            ChatPreview(name: convo.name)
+                                         ChatPreview(convo: convo)
                                                 
                                                 .gesture(DragGesture(minimumDistance: 100, coordinateSpace: .local)
                                                 .onEnded({ value in

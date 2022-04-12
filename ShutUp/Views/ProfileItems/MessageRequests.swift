@@ -18,7 +18,7 @@ struct MessageRequests: View {
                 .padding()
                 .foregroundColor(Color.blue)
             Spacer()
-            Text("Meddelandeförfrågningar")
+            Text("Message Requests")
                 Spacer()
 //            Image(systemName: "greaterthan")
 //                .padding()

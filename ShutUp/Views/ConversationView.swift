@@ -69,7 +69,7 @@ struct ConversationView: View {
 
                     Spacer()
                     
-                    Text("Chattar")
+                    Text("Chats")
                         .font(.title2)
                     
                     Spacer()

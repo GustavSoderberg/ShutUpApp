@@ -25,7 +25,7 @@ struct ChangeAccount: View {
                 .padding()
                 .foregroundColor(Color.green)
             Spacer()
-            Text("Byt Användare")
+            Text("Switch User")
             Spacer()
 //            Image(systemName: "greaterthan")
 //                .padding()

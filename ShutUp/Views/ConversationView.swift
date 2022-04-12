@@ -259,27 +259,33 @@ struct NewConversationView : View{
         Spacer()
         
         ForEach(um.listOfUsers) { user in
-            
-            Button {
-                if !convoM.selectedUsers.contains(user) {
-                    convoM.select(user: user)
-                } else if convoM.selectedUsers.contains(user) {
-                    convoM.unselect(userToRemove: user)
+                
+            if user.id != um.currentUser!.id {
+                Button {
+                    if !convoM.selectedUsers.contains(user) {
+                        convoM.select(user: user)
+                    } else if convoM.selectedUsers.contains(user) {
+                        convoM.unselect(userToRemove: user)
+                    }
+                    
+                    
+                } label: {
+                    
+                    if !convoM.selectedUsers.contains(user) {
+                        TitleRow(user: user)
+                    } else if convoM.selectedUsers.contains(user) {
+                        TitleRow(user: user)
+                            .foregroundColor(Color.white)
+                            .background(Color.blue)
+                            .cornerRadius(20)
+                    }
                 }
-                
-                
-            } label: {
-                
-                if !convoM.selectedUsers.contains(user) {
-                    TitleRow(user: user)
-                } else if convoM.selectedUsers.contains(user) {
-                    TitleRow(user: user)
-                        .foregroundColor(Color.white)
-                        .background(Color.blue)
-                        .cornerRadius(20)
-                }
+                .frame(width: 150, height: 70, alignment: .center)
             }
-            .frame(width: 150, height: 70, alignment: .center)
+                
+                
+            
+            
             
         }
         

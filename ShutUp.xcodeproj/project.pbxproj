@@ -39,6 +39,7 @@
 		B359E93328030FC500035660 /* DarkModeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E93228030FC500035660 /* DarkModeSettings.swift */; };
 		B359E9352804637C00035660 /* MessageRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E9342804637C00035660 /* MessageRequests.swift */; };
 		B359E9372805B3E500035660 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E9362805B3E500035660 /* LogoutView.swift */; };
+		E5FE49C82806BE5E00A92710 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FE49C72806BE5E00A92710 /* KeyboardManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		B359E93228030FC500035660 /* DarkModeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeSettings.swift; sourceTree = "<group>"; };
 		B359E9342804637C00035660 /* MessageRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRequests.swift; sourceTree = "<group>"; };
 		B359E9362805B3E500035660 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
+		E5FE49C72806BE5E00A92710 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				B359E8E027F3A06B00035660 /* ViewComponents */,
 				3FAE94C227F2012900957C61 /* ConversationView.swift */,
 				3FAE94D927F2123600957C61 /* SingleConversationView.swift */,
+				E5FE49C72806BE5E00A92710 /* KeyboardManager.swift */,
 				3FE554FE27F6E75F00325B17 /* WelcomeView.swift */,
 				3F05FE0027FB184D0058FACF /* SettingsView.swift */,
 				B359E8E727FEF0AD00035660 /* ProfileView.swift */,
@@ -291,6 +294,7 @@
 				3FAE94C127F2012900957C61 /* ShutUpApp.swift in Sources */,
 				3FAE94D527F201CD00957C61 /* Conversation.swift in Sources */,
 				B359E8E627F460C800035660 /* ChatPreview.swift in Sources */,
+				E5FE49C82806BE5E00A92710 /* KeyboardManager.swift in Sources */,
 				3FAE94D827F2044300957C61 /* ConversationManager.swift in Sources */,
 				B359E8EA27FEF87500035660 /* ProfileViewItems.swift in Sources */,
 				B359E8F82800491100035660 /* Privacy.swift in Sources */,

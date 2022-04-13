@@ -15,7 +15,7 @@ struct Message: Identifiable, Codable {
     let text: String
     
 }
-//
+
 //extension Message: Hashable {
 //    static func == (lhs: Message, rhs: Message) -> Bool {
 //        return  lhs.id == rhs.id &&

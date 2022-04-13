@@ -8,8 +8,15 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestoreSwift
+import Combine
+
+
 
 struct SingleConversationView: View {
+    
+    @ObservedObject var keyboardManager = KeyboardManager()
+    @State var scrollView: UIScrollView? = nil
+    @State var keyboardHeight = CGFloat(0)
     
     var index: Int
     @ObservedObject var convoM = cm
@@ -21,15 +28,15 @@ struct SingleConversationView: View {
     
     var body: some View {
         
-        Divider()
-        
-        ScrollViewReader{ proxy in
+        VStack{
             
-            ScrollView() {
+            ScrollViewReader { proxy in
                 
-                Spacer()
-                
-                //HStack{
+                ScrollView() {
+                    
+                    Spacer()
+                    
+                    //HStack{
                     
                     VStack {
                         
@@ -41,50 +48,86 @@ struct SingleConversationView: View {
                                     .id(idx)
                                 
                             }
-                        
+                            
                         }
                         //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
                     }
+                    
+                    
                     Spacer()
-//                }
-//                Spacer()
-            }.onAppear{
-                proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
-            }.onChange(of: convoM.listOfConversations[index].messages.count) { newValue in
-                proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
-            }
-        }
-        
-        HStack {
-            
-            TextField("message", text: $message).padding()
-            
-            Button {
-                
-                if !message.isEmpty {
-                    convoM.sendMessage(message: message, user: um.currentUser!, conversation: conversation!)
-                    message = ""
+                    //                }
+                    //                Spacer()
+                }
+                .onChange(of: keyboardManager.isVisible) { newValue in
+                    print(keyboardManager.isVisible)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        
+                        
+                        withAnimation{
+                            proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
+                        }
+                        
+                    }
+                    
+                    
+
+                    keyboardManager.isVisible = false
+
+                    
+                    print("im here" )
                 }
                 
-            } label: {
+                .onAppear{
+                    proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
+                    
+                    
+                }
                 
-                Text("Send")
+                .onChange(of: convoM.listOfConversations[index].messages.count) { newValue in
+                    
+                    withAnimation{
+                        proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
+                    }
+                    
+                    
+                }
                 
-            }.padding()
-            
-        }.toolbar {
-            Button {
-                showSettingsView = true
-            } label: {
-                Image(systemName: "gear")
+                
             }
             
+            HStack {
+                
+                TextField("message", text: $message).padding()
+                
+                Button {
+                    
+                    if !message.isEmpty {
+                        convoM.sendMessage(message: message, user: um.currentUser!, conversation: conversation!)
+                        message = ""
+                    }
+                    
+                } label: {
+                    
+                    Text("Send")
+                    
+                }.padding()
+                
+            }.toolbar {
+                Button {
+                    showSettingsView = true
+                } label: {
+                    Image(systemName: "gear")
+                }
+                
+            }
+            .navigationBarTitle("\(getMembers.everybody(members: conversation!.members))".dropLast(2)).navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $showSettingsView) {
+                SettingsView(showSettingsView: $showSettingsView, conversation: conversation!)
+            }
+            
+            
         }
-        .navigationBarTitle("\(getMembers.everybody(members: conversation!.members))".dropLast(2)).navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showSettingsView) {
-            SettingsView(showSettingsView: $showSettingsView, conversation: conversation!)
-        }
-        
+
     }
     
 }

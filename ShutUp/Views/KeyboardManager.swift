@@ -28,10 +28,16 @@ class KeyboardManager: ObservableObject {
                 guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
                 
                 self.topFrame = keyboardFrame.maxY
+                
+                
+                
                 self.isVisible = keyboardFrame.minY < UIScreen.main.bounds.height
-                
-                
+                    
+                    
                 self.keyboardHeight = self.isVisible ? keyboardFrame.height : 0
+                    
+                
+                
             }
         
         

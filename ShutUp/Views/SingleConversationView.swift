@@ -62,7 +62,6 @@ struct SingleConversationView: View {
                     print(keyboardManager.isVisible)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         
-                        
                         withAnimation{
                             proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
                         }
@@ -79,7 +78,6 @@ struct SingleConversationView: View {
                 
                 .onAppear{
                     proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
-                    
                     
                 }
                 
@@ -156,6 +154,10 @@ struct GetMembers {
 struct MessageBubble : View{
     
     @ObservedObject var convoM = cm
+    @State var showDate = false
+    
+    
+    
     var message: Message
     
     var body: some View {
@@ -163,15 +165,48 @@ struct MessageBubble : View{
         VStack(alignment: um.currentUser!.id == message.senderID ? .trailing : .leading){
             
             HStack{
+                VStack(alignment: um.currentUser!.id == message.senderID ? .trailing : .leading ){
+                    
+                    if showDate{
+                        
+                        Text(message.timeStamp.formatted())
+                            .font(.system(size: 10))
+                            .padding(.top, 10)
+                    }
+                    
                 Text(message.text)
+                             
                     .fontWeight(.medium)
                     .foregroundColor(Color.white)
                     .padding()
                     .background(um.currentUser!.id == message.senderID ? sm.currentTheme!.bubbleS : sm.currentTheme!.bubbleR)
                     .cornerRadius(30)
+                                
+                    
+                    
+                }
+                
                 
             }
             .frame(maxWidth: 300, alignment: um.currentUser!.id == message.senderID ? .trailing : .leading)
+            
+        }.onTapGesture {
+            withAnimation{
+                showDate = true
+            }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    
+                    withAnimation{
+                        showDate = false
+                    }
+                    
+                    
+                }
+                
+            
+            
+            
             
         }
         .frame(maxWidth: .infinity, alignment: um.currentUser!.id == message.senderID ? .trailing : .leading)

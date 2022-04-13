@@ -23,36 +23,36 @@ struct SingleConversationView: View {
         
         Divider()
         
-        ScrollView() {
+        ScrollViewReader{ proxy in
             
-            Spacer()
-            
-            HStack{
+            ScrollView() {
                 
-                VStack {
-                    
-                    
-                    
-                    if !convoM.listOfConversations.isEmpty {
-                        
-                        ForEach(convoM.listOfConversations[index].messages) { message in
-                        
-                        
-                            
-                            MessageBubble(message: message)
-                        
-                            }
-                    }
-                        
-                            
-                        
-                        
-                        //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
-                    
-                }
                 Spacer()
+                
+                //HStack{
+                    
+                    VStack {
+                        
+                        if !convoM.listOfConversations.isEmpty {
+                            
+                            ForEach(Array(convoM.listOfConversations[index].messages.enumerated()), id: \.offset) { idx, message in
+                                
+                                MessageBubble(message: message)
+                                    .id(idx)
+                                
+                            }
+                        
+                        }
+                        //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
+                    }
+                    Spacer()
+//                }
+//                Spacer()
+            }.onAppear{
+                proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
+            }.onChange(of: convoM.listOfConversations[index].messages.count) { newValue in
+                proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
             }
-            Spacer()
         }
         
         HStack {
@@ -78,7 +78,7 @@ struct SingleConversationView: View {
             } label: {
                 Image(systemName: "gear")
             }
-
+            
         }
         .navigationBarTitle("\(getMembers.everybody(members: conversation!.members))".dropLast(2)).navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showSettingsView) {
@@ -94,7 +94,7 @@ struct GetMembers {
     func everybody(members: [User]) -> String {
         
         var rMembers = ""
-
+        
         for member in members {
             
             if let cu = um.currentUser {
@@ -133,7 +133,7 @@ struct MessageBubble : View{
         }
         .frame(maxWidth: .infinity, alignment: um.currentUser!.id == message.senderID ? .trailing : .leading)
         .padding(um.currentUser!.id == message.senderID ? .trailing : .leading)
-
+        
     }
 }
 

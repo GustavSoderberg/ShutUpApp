@@ -49,36 +49,26 @@ struct ProfileView: View {
                         
                         //MARK: PROFILE IMAGE VSTACK ----------------------------------------------------------------
                         
-                        
-                        VStack(spacing: 0) {
-                            
+                        List {
+                            VStack(spacing: 0) {
+
+                                HStack {
+                            Spacer()
                             AsyncImage(url: imageURL) { image in
                                 image.resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 100, height: 100)
                                     .cornerRadius(50)
-                                
                             } placeholder: {
                                 ProgressView()
                             }
-                            
+                                    Spacer()
+                                }
                             Text(user.username)
-                            //.font(.headline)
                                 .font(.system(size: 28))
                                 .padding(.bottom, 25)
-                            
-                        }
-                        
-                        //.edgesIgnoringSafeArea(.all)
-                        //                            .background(Color.white.opacity(0.8))
-                        //                            .zIndex(2)
-                    }
-                    
-                    
-                    
-                    List {
-                        
-                        
+                            }
+
                         Section(header: Text("Important Tasks")) {
                             
                             //MARK: DarkModeSettings -------------------------------------
@@ -150,3 +140,4 @@ struct ProfileView: View {
 }
 
 
+}

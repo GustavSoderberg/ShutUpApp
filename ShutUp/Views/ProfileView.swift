@@ -54,7 +54,7 @@ struct ProfileView: View {
 
                                 HStack {
                             Spacer()
-                            AsyncImage(url: imageURL) { image in
+                                    AsyncImage(url: URL(string: um.currentUser!.photoUrl)) { image in
                                 image.resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 100, height: 100)

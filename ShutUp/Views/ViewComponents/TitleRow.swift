@@ -18,7 +18,7 @@ struct TitleRow: View {
     var body: some View {
         HStack(spacing: 20) {
 
-            AsyncImage(url: imageURL) { image in
+            AsyncImage(url: URL(string: user.photoUrl)) { image in
                 image.resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 50, height: 50)

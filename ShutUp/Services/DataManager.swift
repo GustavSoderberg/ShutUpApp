@@ -67,6 +67,9 @@ class DataManager {
                         print("Error decoding convo \(error)")
                     }
                 }
+                
+                //CALL BOOL
+                
             }
         }
     }

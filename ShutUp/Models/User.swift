@@ -11,5 +11,6 @@ struct User: Identifiable, Equatable, Codable {
     
     let id: String
     let username: String
+    let photoUrl: String
     
 }

@@ -134,7 +134,7 @@ struct ConversationView: View {
                             
                         }
                         
-                        if um.currentUser == nil {
+                        if um.isLoading {
                             
                                 ProgressView()
                             
@@ -261,24 +261,6 @@ struct ConversationView: View {
             if Auth.auth().currentUser == nil{
                 
                 showWelcomeView = true
-                
-            }
-            
-            else {
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    
-                    for user in um.listOfUsers {
-                        
-                        if user.id == Auth.auth().currentUser!.uid {
-                            um.currentUser = user
-                            print("Logged in as \(user.username)")
-                            cm.refresh += 1
-                        }
-                        
-                    }
-                    
-                }
                 
             }
             

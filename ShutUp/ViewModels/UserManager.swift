@@ -11,6 +11,7 @@ class UserManager {
     
     var currentUser: User? = nil
     var listOfUsers = [User]()
+    var isLoading = true
     
     func register(username: String, uid: String, photoUrl: String) {
         
@@ -40,7 +41,6 @@ class UserManager {
             }
         }
         
-        print("⚠️ New user detected ⚠️")
         return true
     }
 

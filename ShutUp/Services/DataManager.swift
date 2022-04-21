@@ -68,7 +68,27 @@ class DataManager {
                     }
                 }
                 
-                //CALL BOOL
+                if Auth.auth().currentUser != nil {
+                    
+                    for user in um.listOfUsers {
+                        
+                        if user.id == Auth.auth().currentUser!.uid {
+                            um.currentUser = user
+                            print("Logged in as \(user.username)")
+                            cm.refresh += 1
+                        }
+                        
+                    }
+                    
+                }
+                else {
+                    
+                    print("⚠️ New user detected ⚠️")
+                    
+                }
+                
+                um.isLoading = false
+                cm.refresh += 1
                 
             }
         }

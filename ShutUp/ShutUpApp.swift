@@ -11,6 +11,7 @@ import Firebase
 @main
 struct ShutUpApp: App {
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     init() {
         FirebaseApp.configure()
     }
@@ -18,7 +19,7 @@ struct ShutUpApp: App {
     var body: some Scene {
         WindowGroup {
             ConversationView()
-                .ignoresSafeArea(.keyboard)
+//                .ignoresSafeArea(.keyboard)
                 //.environment(\.colorScheme, .dark)
         }
     }

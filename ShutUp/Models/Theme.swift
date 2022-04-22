@@ -11,11 +11,9 @@ import SwiftUI
 struct Theme : Codable {
     
     var name: String
-    
     var top: Color
     var background: Color
     var bottom: Color
-    
     var bubbleS: Color
     var bubbleR: Color
     

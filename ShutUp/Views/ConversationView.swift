@@ -36,8 +36,7 @@ struct ConversationView: View {
     @State var convoName = ""
     @State var searchText = ""
     @State var onTapped = false
-    
-    
+
     var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
     
     var body: some View {
@@ -269,7 +268,7 @@ struct ConversationView: View {
             WelcomeView(showWelcomeView: $showWelcomeView)
         }
         .sheet(isPresented: $showProfileView) {
-            ProfileView(showProfileView: $showProfileView, user: um.currentUser!)
+            ProfileView(showWelcomeView: $showWelcomeView, showProfileView: $showProfileView, user: um.currentUser!)
         }
     }
 }

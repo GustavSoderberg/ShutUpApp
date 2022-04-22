@@ -11,9 +11,7 @@ struct TitleRow: View {
 
     var user: User
 
-
     var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
-    //var name = "Dummy Jonasson"
 
     var body: some View {
         HStack(spacing: 20) {
@@ -38,20 +36,9 @@ struct TitleRow: View {
                     .foregroundColor(.gray)
             }
 
-//            Image(systemName: "phone.fill")
-//                .foregroundColor(.gray)
-//                .padding(10)
-//                .background(.white)
-//                .cornerRadius(50)
-
         }.padding(.leading, 10)
             .frame(width: 0.8*UIScreen.main.bounds.width, height: 70, alignment: .leading)
 
     }
 }
 
-//struct TitleRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TitleRow(user: User(name: "Test Persson", username: "perr1337", password: ""))
-//    }
-//}

@@ -19,19 +19,6 @@ struct TextShimmer: View {
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(Color.white.opacity(0.55))
 
-            //Multicolor text...
-
-//            HStack(spacing: 0) {
-//                ForEach(0..<text.count){index in
-//                    
-//                    Text(String(text[text.index(text.startIndex, offsetBy:
-//                                                    index)]))
-//                        .font(.system(size: 20, weight: .bold))
-//                        .foregroundColor(randomColor())
-//                }
-//           }
-
-            // Masking for shimmer effect
             .mask(
                 Rectangle()
                 // For some more effect we use gradient

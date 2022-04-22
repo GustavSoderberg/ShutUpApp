@@ -18,19 +18,16 @@ class UserManager {
         if !loginCheck(uid: uid) {
             
             self.currentUser = User(id: uid, username: username, photoUrl: photoUrl)
-            
+
         }
-        
+
         else {
             
             dm.saveUserToFirestore(user: User(id: uid, username: username, photoUrl: photoUrl))
             self.currentUser = User(id: uid, username: username, photoUrl: photoUrl)
-            
         }
-
     }
 
-    
     func loginCheck(uid: String) -> Bool {
         
         for user in listOfUsers {
@@ -40,7 +37,6 @@ class UserManager {
                 return false
             }
         }
-        
         return true
     }
 

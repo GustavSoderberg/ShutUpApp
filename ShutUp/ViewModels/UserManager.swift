@@ -11,33 +11,32 @@ class UserManager {
     
     var currentUser: User? = nil
     var listOfUsers = [User]()
+    var isLoading = true
     
-    func login(username: String) -> Bool {
+    func register(username: String, uid: String, photoUrl: String) {
         
-        if let uid = auth.currentUser?.uid {
+        if !loginCheck(uid: uid) {
             
-            dm.saveUserToFirestore(user: User(id: uid, username: username))
-            self.currentUser = User(id: uid, username: username)
-            return true
+            self.currentUser = User(id: uid, username: username, photoUrl: photoUrl)
+
         }
+
         else {
-            return false
+            
+            dm.saveUserToFirestore(user: User(id: uid, username: username, photoUrl: photoUrl))
+            self.currentUser = User(id: uid, username: username, photoUrl: photoUrl)
         }
-        
     }
-    
+
     func loginCheck(uid: String) -> Bool {
         
         for user in listOfUsers {
             
             if user.id == uid {
-                self.currentUser = user
-                print("Logged in as \(currentUser!.username)")
+                print("Logged in as existing user")
                 return false
             }
         }
-        
-        print("⚠️ New user detected ⚠️")
         return true
     }
 

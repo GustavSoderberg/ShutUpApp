@@ -16,7 +16,8 @@ import SwiftUI
 import Firebase
 
 struct ProfileView: View {
-    
+
+    @Binding var showWelcomeView : Bool
     @Binding var showProfileView : Bool
     
     var user: User
@@ -54,7 +55,7 @@ struct ProfileView: View {
 
                                 HStack {
                             Spacer()
-                            AsyncImage(url: imageURL) { image in
+                                    AsyncImage(url: URL(string: um.currentUser!.photoUrl)) { image in
                                 image.resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 100, height: 100)
@@ -78,8 +79,8 @@ struct ProfileView: View {
                             } label: {
                                 DarkMode()
                             }.buttonStyle(PlainButtonStyle())
-                            
-                            //MARK: Toggle ActivityStatus -------------------------------------
+
+//MARK: Toggle ActivityStatus ------------------------------
                             
                             NavigationLink {
                                 DarkModeSettings()
@@ -87,15 +88,15 @@ struct ProfileView: View {
                                 ActivityStatus()
                             }.buttonStyle(PlainButtonStyle())
                             
-                            //MARK: Change account -------------------------------------
+//MARK: Change account -------------------------------------
                             
                             NavigationLink {
-                                LogoutView(showingAlert: false)
+                                LogoutView(showingAlert: false, showProfileView: $showProfileView, showWelcomeView: $showWelcomeView)
                             } label: {
                                 ChangeAccount()
                             }.buttonStyle(PlainButtonStyle())
                             
-                            //MARK: Credits -------------------------------------
+//MARK: Credits --------------------------------------------
                             
                             NavigationLink {
                                 DarkModeSettings()
@@ -103,7 +104,7 @@ struct ProfileView: View {
                                 Credits()
                             }.buttonStyle(PlainButtonStyle())
                             
-                            //MARK: Sekretess -------------------------------------
+//MARK: Sekretess ------------------------------------------
                             
                             NavigationLink {
                                 DarkModeSettings()
@@ -111,7 +112,7 @@ struct ProfileView: View {
                                 Privacy()
                             }.buttonStyle(PlainButtonStyle())
                             
-                            //MARK: Meddelandeförfrågningar -------------------------------------
+//MARK: Meddelandeförfrågningar -------------------------------------
                             
                             NavigationLink {
                                 DarkModeSettings()
@@ -120,10 +121,8 @@ struct ProfileView: View {
                             }.buttonStyle(PlainButtonStyle())
                             
                         }
-                        
-                        //MARK: SECTION TWO LETS GO
-                        
-                        
+                    
+
                     }
                 }
                 .navigationBarHidden(true)

@@ -140,11 +140,13 @@ struct CustomLoginViewController : UIViewControllerRepresentable {
         actionCodeSettings.handleCodeInApp = true
         actionCodeSettings.setAndroidPackageName("com.firebase.example", installIfNotAvailable: false, minimumVersion: "12")
         
+        let twitterAuthProvider = FUIOAuth.twitterAuthProvider()
         let facebookAuthProvider = FUIFacebookAuth(authUI: authUI)
         let githubAuthProvider = FUIOAuth.githubAuthProvider(withAuthUI: authUI)
         let googleAuthProvider = FUIGoogleAuth(authUI: authUI)
         
         let authProviders: [FUIAuthProvider] = [
+            twitterAuthProvider,
             facebookAuthProvider,
             googleAuthProvider,
             githubAuthProvider,

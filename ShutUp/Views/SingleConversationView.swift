@@ -27,20 +27,20 @@ struct SingleConversationView: View {
     @State var message = ""
     
     var body: some View {
-        
-        VStack{
+        if !convoM.listOfConversations.isEmpty {
             
-            ScrollViewReader { proxy in
+            VStack{
                 
-                ScrollView() {
+                ScrollViewReader { proxy in
                     
-                    Spacer()
-                    
-                    //HStack{
-                    
-                    VStack {
+                    ScrollView() {
                         
-                        if !convoM.listOfConversations.isEmpty {
+                        Spacer()
+                        
+                        //HStack{
+                        
+                        VStack {
+                            
                             
                             ForEach(Array(convoM.listOfConversations[index].messages.enumerated()), id: \.offset) { idx, message in
                                 
@@ -49,83 +49,82 @@ struct SingleConversationView: View {
                                 
                             }
                             
+                            
+                            //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
                         }
-                        //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
+                        
+                        
+                        Spacer()
+                        //                }
+                        //                Spacer()
+                    }
+                    .onChange(of: keyboardManager.isVisible) { newValue in
+                        print(keyboardManager.isVisible)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            
+                            withAnimation{
+                                proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
+                            }
+                            
+                        }
+                        
+                        
+                        
+                        keyboardManager.isVisible = false
+                        
+                        
+                        print("im here" )
                     }
                     
-                    
-                    Spacer()
-                    //                }
-                    //                Spacer()
-                }
-                .onChange(of: keyboardManager.isVisible) { newValue in
-                    print(keyboardManager.isVisible)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    .onAppear{
+                        proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
+                        
+                    }
+                    .onChange(of: convoM.listOfConversations[index].messages.count) { newValue in
                         
                         withAnimation{
                             proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
                         }
                         
-                    }
-                    
-                    
-
-                    keyboardManager.isVisible = false
-
-                    
-                    print("im here" )
-                }
-                
-                .onAppear{
-                    proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
-                    
-                }
-                
-                .onChange(of: convoM.listOfConversations[index].messages.count) { newValue in
-                    
-                    withAnimation{
-                        proxy.scrollTo(convoM.listOfConversations[index].messages.count - 1, anchor: .bottom)
+                        
                     }
                     
                     
                 }
                 
-                
-            }
-            
-            HStack {
-                
-                TextField("message", text: $message).padding()
-                
-                Button {
+                HStack {
                     
-                    if !message.isEmpty {
-                        convoM.sendMessage(message: message, user: um.currentUser!, conversation: conversation!)
-                        message = ""
+                    TextField("message", text: $message).padding()
+                    
+                    Button {
+                        
+                        if !message.isEmpty {
+                            convoM.sendMessage(message: message, user: um.currentUser!, conversation: conversation!)
+                            message = ""
+                        }
+                        
+                    } label: {
+                        
+                        Text("Send")
+                        
+                    }.padding()
+                    
+                }.toolbar {
+                    Button {
+                        showSettingsView = true
+                    } label: {
+                        Image(systemName: "gear")
                     }
                     
-                } label: {
-                    
-                    Text("Send")
-                    
-                }.padding()
-                
-            }.toolbar {
-                Button {
-                    showSettingsView = true
-                } label: {
-                    Image(systemName: "gear")
+                }
+                .navigationBarTitle("\(getMembers.everybody(members: conversation!.members))".dropLast(2)).navigationBarTitleDisplayMode(.inline)
+                .sheet(isPresented: $showSettingsView) {
+                    SettingsView(showSettingsView: $showSettingsView, conversation: conversation!)
                 }
                 
+                
             }
-            .navigationBarTitle("\(getMembers.everybody(members: conversation!.members))".dropLast(2)).navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $showSettingsView) {
-                SettingsView(showSettingsView: $showSettingsView, conversation: conversation!)
-            }
-            
-            
         }
-
     }
     
 }
@@ -174,14 +173,14 @@ struct MessageBubble : View{
                             .padding(.top, 10)
                     }
                     
-                Text(message.text)
-                             
-                    .fontWeight(.medium)
-                    .foregroundColor(Color.white)
-                    .padding()
-                    .background(um.currentUser!.id == message.senderID ? sm.currentTheme!.bubbleS : sm.currentTheme!.bubbleR)
-                    .cornerRadius(30)
-                                
+                    Text(message.text)
+                    
+                        .fontWeight(.medium)
+                        .foregroundColor(Color.white)
+                        .padding()
+                        .background(um.currentUser!.id == message.senderID ? sm.currentTheme!.bubbleS : sm.currentTheme!.bubbleR)
+                        .cornerRadius(30)
+                    
                     
                     
                 }
@@ -194,16 +193,16 @@ struct MessageBubble : View{
             withAnimation{
                 showDate = true
             }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    
-                    withAnimation{
-                        showDate = false
-                    }
-                    
-                    
+                withAnimation{
+                    showDate = false
                 }
                 
+                
+            }
+            
             
             
             

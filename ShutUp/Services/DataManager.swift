@@ -68,6 +68,10 @@ class DataManager {
                     }
                 }
                 
+                if um.listOfUsers.isEmpty {
+                    print("Offline mode")
+                }
+                
                 if Auth.auth().currentUser != nil {
                     
                     for user in um.listOfUsers {

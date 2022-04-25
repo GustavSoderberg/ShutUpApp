@@ -33,6 +33,7 @@ class UserManager {
         for user in listOfUsers {
             
             if user.id == uid {
+                um.currentUser = user
                 print("Logged in as existing user")
                 return false
             }

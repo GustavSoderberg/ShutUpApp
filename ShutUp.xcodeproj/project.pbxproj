@@ -44,6 +44,7 @@
 		B359E93328030FC500035660 /* DarkModeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E93228030FC500035660 /* DarkModeSettings.swift */; };
 		B359E9352804637C00035660 /* MessageRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E9342804637C00035660 /* MessageRequests.swift */; };
 		B359E9372805B3E500035660 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E9362805B3E500035660 /* LogoutView.swift */; };
+		E546A953281690A3004F4458 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E546A952281690A3004F4458 /* NetworkManager.swift */; };
 		E5FE49C82806BE5E00A92710 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FE49C72806BE5E00A92710 /* KeyboardManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		B359E93228030FC500035660 /* DarkModeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeSettings.swift; sourceTree = "<group>"; };
 		B359E9342804637C00035660 /* MessageRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRequests.swift; sourceTree = "<group>"; };
 		B359E9362805B3E500035660 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
+		E546A952281690A3004F4458 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E5FE49C72806BE5E00A92710 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				3FE554FC27F6E5DF00325B17 /* DataManager.swift */,
+				E546A952281690A3004F4458 /* NetworkManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				B359E8EA27FEF87500035660 /* ProfileViewItems.swift in Sources */,
 				B359E8F82800491100035660 /* Privacy.swift in Sources */,
 				B359E8F62800490100035660 /* Credits.swift in Sources */,
+				E546A953281690A3004F4458 /* NetworkManager.swift in Sources */,
 				3F05FE0127FB184D0058FACF /* SettingsView.swift in Sources */,
 				B359E8E827FEF0AD00035660 /* ProfileView.swift in Sources */,
 				B359E8FA280068F100035660 /* ChangeAccount.swift in Sources */,

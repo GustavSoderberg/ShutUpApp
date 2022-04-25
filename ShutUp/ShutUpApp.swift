@@ -11,15 +11,13 @@ import Firebase
 @main
 struct ShutUpApp: App {
     
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @ObservedObject var nm = NetworkManager()
-    
     
     init() {
         
         FirebaseApp.configure()
-        print(nm.isConnected)
+        cm.isConnected = nm.isConnected!
     }
     
     var body: some Scene {

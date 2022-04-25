@@ -18,7 +18,11 @@ var sm = SettingsManager()
 var dm = DataManager()
 var um = UserManager()
 
+
+
 struct ConversationView: View {
+    
+    
     
     init() {
         
@@ -67,7 +71,20 @@ struct ConversationView: View {
                                         .frame(width: 40, height: 40)
                                         .cornerRadius(50)
                                 } placeholder: {
-                                    ProgressView()
+                                    if cm.isConnected{
+                                        ProgressView()
+                                        
+                                    }
+                                    else{
+                                        Image("def_avatar")
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(50)
+                                    }
+                                    
+                                    
+
+                                
+                                    
                                 }
                                 
                             }
@@ -272,6 +289,8 @@ struct ConversationView: View {
         }
     }
 }
+
+
 
 struct NewConversationView : View{
     

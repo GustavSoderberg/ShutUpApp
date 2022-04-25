@@ -15,6 +15,7 @@ class ConversationManager: ObservableObject {
     @Published var listOfConversations = [Conversation]()
     @Published var refresh = 0
     var index = 0
+    var isConnected = false
     
     func newConversation(name: String) {
         

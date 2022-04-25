@@ -44,6 +44,8 @@ class DataManager {
             
         }
         
+        
+        
         db.collection("users").addSnapshotListener { snapshot, err in
             guard let snapshot = snapshot else { return }
             
@@ -99,6 +101,7 @@ class DataManager {
             }
         }
     }
+    
     
     func saveToFirestore(convo: Conversation) {
         

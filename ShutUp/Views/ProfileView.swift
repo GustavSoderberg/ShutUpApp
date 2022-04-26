@@ -110,7 +110,7 @@ struct ProfileView: View {
 //MARK: Sekretess ------------------------------------------
                             
                             NavigationLink {
-                                DarkModeSettings()
+                                PrivacyView()
                             } label: {
                                 Privacy()
                             }.buttonStyle(PlainButtonStyle())

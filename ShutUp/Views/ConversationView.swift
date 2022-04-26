@@ -214,7 +214,7 @@ struct ConversationView: View {
                                                 SingleConversationView(index: index)
                                                     .onAppear {
                                                         showDelete = false
-                                                    }
+                                                    }          
                                                 
                                                 
                                             } label:{
@@ -253,9 +253,11 @@ struct ConversationView: View {
                                                     
                                                     
                                                     Button(action: {
+
                                                         dm.deleteFromFirestore(conversation: convo)
                                                         selectedConvo = -1
                                                         showDelete = false
+
                                                         print("deletebutton")
                                                         
                                                     }, label: {

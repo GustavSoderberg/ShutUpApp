@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import CoreData
 
 class DataManager {
     
@@ -14,92 +15,122 @@ class DataManager {
     
     func listenToFirestore() {
         
-        db.collection("convos").addSnapshotListener { snapshot, err in
-            guard let snapshot = snapshot else { return }
+        if cm.isConnected {
             
-            if let err = err {
-                print("Error getting convo document \(err)")
+            print("hello from firestore")
+            
+            db.collection("convos").addSnapshotListener { snapshot, err in
+                guard let snapshot = snapshot else { return }
                 
-            } else {
-                cm.listOfConversations.removeAll()
-                for document in snapshot.documents {
-                    let result = Result {
-                        
-                        try document.data(as: Conversation.self)
-                        
-                    }
+                if let err = err {
+                    print("Error getting convo document \(err)")
                     
-                    switch result {
-                    case.success(let convo) :
-                        
-                        cm.listOfConversations.append(convo)
-                        cm.refresh += 1
-                        
-                    case.failure(let error) :
-                        print("Error decoding user \(error)")
-                    }
-                }
-            }
-            
-            
-        }
-        
-        
-        
-        db.collection("users").addSnapshotListener { snapshot, err in
-            guard let snapshot = snapshot else { return }
-            
-            if let err = err {
-                print("Error getting user document \(err)")
-                
-            } else {
-                um.listOfUsers.removeAll()
-                for document in snapshot.documents {
-                    let result = Result {
-                        
-                        try document.data(as: User.self)
-                        
-                    }
-                    
-                    switch result {
-                    case.success(let user) :
-                        
-                        um.listOfUsers.append(user)
-                        cm.refresh += 1
-                        
-                    case.failure(let error) :
-                        print("Error decoding convo \(error)")
-                    }
-                }
-                
-                if um.listOfUsers.isEmpty {
-                    print("Offline mode")
-                }
-                
-                if Auth.auth().currentUser != nil {
-                    
-                    for user in um.listOfUsers {
-                        
-                        if user.id == Auth.auth().currentUser!.uid {
-                            um.currentUser = user
-                            print("Logged in as \(user.username)")
-                            cm.refresh += 1
+                } else {
+                    cm.listOfConversations.removeAll()
+                    for document in snapshot.documents {
+                        let result = Result {
+                            
+                            try document.data(as: Conversation.self)
+                            
                         }
                         
+                        switch result {
+                        case.success(let convo) :
+                            
+                            cm.listOfConversations.append(convo)
+                            cm.refresh += 1
+                            
+                        case.failure(let error) :
+                            print("Error decoding user \(error)")
+                        }
+                    }
+                }
+            }
+            
+            
+            
+            db.collection("users").addSnapshotListener { snapshot, err in
+                guard let snapshot = snapshot else { return }
+                
+                if let err = err {
+                    print("Error getting user document \(err)")
+                    
+                } else {
+                    print("## Successfully read from firestore ##")
+                    um.listOfUsers.removeAll()
+                    for document in snapshot.documents {
+                        let result = Result {
+                            
+                            try document.data(as: User.self)
+                            
+                        }
+                        
+                        switch result {
+                        case.success(let user) :
+                            
+                            um.listOfUsers.append(user)
+                            cm.refresh += 1
+                            
+                        case.failure(let error) :
+                            print("Error decoding convo \(error)")
+                        }
                     }
                     
+                    self.setCurrentUser()
                 }
-                else {
-                    
-                    print("⚠️ New user detected ⚠️")
-                    
-                }
-                
-                um.isLoading = false
-                cm.refresh += 1
-                
             }
         }
+        
+        else { // IF COREDATA
+            
+            print("hello from core data")
+            
+            let fetchRequest: NSFetchRequest<UserCD> = UserCD.fetchRequest()
+            
+            pc.perform {
+                do {
+                    let result = try fetchRequest.execute()
+                    print("## Successfully read from coredata ##")
+                    for user in result {
+                        
+                        um.listOfUsers.append(User(id: user.id!, username: user.username!, photoUrl: ""))
+                        
+                    }
+                    
+                    self.setCurrentUser()
+                    
+                } catch {
+                    print("E: Failed to fetch users coredata \(error)")
+                }
+            }
+        }
+    }
+    
+    func setCurrentUser() {
+        
+        if Auth.auth().currentUser != nil {
+            
+            for user in um.listOfUsers {
+                if user.id == Auth.auth().currentUser!.uid {
+                    
+                    um.currentUser = user
+                    print("Logged in as \(user.username)")
+                    cm.refresh += 1
+                    
+                }
+                
+            }
+            
+        }
+        else {
+            
+            print("⚠️ New user detected ⚠️")
+            
+        }
+        
+        um.isLoading = false
+        cm.refresh += 1
+        
     }
     
     
@@ -111,6 +142,7 @@ class DataManager {
             print("Error saving to db")
         }
     }
+    
     
     func saveUserToFirestore(user: User) {
         
@@ -134,21 +166,20 @@ class DataManager {
         
         if let id = conversation.id {
             db.collection("convos").document(id)
-        
+            
                 .updateData([
                     "messages": FieldValue.arrayUnion([xMessage])
                     
                 ])
             
         }
-        
     }
+    
     
     func deleteFromFirestore(conversation: Conversation) {
         
         if let id = conversation.id {
             db.collection("convos").document(id).delete()
         }
-        
     }
 }

@@ -11,18 +11,20 @@ import FirebaseFirestoreSwift
 import FirebaseFacebookAuthUI
 import FirebaseGoogleAuthUI
 import FirebaseOAuthUI
+import CoreData
 
 //Global instances of a Singleton object
 var cm = ConversationManager()
 var sm = SettingsManager()
 var dm = DataManager()
 var um = UserManager()
+let pc = PersistenceController.shared.container.viewContext
 
 
 
 struct ConversationView: View {
     
-    
+    @Environment(\.managedObjectContext) private var coreData
     
     init() {
         
@@ -40,7 +42,7 @@ struct ConversationView: View {
     @State var convoName = ""
     @State var searchText = ""
     @State var onTapped = false
-
+    
     var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
     
     var body: some View {
@@ -58,7 +60,7 @@ struct ConversationView: View {
                             Button{
                                 withAnimation{
                                     
-                                    if um.currentUser != nil {
+                                    if um.currentUser != nil && cm.isConnected {
                                         showProfileView = true
                                     }
                                 }
@@ -82,8 +84,8 @@ struct ConversationView: View {
                                     }
                                     
                                     
-
-                                
+                                    
+                                    
                                     
                                 }
                                 
@@ -96,8 +98,15 @@ struct ConversationView: View {
                     
                     Spacer()
                     
-                    Text("Chats")
-                        .font(.title2)
+                    Button {
+                        cm.isConnected.toggle()
+                        cm.refresh += 1
+                    } label: {
+                        
+                        Text("Chats")
+                            .font(.title2)
+                    }
+                    
                     
                     Spacer()
                     
@@ -105,7 +114,7 @@ struct ConversationView: View {
                         
                         withAnimation{
                             
-                            if um.currentUser != nil {
+                            if um.currentUser != nil && cm.isConnected {
                                 newConversationSheet = true
                             }
                             
@@ -124,15 +133,30 @@ struct ConversationView: View {
                     
                 }.padding()
                 
+                if !cm.isConnected {
+                    
+                    
+                    HStack{
+                        Spacer()
+                        Label("You have no internet connection", systemImage: "wifi.slash")
+                        Spacer()
+                    }.padding().background(Color.red)
+                        .foregroundColor(Color.white)
+                    
+                }
+                
+                
                 ScrollView {
                     
                     VStack(alignment: .leading){
                         
                         Label() {
-                            TextField("Search here...", text: $searchText)
+                            TextField("Search here...", text: $searchText).onSubmit({
+                                print("hej")
+                            })
                             
-                                .foregroundColor(Color.black)
-                                .accentColor(Color.white)
+                            .foregroundColor(Color.black)
+                            .accentColor(Color.white)
                             
                             
                         } icon: {
@@ -142,7 +166,7 @@ struct ConversationView: View {
                                 .scaledToFit()
                         }
                         .textFieldStyle(.roundedBorder)
-                        .padding(10)
+                        .padding(.horizontal, 10)
                         .background(Color.white)
                         .cornerRadius(50)
                         .onTapGesture {
@@ -152,7 +176,26 @@ struct ConversationView: View {
                         
                         if um.isLoading {
                             
-                                ProgressView()
+                            ProgressView()
+                            
+                        }
+                        else if cm.listOfConversations.isEmpty {
+                            VStack {
+                                HStack {
+                                    Spacer()
+                                    Text("You have no conversations")
+                                    
+                                    
+                                    Spacer()
+                                }
+                                Button {
+                                    if cm.isConnected {
+                                        newConversationSheet = true
+                                    }
+                                } label: {
+                                    Text("Start chatting now")
+                                }
+                            }.padding(.top, 100)
                             
                         }
                         
@@ -162,18 +205,25 @@ struct ConversationView: View {
                                 if let cu = um.currentUser {
                                     
                                     
-                                    if convo.members.contains(cu){
+                                    if (convo.members.contains(cu) && searchText.isEmpty) || (convo.members.contains(cu) && convo.name.lowercased().contains(searchText.lowercased())){
                                         HStack(spacing: 10){
+                                            
                                             
                                             NavigationLink {
                                                 
+                                                if !showDelete {
+                                                    SingleConversationView(index: index)
+                                                        .onAppear(perform: {
+                                                            showDelete = false
+                                                            print("navigationlink")
+                                                            
+                                                        })
+                                                    
+                                                    
+                                                } else {
+                                                    Text("You stoopid")
+                                                }
                                                 
-                                                SingleConversationView(index: index, conversation: convo)
-                                                    .onAppear(perform: {
-                                                        showDelete = false
-                                                        print("navigationlink")
-                                                        
-                                                    })
                                                 
                                             } label:{
                                                 
@@ -254,15 +304,18 @@ struct ConversationView: View {
                                     
                                 }
                             }.padding()
+                            Spacer()
                         }
                         
                         
                         
-                        Spacer()
                     }
-                    .padding(20)
+                    .padding([.leading, .bottom, .trailing], 20)
                     .navigationBarHidden(true)
-                    .sheet(isPresented: $newConversationSheet) {
+                    .sheet(isPresented: $newConversationSheet,onDismiss: {
+                        cm.selectedUsers.removeAll()
+                        cm.refresh += 1
+                    }) {
                         NewConversationView(newConversationSheet: $newConversationSheet, convoName: $convoName)
                         
                     }
@@ -278,6 +331,8 @@ struct ConversationView: View {
                 
                 showWelcomeView = true
                 
+            } else {
+                um.loginCheck(uid: Auth.auth().currentUser!.uid)
             }
             
         })

@@ -11,6 +11,7 @@ import Firebase
 @main
 struct ShutUpApp: App {
     
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @ObservedObject var nm = NetworkManager()
     

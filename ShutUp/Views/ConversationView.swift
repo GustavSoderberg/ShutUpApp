@@ -211,7 +211,7 @@ struct ConversationView: View {
                                             
                                             NavigationLink {
                                                 
-                                                if !showDelete {
+                                                
                                                     SingleConversationView(index: index)
                                                         .onAppear(perform: {
                                                             showDelete = false
@@ -220,9 +220,7 @@ struct ConversationView: View {
                                                         })
                                                     
                                                     
-                                                } else {
-                                                    Text("You stoopid")
-                                                }
+                                                
                                                 
                                                 
                                             } label:{
@@ -261,8 +259,12 @@ struct ConversationView: View {
                                                     
                                                     
                                                     Button(action: {
-                                                        dm.deleteFromFirestore(conversation: convo)
-                                                        selectedConvo = -1
+                                                       
+                                                            dm.deleteFromFirestore(conversation: convo)
+                                                            selectedConvo = -1
+                                                            
+                                                        
+                                                        
                                                         print("deletebutton")
                                                         
                                                     }, label: {

@@ -22,7 +22,13 @@ class UserManager {
         let userCD = UserCD(context: pc)
         userCD.id = uid
         userCD.username = username
-        try! pc.save()
+        do {
+            try pc.save()
+        }
+        catch {
+            print("E: UserManager - Register() - Failed to save new user to database\(error)")
+        }
+        
         
     }
     
@@ -33,14 +39,10 @@ class UserManager {
             
             if user.id == uid {
                 
-                let userCD = UserCD(context: pc)
-                userCD.id = user.id
-                userCD.username = user.username
-                try! pc.save()
-                
                 self.currentUser = user
                 print("Logged in as \(user.username)")
                 return false
+                
             }
         }
         

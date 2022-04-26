@@ -211,16 +211,10 @@ struct ConversationView: View {
                                             
                                             NavigationLink {
                                                 
-                                                
-                                                    SingleConversationView(index: index)
-                                                        .onAppear(perform: {
-                                                            showDelete = false
-                                                            print("navigationlink")
-                                                            
-                                                        })
-                                                    
-                                                    
-                                                
+                                                SingleConversationView(index: index)
+                                                    .onAppear {
+                                                        showDelete = false
+                                                    }          
                                                 
                                                 
                                             } label:{
@@ -259,12 +253,11 @@ struct ConversationView: View {
                                                     
                                                     
                                                     Button(action: {
-                                                       
-                                                            dm.deleteFromFirestore(conversation: convo)
-                                                            selectedConvo = -1
-                                                            
-                                                        
-                                                        
+
+                                                        dm.deleteFromFirestore(conversation: convo)
+                                                        selectedConvo = -1
+                                                        showDelete = false
+
                                                         print("deletebutton")
                                                         
                                                     }, label: {
@@ -279,10 +272,6 @@ struct ConversationView: View {
                                                     .background(Color.red)
                                                     .cornerRadius(25)
                                                     .transition(.scale)
-                                                    
-                                                    //                                        .onTapGesture {
-                                                    //
-                                                    //                                        }
                                                     
                                                     
                                                     
@@ -384,10 +373,6 @@ struct NewConversationView : View{
                 .frame(width: 150, height: 70, alignment: .center)
             }
             
-            
-            
-            
-            
         }
         
         Spacer()
@@ -433,9 +418,3 @@ struct NewConversationView : View{
     }
     
 }
-
-//struct ConversationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ConversationView()
-//    }
-//}

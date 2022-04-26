@@ -23,15 +23,6 @@ class NetworkManager: ObservableObject {
                 print("not connected")
                 self.isConnected = false
             }
-//            else if path.usesInterfaceType(.cellular){
-//                print("3/4/5g internet")
-//            }
-//            else if path.usesInterfaceType(.wifi){
-//                print("wifi internet")
-//            }
-//            else if path.usesInterfaceType(.wiredEthernet){
-//                print("wired internet")
-//            }
                 
             if path.status == .satisfied{
                 print("net u have")

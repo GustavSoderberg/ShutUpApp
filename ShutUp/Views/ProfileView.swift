@@ -84,7 +84,7 @@ struct ProfileView: View {
 //MARK: Toggle ActivityStatus ------------------------------
                             
                             NavigationLink {
-                                DarkModeSettings()
+                                AccountSettingsView()
                             } label: {
                                 ActivityStatus()
                             }.buttonStyle(PlainButtonStyle())
@@ -102,7 +102,7 @@ struct ProfileView: View {
 //MARK: Credits --------------------------------------------
                             
                             NavigationLink {
-                                DarkModeSettings()
+                                CreditsView()
                             } label: {
                                 Credits()
                             }.buttonStyle(PlainButtonStyle())

@@ -161,11 +161,12 @@ struct MessageBubble : View{
                     
                     Text(message.text)
                     
-                        .fontWeight(.medium)
-                        .foregroundColor(Color.white)
+                        .fontWeight(.light)
+                        .foregroundColor(um.currentUser!.id == message.senderID ? Color.white : Color.black)
                         .padding()
-                        .background(um.currentUser!.id == message.senderID ? sm.currentTheme!.bubbleS : sm.currentTheme!.bubbleR)
+                        .background(um.currentUser!.id == message.senderID ? Color.blue : Color(UIColor(named: "customGray")!))
                         .cornerRadius(30)
+                        
                     
                     
                     

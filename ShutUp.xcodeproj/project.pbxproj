@@ -48,6 +48,8 @@
 		B359E9372805B3E500035660 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359E9362805B3E500035660 /* LogoutView.swift */; };
 		E546A953281690A3004F4458 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E546A952281690A3004F4458 /* NetworkManager.swift */; };
 		E5CCA26E2818761B00F3AF96 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CCA26D2818761B00F3AF96 /* PrivacyView.swift */; };
+		E5CCA27028187B8300F3AF96 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CCA26F28187B8300F3AF96 /* CreditsView.swift */; };
+		E5CCA27228187EAC00F3AF96 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CCA27128187EAC00F3AF96 /* AccountSettingsView.swift */; };
 		E5FE49C82806BE5E00A92710 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FE49C72806BE5E00A92710 /* KeyboardManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +90,8 @@
 		B359E9362805B3E500035660 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
 		E546A952281690A3004F4458 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E5CCA26D2818761B00F3AF96 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
+		E5CCA26F28187B8300F3AF96 /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
+		E5CCA27128187EAC00F3AF96 /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
 		E5FE49C72806BE5E00A92710 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,6 +232,8 @@
 				B359E93228030FC500035660 /* DarkModeSettings.swift */,
 				B359E9362805B3E500035660 /* LogoutView.swift */,
 				E5CCA26D2818761B00F3AF96 /* PrivacyView.swift */,
+				E5CCA26F28187B8300F3AF96 /* CreditsView.swift */,
+				E5CCA27128187EAC00F3AF96 /* AccountSettingsView.swift */,
 			);
 			path = ProfileViewDestinations;
 			sourceTree = "<group>";
@@ -323,11 +329,13 @@
 				3FE0BE8D28116DDB00196B2F /* AppDelegate.swift in Sources */,
 				3FAE94D327F201B600957C61 /* Message.swift in Sources */,
 				3FAE94C127F2012900957C61 /* ShutUpApp.swift in Sources */,
+				E5CCA27228187EAC00F3AF96 /* AccountSettingsView.swift in Sources */,
 				3F1B83EF2816BB0200A411D0 /* ShutUpCD.xcdatamodeld in Sources */,
 				3FAE94D527F201CD00957C61 /* Conversation.swift in Sources */,
 				B359E8E627F460C800035660 /* ChatPreview.swift in Sources */,
 				E5FE49C82806BE5E00A92710 /* KeyboardManager.swift in Sources */,
 				3FAE94D827F2044300957C61 /* ConversationManager.swift in Sources */,
+				E5CCA27028187B8300F3AF96 /* CreditsView.swift in Sources */,
 				B359E8EA27FEF87500035660 /* ProfileViewItems.swift in Sources */,
 				B359E8F82800491100035660 /* Privacy.swift in Sources */,
 				B359E8F62800490100035660 /* Credits.swift in Sources */,

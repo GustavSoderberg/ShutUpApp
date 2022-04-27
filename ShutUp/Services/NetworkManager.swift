@@ -26,7 +26,7 @@ class NetworkManager: ObservableObject {
                 
             if path.status == .satisfied{
                 print("net u have")
-                self.isConnected = true
+                self.isConnected = false
             }
             
             

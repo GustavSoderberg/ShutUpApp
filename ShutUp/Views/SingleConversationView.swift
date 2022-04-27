@@ -94,14 +94,17 @@ struct SingleConversationView: View {
                     
                     Button {
                         
-                        if !message.isEmpty {
-                            convoM.sendMessage(message: message, user: um.currentUser!, conversation: convoM.listOfConversations[index])
-                            message = ""
-                        } else {
-                            message = "👍"
-                            convoM.sendMessage(message: message, user: um.currentUser!, conversation: convoM.listOfConversations[index])
-                            message = ""
+                        if cm.isConnected {
+                            if !message.isEmpty {
+                                convoM.sendMessage(message: message, user: um.currentUser!, conversation: convoM.listOfConversations[index])
+                                message = ""
+                            } else {
+                                message = "👍"
+                                convoM.sendMessage(message: message, user: um.currentUser!, conversation: convoM.listOfConversations[index])
+                                message = ""
+                            }
                         }
+                        
                         
                     } label: {
                         

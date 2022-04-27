@@ -11,13 +11,19 @@ import Firebase
 @main
 struct ShutUpApp: App {
     
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @ObservedObject var nm = NetworkManager()
+    
     init() {
+        
         FirebaseApp.configure()
+        cm.isConnected = nm.isConnected!
     }
     
     var body: some Scene {
         WindowGroup {
+            
             ConversationView()
 //                .ignoresSafeArea(.keyboard)
                 //.environment(\.colorScheme, .dark)

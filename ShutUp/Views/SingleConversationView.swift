@@ -20,14 +20,13 @@ struct SingleConversationView: View {
     
     var index: Int
     @ObservedObject var convoM = cm
-    @State var conversation: Conversation?
     @State var showSettingsView = false
-    var getMembers = GetMembers()
     
     @State var message = ""
     
     var body: some View {
-        if !convoM.listOfConversations.isEmpty {
+        
+        if !convoM.listOfConversations.isEmpty && convoM.listOfConversations.count > index {
             
             VStack{
                 
@@ -37,17 +36,15 @@ struct SingleConversationView: View {
                         
                         Spacer()
                         
-                        //HStack{
-                        
                         VStack {
                             
+                                ForEach(Array(convoM.listOfConversations[index].messages.enumerated()), id: \.offset) { idx, message in
+                                    
+                                    MessageBubble(message: message)
+                                        .id(idx)
+                                    
+                                }
                             
-                            ForEach(Array(convoM.listOfConversations[index].messages.enumerated()), id: \.offset) { idx, message in
-                                
-                                MessageBubble(message: message)
-                                    .id(idx)
-                                
-                            }
                             
                             
                             //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
@@ -93,19 +90,28 @@ struct SingleConversationView: View {
                 }
                 
                 HStack {
-                    
                     TextField("message", text: $message).padding()
                     
                     Button {
                         
                         if !message.isEmpty {
-                            convoM.sendMessage(message: message, user: um.currentUser!, conversation: conversation!)
+                            convoM.sendMessage(message: message, user: um.currentUser!, conversation: convoM.listOfConversations[index])
+                            message = ""
+                        } else {
+                            message = "👍"
+                            convoM.sendMessage(message: message, user: um.currentUser!, conversation: convoM.listOfConversations[index])
                             message = ""
                         }
                         
                     } label: {
                         
-                        Text("Send")
+                        if message.isEmpty {
+                            Text("👍")
+                        }
+                        else {
+                            Text("Send")
+                        }
+                        
                         
                     }.padding()
                     
@@ -117,37 +123,17 @@ struct SingleConversationView: View {
                     }
                     
                 }
-                .navigationBarTitle("\(getMembers.everybody(members: conversation!.members))".dropLast(2)).navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitle(convoM.listOfConversations[index].name).navigationBarTitleDisplayMode(.inline)
                 .sheet(isPresented: $showSettingsView) {
-                    SettingsView(showSettingsView: $showSettingsView, conversation: conversation!)
+                    SettingsView(showSettingsView: $showSettingsView, conversation: convoM.listOfConversations[index])
                 }
                 
                 
             }
         }
+        
     }
     
-}
-
-struct GetMembers {
-    
-    func everybody(members: [User]) -> String {
-        
-        var rMembers = ""
-        
-        for member in members {
-            
-            if let cu = um.currentUser {
-                if member.username != cu.username {
-                    
-                    rMembers += "\(member.username), "
-                    
-                }
-            }
-            
-        }
-        return rMembers
-    }
 }
 
 struct MessageBubble : View{
@@ -175,11 +161,12 @@ struct MessageBubble : View{
                     
                     Text(message.text)
                     
-                        .fontWeight(.medium)
-                        .foregroundColor(Color.white)
+                        .fontWeight(.light)
+                        .foregroundColor(um.currentUser!.id == message.senderID ? Color.white : Color.black)
                         .padding()
-                        .background(um.currentUser!.id == message.senderID ? sm.currentTheme!.bubbleS : sm.currentTheme!.bubbleR)
+                        .background(um.currentUser!.id == message.senderID ? Color.blue : Color(UIColor(named: "customGray")!))
                         .cornerRadius(30)
+                        
                     
                     
                     

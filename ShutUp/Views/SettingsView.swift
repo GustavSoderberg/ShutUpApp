@@ -28,6 +28,7 @@ struct SettingsView: View {
                 
                 dm.deleteFromFirestore(conversation: conversation)
                 showSettingsView = false
+                ConversationView()
                 
             }){
                 Text("Remove conversation")

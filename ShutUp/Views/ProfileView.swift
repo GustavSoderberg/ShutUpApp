@@ -5,13 +5,6 @@
 //  Created by Yolanda Jonasson on 2022-04-07.
 //
 
-//
-//  WelcomeView.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-04-01.
-//
-
 import SwiftUI
 import Firebase
 
@@ -45,13 +38,14 @@ struct ProfileView: View {
                                 Text("Done")
                                     .foregroundColor(Color.blue)
                             }).padding(.trailing, 20.0)
-                                .padding(.top, 20.0)
+                                .padding(.top, 10.0)
                         }
                         
                         //MARK: PROFILE IMAGE VSTACK ----------------------------------------------------------------
                         
                         List {
                             VStack(spacing: 0) {
+                                
 
                                 HStack {
                             Spacer()
@@ -67,26 +61,27 @@ struct ProfileView: View {
                                 }
                             Text(user.username)
                                 .font(.system(size: 28))
-                                .padding(.bottom, 25)
-                            }
+                                
+                            }.padding(.vertical, 25)
 
-                        Section(header: Text("Important Tasks")) {
+                        Section(header: Text("User settings")) {
                             
                             //MARK: DarkModeSettings -------------------------------------
                             
-                            NavigationLink {
-                                DarkModeSettings()
-                            } label: {
-                                DarkMode()
-                            }.buttonStyle(PlainButtonStyle())
+//                            NavigationLink {
+//                                DarkModeSettings()
+//                            } label: {
+//                                DarkMode()
+//                            }.buttonStyle(PlainButtonStyle())
 
 //MARK: Toggle ActivityStatus ------------------------------
                             
                             NavigationLink {
-                                DarkModeSettings()
+                                AccountSettingsView()
                             } label: {
                                 ActivityStatus()
                             }.buttonStyle(PlainButtonStyle())
+
                             
 //MARK: Change account -------------------------------------
                             
@@ -95,11 +90,12 @@ struct ProfileView: View {
                             } label: {
                                 ChangeAccount()
                             }.buttonStyle(PlainButtonStyle())
-                            
+                        }
+                            Section(header: Text("Other")) {
 //MARK: Credits --------------------------------------------
                             
                             NavigationLink {
-                                DarkModeSettings()
+                                CreditsView()
                             } label: {
                                 Credits()
                             }.buttonStyle(PlainButtonStyle())
@@ -107,23 +103,24 @@ struct ProfileView: View {
 //MARK: Sekretess ------------------------------------------
                             
                             NavigationLink {
-                                DarkModeSettings()
+                                PrivacyView()
                             } label: {
                                 Privacy()
                             }.buttonStyle(PlainButtonStyle())
                             
 //MARK: Meddelandeförfrågningar -------------------------------------
                             
-                            NavigationLink {
-                                DarkModeSettings()
-                            } label: {
-                                MessageRequests()
-                            }.buttonStyle(PlainButtonStyle())
+//                            NavigationLink {
+//                                DarkModeSettings()
+//                            } label: {
+//                                MessageRequests()
+//                            }.buttonStyle(PlainButtonStyle())
                             
                         }
                     
 
-                    }
+                        }
+                        
                 }
                 .navigationBarHidden(true)
                 .navigationBarItems(trailing: Button(action: {

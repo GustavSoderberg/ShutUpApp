@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 class UserManager {
     
@@ -15,30 +16,39 @@ class UserManager {
     
     func register(username: String, uid: String, photoUrl: String) {
         
-        if !loginCheck(uid: uid) {
-            
-            self.currentUser = User(id: uid, username: username, photoUrl: photoUrl)
-
+        dm.saveUserToFirestore(user: User(id: uid, username: username, photoUrl: photoUrl))
+        self.currentUser = User(id: uid, username: username, photoUrl: photoUrl)
+        
+        let userCD = UserCD(context: pc)
+        userCD.id = uid
+        userCD.username = username
+        do {
+            try pc.save()
         }
-
-        else {
-            
-            dm.saveUserToFirestore(user: User(id: uid, username: username, photoUrl: photoUrl))
-            self.currentUser = User(id: uid, username: username, photoUrl: photoUrl)
+        catch {
+            print("E: UserManager - Register() - Failed to save new user to database\(error)")
         }
+        
+        
     }
-
+    
     func loginCheck(uid: String) -> Bool {
+        
         
         for user in listOfUsers {
             
             if user.id == uid {
-                print("Logged in as existing user")
+                
+                self.currentUser = user
+                print("Logged in as \(user.username)")
                 return false
+                
             }
         }
+        
+        
         return true
+        
+        
     }
-
-    
 }

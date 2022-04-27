@@ -5,13 +5,6 @@
 //  Created by Yolanda Jonasson on 2022-04-08.
 //
 
-//
-//  ActivityStatus.swift
-//  ShutUp
-//
-//  Created by Yolanda Jonasson on 2022-04-08.
-//
-
 import SwiftUI
 
 struct ChangeAccount: View {

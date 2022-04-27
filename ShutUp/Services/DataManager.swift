@@ -80,66 +80,27 @@ class DataManager {
             }
         
         
-//        else { // IF COREDATA
-//
-//            print("hello from core data")
-//
-//            let fetchRequest: NSFetchRequest<UserCD> = UserCD.fetchRequest()
-//
-//            pc.perform {
-//                do {
-//                    let result = try fetchRequest.execute()
-//                    print("## Successfully read users from coredata ##")
-//                    for user in result {
-//
-//                        um.listOfUsers.append(User(id: user.id!, username: user.username!, photoUrl: ""))
-//
-//                    }
-//
-//
-//
-//                } catch {
-//                    print("E: Failed to fetch users coredata \(error)")
-//                }
-//            }
-//
-//            let fetchRequest1: NSFetchRequest<ConversationCD> = ConversationCD.fetchRequest()
-//
-//            pc.perform {
-//                do {
-//                    let result1 = try fetchRequest1.execute()
-//                    print("## Successfully read convos from coredata ##")
-//
-//                    cm.listOfConversations.removeAll()
-//                    for convo in result1 {
-//
-//                        var user = [User]()
-//                        for member in convo.members! {
-//                            user.append(member as! User)
-//                        }
-//
-//                        let conversation = Conversation(name: convo.name!, members: user)
-//
-//                        for message in convo.messages! {
-//                            conversation.messages.append(message as! Message)
-//                        }
-//
-//                        print(conversation)
-//                        cm.listOfConversations.append(conversation)
-//
-//                    }
-//
-//
-//                        self.setCurrentUser()
-//
-//
-//
-//                }
-//                catch {
-//                    print("E: Failed to fetch convos from coredata \(error)")
-//                }
-//            }
-//        }
+        if !cm.isConnected { // COREDATA
+
+            print("hello from core data")
+
+            let fetchRequest: NSFetchRequest<UserCD> = UserCD.fetchRequest()
+
+            pc.perform {
+                do {
+                    let result = try fetchRequest.execute()
+                    print("## Successfully read users from coredata ##")
+                    for user in result {
+
+                        um.listOfUsers.append(User(id: user.id!, username: user.username!, photoUrl: ""))
+
+                    }
+                    
+                } catch {
+                    print("E: Failed to fetch users coredata \(error)")
+                }
+            }
+        }
     }
     
     func setCurrentUser() {
@@ -218,6 +179,4 @@ class DataManager {
             db.collection("convos").document(id).delete()
         }
     }
-    
-    
 }

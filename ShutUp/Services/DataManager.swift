@@ -15,7 +15,6 @@ class DataManager {
     
     func listenToFirestore() {
         
-        if cm.isConnected {
             
             print("hello from firestore")
             
@@ -79,25 +78,23 @@ class DataManager {
                     self.setCurrentUser()
                 }
             }
-        }
         
-        else { // IF COREDATA
-            
+        
+        if !cm.isConnected { // COREDATA
+
             print("hello from core data")
-            
+
             let fetchRequest: NSFetchRequest<UserCD> = UserCD.fetchRequest()
-            
+
             pc.perform {
                 do {
                     let result = try fetchRequest.execute()
-                    print("## Successfully read from coredata ##")
+                    print("## Successfully read users from coredata ##")
                     for user in result {
-                        
+
                         um.listOfUsers.append(User(id: user.id!, username: user.username!, photoUrl: ""))
-                        
+
                     }
-                    
-                    self.setCurrentUser()
                     
                 } catch {
                     print("E: Failed to fetch users coredata \(error)")
@@ -182,6 +179,4 @@ class DataManager {
             db.collection("convos").document(id).delete()
         }
     }
-    
-    
 }

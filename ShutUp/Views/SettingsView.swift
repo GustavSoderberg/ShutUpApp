@@ -25,10 +25,9 @@ struct SettingsView: View {
             Spacer()
             
             Button(action: {
-                
-                dm.deleteFromFirestore(conversation: conversation)
-                showSettingsView = false
-                ConversationView()
+//                
+//                dm.deleteFromFirestore(conversation: conversation)
+//                showSettingsView = false
                 
             }){
                 Text("Remove conversation")
@@ -53,8 +52,8 @@ struct SelectionView: View {
     var body: some View {
         
         Button {
-            sm.setCurrentTheme(name: settings)
-            showSettingsView = false
+//            sm.setCurrentTheme(name: settings)
+//            showSettingsView = false
         } label: {
             HStack{
                 Spacer()

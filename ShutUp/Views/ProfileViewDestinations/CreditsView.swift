@@ -31,9 +31,3 @@ struct CreditsView: View {
             
     }
 }
-
-struct CreditsView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreditsView()
-    }
-}

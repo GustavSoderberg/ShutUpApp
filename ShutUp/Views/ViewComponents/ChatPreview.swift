@@ -88,7 +88,7 @@ struct ChatPreview: View {
                 
                 
             }.onAppear {
-                getPosition(convo: convo)
+                _ = getPosition(convo: convo)
             }
             
             VStack(alignment: .leading){

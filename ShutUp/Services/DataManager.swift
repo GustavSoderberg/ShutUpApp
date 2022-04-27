@@ -36,7 +36,7 @@ class DataManager {
                         switch result {
                         case.success(let convo) :
                             
-                            cm.listOfConversations.append(convo)
+                            cm.listOfConversations.append(convo!)
                             cm.refresh += 1
                             
                         case.failure(let error) :
@@ -67,7 +67,7 @@ class DataManager {
                         switch result {
                         case.success(let user) :
                             
-                            um.listOfUsers.append(user)
+                            um.listOfUsers.append(user!)
                             cm.refresh += 1
                             
                         case.failure(let error) :

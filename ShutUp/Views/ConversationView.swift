@@ -15,7 +15,7 @@ import CoreData
 
 //Global instances of a Singleton object
 var cm = ConversationManager()
-var sm = SettingsManager()
+//var sm = SettingsManager()
 var dm = DataManager()
 var um = UserManager()
 let pc = PersistenceController.shared.container.viewContext

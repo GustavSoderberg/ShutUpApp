@@ -5,13 +5,6 @@
 //  Created by Yolanda Jonasson on 2022-04-07.
 //
 
-//
-//  WelcomeView.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-04-01.
-//
-
 import SwiftUI
 import Firebase
 

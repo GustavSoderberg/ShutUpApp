@@ -97,15 +97,9 @@ struct ConversationView: View {
                     
                     
                     Spacer()
-                    
-                    Button {
-                        cm.isConnected.toggle()
-                        cm.refresh += 1
-                    } label: {
                         
                         Text("Chats")
                             .font(.title2)
-                    }
                     
                     
                     Spacer()
@@ -322,8 +316,6 @@ struct ConversationView: View {
                 
                 showWelcomeView = true
                 
-            } else {
-                um.loginCheck(uid: Auth.auth().currentUser!.uid)
             }
             
         })

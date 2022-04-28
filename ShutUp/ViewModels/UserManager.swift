@@ -10,24 +10,19 @@ import CoreData
 
 class UserManager {
     
+    
+    
     var currentUser: User? = nil
     var listOfUsers = [User]()
     var isLoading = true
     
     func register(username: String, uid: String, photoUrl: String) {
         
-        dm.saveUserToFirestore(user: User(id: uid, username: username, photoUrl: photoUrl))
+        let user = User(id: uid, username: username, photoUrl: photoUrl)
+        dm.saveUserToCoredata(user: user)
+        dm.saveUserToFirestore(user: user)
         self.currentUser = User(id: uid, username: username, photoUrl: photoUrl)
         
-        let userCD = UserCD(context: pc)
-        userCD.id = uid
-        userCD.username = username
-        do {
-            try pc.save()
-        }
-        catch {
-            print("E: UserManager - Register() - Failed to save new user to database\(error)")
-        }
         
         
     }
@@ -49,6 +44,21 @@ class UserManager {
         
         return true
         
+        
+    }
+    
+    func loginCoredata(uid: String) {
+        
+        for user in listOfUsers {
+            
+            if user.id == uid {
+                
+                print("Oh Coredata plz log me in it's my first time")
+                let user = User(id: user.id, username: user.username, photoUrl: user.photoUrl)
+                dm.saveUserToCoredata(user: user)
+                
+            }
+        }
         
     }
 }

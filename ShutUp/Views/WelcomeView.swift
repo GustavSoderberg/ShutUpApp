@@ -14,16 +14,18 @@ var showLoginViewGlobal : Bool = true
 
 struct WelcomeView: View {
     
+    @AppStorage("firstTime") var firstTime = true
+    
     @Binding var showWelcomeView : Bool
     @State var showLoginView = showLoginViewGlobal
     @State var refresh = 1
     @State var username = ""
     @State var isRegistered : Bool = true
-
+    
     var body: some View {
         
         VStack {
-
+            
             if refresh > 0 {
                 
                 if let currentUser = Auth.auth().currentUser {
@@ -48,15 +50,15 @@ struct WelcomeView: View {
                     TextField(
                         "Username",
                         text: $username)
-                        .autocapitalization(.none)
-                        .disableAutocorrection(true)
-                        .foregroundColor(Color.black)
-                        .keyboardType(.emailAddress)
-                        .submitLabel(.next)
-                        .frame(width: 250.0)
-                        .multilineTextAlignment(.leading)
-                        .padding([.top, .bottom, .trailing])
-                        .padding(.horizontal, 45.0)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .foregroundColor(Color.black)
+                    .keyboardType(.emailAddress)
+                    .submitLabel(.next)
+                    .frame(width: 250.0)
+                    .multilineTextAlignment(.leading)
+                    .padding([.top, .bottom, .trailing])
+                    .padding(.horizontal, 45.0)
                     
                     Button {
                         
@@ -77,9 +79,17 @@ struct WelcomeView: View {
             }
         }
         .sheet(isPresented: $showLoginView, onDismiss: {
-
-            showWelcomeView = um.loginCheck(uid: Auth.auth().currentUser?.uid ?? "")
-            refresh += 1
+            
+            if firstTime && !um.loginCheck(uid: Auth.auth().currentUser?.uid ?? ""){
+                um.loginCoredata(uid: Auth.auth().currentUser!.uid)
+                firstTime = false
+                showWelcomeView = false
+            }
+            else {
+                showWelcomeView = um.loginCheck(uid: Auth.auth().currentUser?.uid ?? "")
+                refresh += 1
+            }
+            
             
         }) {
             
@@ -100,7 +110,7 @@ public var screenHeight: CGFloat {
 }
 
 struct LoginView : View {
-
+    
     @Binding var showLoginView : Bool
     @State private var viewState = CGSize(width: 0, height: screenHeight)
     @State private var MainviewState = CGSize.zero
@@ -177,7 +187,7 @@ struct CustomLoginViewController : UIViewControllerRepresentable {
 }
 
 class AuthViewModel: NSObject, ObservableObject, FUIAuthDelegate {
-
+    
     
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, url: URL?, error: Error?) {
         
@@ -185,7 +195,7 @@ class AuthViewModel: NSObject, ObservableObject, FUIAuthDelegate {
             print("\(error) \n Failed to sign in")
         }
         else {
-
+            
             showLoginViewGlobal = false
             
         }

@@ -23,6 +23,7 @@ class ConversationManager: ObservableObject {
         let conversation = Conversation(name: name, members: selectedUsers)
         selectedUsers.removeAll()
         
+        dm.saveToCoredata(conversation: conversation)
         dm.saveToFirestore(convo: conversation)
         self.listOfConversations.append(conversation)
         
@@ -32,6 +33,8 @@ class ConversationManager: ObservableObject {
         
         let newMessage = Message(id: UUID(), timeStamp: Date.now, senderID: user.id, text: message)
         conversation.messages.append(newMessage)
+        
+        dm.updateCoredata(conversation: conversation, message: newMessage)
         dm.updateFirestore(conversation: conversation, message: newMessage)
         
     }
@@ -48,6 +51,14 @@ class ConversationManager: ObservableObject {
         }
         
         return nil
+        
+    }
+    
+    func deleteConversation(conversation: Conversation) {
+        
+        dm.deleteFromCoredata(conversation: conversation)
+        dm.deleteFromFirestore(conversation: conversation)
+        cm.refresh += 1
         
     }
     

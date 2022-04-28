@@ -17,7 +17,7 @@ class DataManager {
     func listenToFirestore() {
         
         if cm.isConnected {
-            
+            self.emptyCoredata(selection: (false, true))
             print("hello from firestore")
             
             db.collection("convos").addSnapshotListener { snapshot, err in
@@ -39,6 +39,39 @@ class DataManager {
                         
                         switch result {
                         case.success(let convo) :
+                            
+                            let convoCOD = ConversationCOD(context: pc)
+                            convoCOD.id = convo!.id
+                            convoCOD.uid = "\(convo!.uid)"
+                            convoCOD.name = convo!.name
+                            
+                            for member in convo!.members {
+                                let userCOD = UserCOD(context: pc)
+                                userCOD.id = member.id
+                                userCOD.username = member.username
+                                userCOD.photoUrl = member.photoUrl
+                                
+                                convoCOD.addToMembers(userCOD)
+                            }
+                            
+                            for message in convo!.messages {
+                                let messageCOD = MessageCOD(context: pc)
+                                messageCOD.id = message.id
+                                messageCOD.senderID = message.senderID
+                                messageCOD.timeStamp = message.timeStamp
+                                messageCOD.text = message.text
+                                
+                                convoCOD.addToMessages(messageCOD)
+                            }
+                            
+                            do {
+                                try pc.save()
+                                print("✔️ Conversation saved to coredata from firebase")
+                            }
+                            catch {
+                                print("E: DataManager - listenToFirestore(): Failed to fetch & save conversations")
+                            }
+                            
                             
                             cm.listOfConversations.append(convo!)
                             cm.refresh += 1
@@ -127,7 +160,7 @@ class DataManager {
                             messagesDecoded.append(Message(id: message.id!, timeStamp: message.timeStamp!, senderID: message.senderID!, text: message.text!))
                         }
                         
-                        let conversation = Conversation(uid: UUID(uuidString: convo.id!)!, name: convo.name!, members: membersDecoded, messages: messagesDecoded)
+                        let conversation = Conversation(uid: (UUID(uuidString: convo.id!) ?? UUID()), name: convo.name!, members: membersDecoded, messages: messagesDecoded)
                         
                         cm.listOfConversations.append(conversation)
                         
@@ -156,6 +189,7 @@ class DataManager {
                     print("Logged in as \(user.username)")
                     
                     cm.refresh += 1
+                    break
                     
                 }
                 

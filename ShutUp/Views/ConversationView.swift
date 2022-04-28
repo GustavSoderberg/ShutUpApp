@@ -198,7 +198,6 @@ struct ConversationView: View {
                                 
                                 if let cu = um.currentUser {
                                     
-                                    
                                     if (convo.members.contains(cu) && searchText.isEmpty) || (convo.members.contains(cu) && convo.name.lowercased().contains(searchText.lowercased())){
                                         HStack(spacing: 10){
                                             
@@ -248,7 +247,7 @@ struct ConversationView: View {
                                                     
                                                     Button(action: {
 
-                                                        dm.deleteFromFirestore(conversation: convo)
+                                                        cm.deleteConversation(conversation: convo)
                                                         selectedConvo = -1
                                                         showDelete = false
 

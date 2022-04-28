@@ -21,11 +21,13 @@ class NetworkManager: ObservableObject {
             
             if path.status != .satisfied{
                 print("not connected")
+                
                 self.isConnected = false
             }
                 
             if path.status == .satisfied{
                 print("net u have")
+                
                 self.isConnected = true
             }
             

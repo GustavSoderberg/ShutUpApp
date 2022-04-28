@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestoreSwift
 import CoreData
 
 class DataManager {
@@ -15,7 +16,8 @@ class DataManager {
     
     func listenToFirestore() {
         
-            
+        if cm.isConnected {
+            self.emptyCoredata(selection: (false, true))
             print("hello from firestore")
             
             db.collection("convos").addSnapshotListener { snapshot, err in
@@ -25,7 +27,9 @@ class DataManager {
                     print("Error getting convo document \(err)")
                     
                 } else {
+                    
                     cm.listOfConversations.removeAll()
+                    
                     for document in snapshot.documents {
                         let result = Result {
                             
@@ -35,6 +39,39 @@ class DataManager {
                         
                         switch result {
                         case.success(let convo) :
+                            
+                            let convoCOD = ConversationCOD(context: pc)
+                            convoCOD.id = convo!.id
+                            convoCOD.uid = "\(convo!.uid)"
+                            convoCOD.name = convo!.name
+                            
+                            for member in convo!.members {
+                                let userCOD = UserCOD(context: pc)
+                                userCOD.id = member.id
+                                userCOD.username = member.username
+                                userCOD.photoUrl = member.photoUrl
+                                
+                                convoCOD.addToMembers(userCOD)
+                            }
+                            
+                            for message in convo!.messages {
+                                let messageCOD = MessageCOD(context: pc)
+                                messageCOD.id = message.id
+                                messageCOD.senderID = message.senderID
+                                messageCOD.timeStamp = message.timeStamp
+                                messageCOD.text = message.text
+                                
+                                convoCOD.addToMessages(messageCOD)
+                            }
+                            
+                            do {
+                                try pc.save()
+                                print("✔️ Conversation saved to coredata from firebase")
+                            }
+                            catch {
+                                print("E: DataManager - listenToFirestore(): Failed to fetch & save conversations")
+                            }
+                            
                             
                             cm.listOfConversations.append(convo!)
                             cm.refresh += 1
@@ -47,7 +84,6 @@ class DataManager {
             }
             
             
-            
             db.collection("users").addSnapshotListener { snapshot, err in
                 guard let snapshot = snapshot else { return }
                 
@@ -55,7 +91,7 @@ class DataManager {
                     print("Error getting user document \(err)")
                     
                 } else {
-                    print("## Successfully read from firestore ##")
+                    print("## Successfully read users from firestore ##")
                     um.listOfUsers.removeAll()
                     for document in snapshot.documents {
                         let result = Result {
@@ -78,23 +114,62 @@ class DataManager {
                     self.setCurrentUser()
                 }
             }
-        
-        
-        if !cm.isConnected { // COREDATA
-
+            
+        }
+        else if !cm.isConnected { // COREDATA
+            
+            self.emptyCoredata(selection: (false,false))
+            
             print("hello from core data")
-
-            let fetchRequest: NSFetchRequest<UserCD> = UserCD.fetchRequest()
-
+            
+            let fetchRequest1: NSFetchRequest<UserCOD> = UserCOD.fetchRequest()
+            
             pc.perform {
                 do {
-                    let result = try fetchRequest.execute()
+                    let result = try fetchRequest1.execute()
                     print("## Successfully read users from coredata ##")
                     for user in result {
-
-                        um.listOfUsers.append(User(id: user.id!, username: user.username!, photoUrl: ""))
-
+                        
+                        um.listOfUsers.append(User(id: user.id!, username: user.username!, photoUrl: user.photoUrl!))
+                        
                     }
+                    
+                    
+                } catch {
+                    print("E: Failed to fetch users coredata \(error)")
+                }
+            }
+            
+            let fetchRequest2: NSFetchRequest<ConversationCOD> = ConversationCOD.fetchRequest()
+            
+            pc.perform {
+                do {
+                    let result = try fetchRequest2.execute()
+                    print("## Successfully read conversations from coredata ##")
+                    for convo in result {
+                        
+                        var membersDecoded = [User]()
+                        for memberCOD in convo.members! {
+                            let user : UserCOD = memberCOD.self as! UserCOD
+                            membersDecoded.append(User(id: user.id!, username: user.username!, photoUrl: user.photoUrl!))
+                        }
+                        
+                        var messagesDecoded = [Message]()
+                        for messageCOD in convo.messages! {
+                            let message : MessageCOD = messageCOD.self as! MessageCOD
+                            messagesDecoded.append(Message(id: message.id!, timeStamp: message.timeStamp!, senderID: message.senderID!, text: message.text!))
+                        }
+                        
+                        let conversation = Conversation(uid: (UUID(uuidString: convo.id!) ?? UUID()), name: convo.name!, members: membersDecoded, messages: messagesDecoded)
+                        
+                        cm.listOfConversations.append(conversation)
+                        
+                        
+                    }
+                    
+                    print("Loaded \(cm.listOfConversations.count) conversations from coredata")
+                    
+                    self.setCurrentUser()
                     
                 } catch {
                     print("E: Failed to fetch users coredata \(error)")
@@ -112,9 +187,12 @@ class DataManager {
                     
                     um.currentUser = user
                     print("Logged in as \(user.username)")
+                    
                     cm.refresh += 1
+                    break
                     
                 }
+                
                 
             }
             
@@ -153,8 +231,6 @@ class DataManager {
     
     func updateFirestore(conversation: Conversation, message: Message) {
         
-        //Code to get auth UID : guard let uid = auth.currentUser?.uid else { return }
-        //let xSender = ["id" : "\(uid)", TODO: Switch to UID when registration/listOfUsers + authentication is live
         
         let xMessage = ["id" : "\(message.id)",
                         "senderID" : message.senderID,
@@ -172,11 +248,185 @@ class DataManager {
         }
     }
     
-    
     func deleteFromFirestore(conversation: Conversation) {
         
         if let id = conversation.id {
             db.collection("convos").document(id).delete()
         }
+        
     }
+    
+    func saveToCoredata(conversation: Conversation) {
+        
+        let convoCOD = ConversationCOD(context: pc)
+        convoCOD.id = "\(conversation.uid)"
+        convoCOD.name = conversation.name
+        print("\(convoCOD.id) \(conversation.uid)")
+        
+        for member in conversation.members {
+            let userCOD = UserCOD(context: pc)
+            userCOD.id = member.id
+            userCOD.username = member.username
+            userCOD.photoUrl = member.photoUrl
+            
+            convoCOD.addToMembers(userCOD)
+        }
+        
+        for message in conversation.messages {
+            let messageCOD = MessageCOD(context: pc)
+            messageCOD.id = message.id
+            messageCOD.timeStamp = message.timeStamp
+            messageCOD.senderID = message.senderID
+            messageCOD.text = message.text
+            
+            convoCOD.addToMessages(messageCOD)
+        }
+        
+        do {
+            try pc.save()
+            print("✔ Saved the conversation to coredata")
+        }
+        catch {
+            print("E: DataManager - saveToCoreData(): Error saving conversation \(error)")
+        }
+        
+    }
+    
+    func saveUserToCoredata(user: User) {
+        
+        let userCOD = UserCOD(context: pc)
+        userCOD.id = user.id
+        userCOD.username = user.username
+        userCOD.photoUrl = user.photoUrl
+        
+        do {
+            try pc.save()
+            print("Saved user to coredata")
+        }
+        catch {
+            print("E: UserManager - Register() - Failed to save new user to database\(error)")
+        }
+    }
+    
+    func updateCoredata(conversation: Conversation, message: Message) {
+        
+        let fetchRequest2: NSFetchRequest<ConversationCOD> = ConversationCOD.fetchRequest()
+        
+        pc.perform {
+            do {
+                let result = try fetchRequest2.execute()
+                for convo in result {
+                    
+                    if convo.id == "\(conversation.uid)" {
+                        
+                        let messageCOD = MessageCOD(context: pc)
+                        messageCOD.id = message.id
+                        messageCOD.timeStamp = message.timeStamp
+                        messageCOD.senderID = message.senderID
+                        messageCOD.text = message.text
+                        
+                        convo.addToMessages(messageCOD)
+                        
+                        print("Message '\(messageCOD.text!)' updated")
+                        
+                    }
+                    else {
+                        print("Couldnt find message")
+                        print("1: \(convo.id) 2:\(conversation.uid)")
+                    }
+                    
+                }
+                try! pc.save()
+                
+            } catch {
+                print("E: Failed to fetch users coredata \(error)")
+            }
+        }
+        
+    }
+    
+    func deleteFromCoredata(conversation: Conversation) {
+        
+        let fetchRequest2: NSFetchRequest<ConversationCOD> = ConversationCOD.fetchRequest()
+        
+        pc.perform {
+            do {
+                let result = try fetchRequest2.execute()
+                for convo in result {
+                    
+                    if convo.id == "\(conversation.uid)" {
+                        
+                        pc.delete(convo)
+                        print("⚠ Deleted conversation from coredata")
+                        
+                    }
+                    
+                    else {
+                        print("Couldnt find conversation to remove from coredata")
+                    }
+                    
+                }
+                try! pc.save()
+                
+            } catch {
+                print("E: Failed to fetch users coredata \(error)")
+            }
+        }
+        
+    }
+    
+    func emptyCoredata(selection: (Bool,Bool)) { // selection.0 for users, selection.1 for conversations
+        
+        if selection.0 {
+            
+            let fetchRequest1: NSFetchRequest<UserCOD> = UserCOD.fetchRequest()
+            
+            pc.perform {
+                do {
+                    let result = try fetchRequest1.execute()
+                    print("## Successfully read users from coredata ##")
+                    for user in result {
+                        
+                        pc.delete(user)
+                        
+                    }
+                    
+                    try! pc.save()
+                    
+                    print("Coredata users is now empty")
+                    
+                } catch {
+                    print("E: Failed to fetch users coredata \(error)")
+                }
+            }
+            
+        }
+        
+        if selection.1 {
+            
+            let fetchRequest2: NSFetchRequest<ConversationCOD> = ConversationCOD.fetchRequest()
+            
+            pc.perform {
+                do {
+                    let result = try fetchRequest2.execute()
+                    print("## Successfully read conversations from coredata ##")
+                    for convo in result {
+                        
+                        pc.delete(convo)
+                        
+                    }
+                    
+                    try! pc.save()
+                    
+                    print("Coredata conversations is now empty")
+                    
+                } catch {
+                    print("E: Failed to remove conversations coredata \(error)")
+                }
+            }
+            
+        }
+        
+    }
+    
 }

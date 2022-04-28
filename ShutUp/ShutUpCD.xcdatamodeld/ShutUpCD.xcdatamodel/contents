@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ConversationCD" representedClassName="ConversationCD" syncable="YES" codeGenerationType="class">
+    <entity name="ConversationCOD" representedClassName="ConversationCOD" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserCD" inverseName="invMembers" inverseEntity="UserCD"/>
-        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MessageCD" inverseName="invMessages" inverseEntity="MessageCD"/>
+        <attribute name="uid" optional="YES" attributeType="String"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserCOD" inverseName="inverseMembers" inverseEntity="UserCOD"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MessageCOD" inverseName="inverseMessages" inverseEntity="MessageCOD"/>
     </entity>
-    <entity name="MessageCD" representedClassName="MessageCD" syncable="YES" codeGenerationType="class">
+    <entity name="MessageCOD" representedClassName="MessageCOD" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="senderID" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="invMessages" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConversationCD" inverseName="messages" inverseEntity="ConversationCD"/>
+        <relationship name="inverseMessages" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConversationCOD" inverseName="messages" inverseEntity="ConversationCOD"/>
     </entity>
-    <entity name="UserCD" representedClassName="UserCD" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="String"/>
-        <attribute name="username" attributeType="String"/>
-        <relationship name="invMembers" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConversationCD" inverseName="members" inverseEntity="ConversationCD"/>
+    <entity name="UserCOD" representedClassName="UserCOD" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="photoUrl" optional="YES" attributeType="String"/>
+        <attribute name="username" optional="YES" attributeType="String"/>
+        <relationship name="inverseMembers" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConversationCOD" inverseName="members" inverseEntity="ConversationCOD"/>
     </entity>
     <elements>
-        <element name="UserCD" positionX="30" positionY="298.20703125" width="128" height="88"/>
-        <element name="ConversationCD" positionX="-63" positionY="0" width="128" height="103"/>
-        <element name="MessageCD" positionX="377.97265625" positionY="160.953125" width="128" height="118"/>
+        <element name="UserCOD" positionX="229.640625" positionY="287.85546875" width="128" height="28"/>
+        <element name="ConversationCOD" positionX="270" positionY="351" width="128" height="104"/>
+        <element name="MessageCOD" positionX="297" positionY="369" width="128" height="104"/>
     </elements>
 </model>

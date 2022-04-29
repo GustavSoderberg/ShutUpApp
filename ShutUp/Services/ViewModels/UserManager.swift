@@ -1,9 +1,14 @@
-//
-//  UserManager.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-04-12.
-//
+/**
+ 
+ - Description:
+ The UserManager.swift is a ViewModel for the registration and logging in of a user
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import Foundation
 import CoreData
@@ -25,6 +30,10 @@ class UserManager {
         self.currentUser = User(id: uid, username: username, photoUrl: photoUrl)
         
     }
+    
+    /**
+     Since we want to match the logged in user from Firebase auth with the user object in our firestore we loop through them and sets the current user when the uid matches
+     */
     
     func loginCheck(uid: String, firstTime: Bool) -> Bool {
         

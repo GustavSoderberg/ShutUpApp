@@ -1,9 +1,14 @@
-//
-//  WelcomeView.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-04-01.
-//
+/**
+ 
+ - Description:
+ The WelcomeView.swift is a view that displays the FirebaseUI for user-login as well as registering a username for new users. Also provides checks that either saves the user to firestore/coredata (whichever one is needed)
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 import FirebaseFacebookAuthUI
@@ -107,6 +112,19 @@ public var screenWidth: CGFloat {
 public var screenHeight: CGFloat {
     return UIScreen.main.bounds.height
 }
+
+/**
+ 
+ - Description:
+ The LoginView is provided by FirebaseAuthUI that displays a User Interface which the user can login on a service of their choice.
+ The code was originally written for storyboard but has been translated by us to work with SwiftUI
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 struct LoginView : View {
     

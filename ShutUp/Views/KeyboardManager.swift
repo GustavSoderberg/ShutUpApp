@@ -1,9 +1,14 @@
-//
-//  KeyboardManager.swift
-//  ShutUp
-//
-//  Created by Calle Höglund on 2022-04-13.
-//
+/**
+ 
+ - Description:
+ The KeyboardManager provides the values needed for the autoscroll functionality of the keyboard
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import Foundation
 import UIKit
@@ -11,9 +16,7 @@ import Combine
 import SwiftUI
 
 class KeyboardManager: ObservableObject {
-    @Published var keyboardHeight: CGFloat = 0
     @Published var isVisible = false
-    @Published var topFrame: CGFloat?
     
     
     var keyboardCancellable: Cancellable?
@@ -27,20 +30,10 @@ class KeyboardManager: ObservableObject {
                 guard let userInfo = notification.userInfo else {return}
                 guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
                 
-                self.topFrame = keyboardFrame.maxY
-                
-                
-                
                 self.isVisible = keyboardFrame.minY < UIScreen.main.bounds.height
                     
                     
-                self.keyboardHeight = self.isVisible ? keyboardFrame.height : 0
-                    
-                
-                
             }
-        
-        
         
     }
     

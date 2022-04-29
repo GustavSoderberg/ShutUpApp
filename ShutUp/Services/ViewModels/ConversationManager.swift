@@ -1,9 +1,14 @@
-//
-//  ConversationModel.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-03-28.
-//
+/**
+ 
+ - Description:
+ The ConversationManager.swift is a ViewModel for the different conversation views that handles the interactions with the user
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import Foundation
 import Firebase
@@ -61,6 +66,10 @@ class ConversationManager: ObservableObject {
         cm.refresh += 1
         
     }
+    
+    /**
+        We're keeping track of which Users get selected for a new conversation with an array that gets modified with the following methods
+     */
     
     func select(user: User) {
         self.selectedUsers.append(user)

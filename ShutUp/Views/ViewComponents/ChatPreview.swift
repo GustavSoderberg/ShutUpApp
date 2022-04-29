@@ -1,17 +1,20 @@
-//
-//  TitleRow.swift
-//  ShutUp
-//
-//  Created by Yolanda Jonasson on 2022-03-30.
-//
+/**
+ 
+ - Description:
+ The View for each conversation link in ConversationView
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 
 struct ChatPreview: View {
     
     var convo: Conversation
-    
-    var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
     
     var body: some View {
         

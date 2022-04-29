@@ -1,9 +1,14 @@
-//
-//  SingleConversationView.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-03-28.
-//
+/**
+ 
+ - Description:
+ The SingleConversationView.swift is a View that displays messages from a single conversation as well as a button for sending new messages
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 import Firebase
@@ -45,15 +50,10 @@ struct SingleConversationView: View {
                                     
                                 }
                             
-                            
-                            
-                            //Text("\(message.timeStamp.formatted()):\n\(message.text)").padding()
                         }
                         
                         
                         Spacer()
-                        //                }
-                        //                Spacer()
                     }
                     .onChange(of: keyboardManager.isVisible) { newValue in
                         print(keyboardManager.isVisible)
@@ -65,12 +65,8 @@ struct SingleConversationView: View {
                             
                         }
                         
-                        
-                        
                         keyboardManager.isVisible = false
                         
-                        
-                        print("im here" )
                     }
                     
                     .onAppear{
@@ -118,18 +114,8 @@ struct SingleConversationView: View {
                         
                     }.padding()
                     
-                }.toolbar {
-                    Button {
-                        showSettingsView = true
-                    } label: {
-                        Image(systemName: "gear")
-                    }
-                    
                 }
                 .navigationBarTitle(convoM.listOfConversations[index].name).navigationBarTitleDisplayMode(.inline)
-                .sheet(isPresented: $showSettingsView) {
-                    SettingsView(showSettingsView: $showSettingsView, conversation: convoM.listOfConversations[index])
-                }
                 
                 
             }
@@ -139,12 +125,14 @@ struct SingleConversationView: View {
     
 }
 
+/**
+ A view for displaying a single message in a conversation. It get's aligned and colored based on if the user is the currentUser or not
+ */
+
 struct MessageBubble : View{
     
     @ObservedObject var convoM = cm
     @State var showDate = false
-    
-    
     
     var message: Message
     
@@ -169,9 +157,6 @@ struct MessageBubble : View{
                         .padding()
                         .background(um.currentUser!.id == message.senderID ? Color.blue : Color(UIColor(named: "customGray")!))
                         .cornerRadius(30)
-                        
-                    
-                    
                     
                 }
                 
@@ -192,10 +177,6 @@ struct MessageBubble : View{
                 
                 
             }
-            
-            
-            
-            
             
         }
         .frame(maxWidth: .infinity, alignment: um.currentUser!.id == message.senderID ? .trailing : .leading)

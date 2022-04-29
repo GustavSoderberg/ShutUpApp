@@ -1,26 +1,29 @@
-//
-//  MessageRequests.swift
-//  ShutUp
-//
-//  Created by Yolanda Jonasson on 2022-04-11.
-//
+/**
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 
-struct MessageRequests: View {
+struct AccountSettings: View {
 
     var body: some View {
 
+
         HStack{
 
-            Image(systemName: "message.circle.fill")
+            Image(systemName: "person.crop.circle.fill")
                 .font(.system(size: 25))
                 .padding()
-                .foregroundColor(Color.blue)
+                .foregroundColor(Color.purple)
                 .symbolRenderingMode(.multicolor)
             Spacer()
-            Text("Message Requests")
-                Spacer()
+            Text("Account Settings")
+            Spacer()
 //            Image(systemName: "greaterthan")
 //                .padding()
 
@@ -28,3 +31,5 @@ struct MessageRequests: View {
 
     }
 }
+
+

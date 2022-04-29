@@ -1,9 +1,11 @@
-//
-//  ShutUpApp.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-03-28.
-//
+/**
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 import Firebase
@@ -18,15 +20,16 @@ struct ShutUpApp: App {
     init() {
         
         FirebaseApp.configure()
-        cm.isConnected = nm.isConnected!
+        if let networkStatus = nm.isConnected {
+            cm.isConnected = networkStatus
+        }
     }
     
     var body: some Scene {
         WindowGroup {
             
             ConversationView()
-//                .ignoresSafeArea(.keyboard)
-                //.environment(\.colorScheme, .dark)
+            
         }
     }
 }

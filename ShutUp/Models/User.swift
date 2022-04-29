@@ -1,9 +1,14 @@
-//
-//  User.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-03-28.
-//
+/**
+ 
+ - Description:
+ The User.swift is a Model for a user object
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import Foundation
 

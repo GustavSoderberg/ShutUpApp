@@ -1,9 +1,14 @@
-//
-//  AppDelegate.swift
-//  FirebaseUI
-//
-//  Created by Gustav Söderberg on 2022-04-20.
-//
+/**
+ 
+ - Description:
+ This is an AppDelegate required specifically for the Facebook login service
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import FacebookCore
 

@@ -1,9 +1,14 @@
-//
-//  SwiftUIView.swift
-//  ShutUp
-//
-//  Created by Calle Höglund on 2022-04-26.
-//
+/**
+ 
+ - Description:
+ The PrivacyView.swift is a View that displays our app core values
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 

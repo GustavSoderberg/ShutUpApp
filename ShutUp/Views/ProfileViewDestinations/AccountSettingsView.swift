@@ -1,9 +1,14 @@
-//
-//  AccountSettingsView.swift
-//  ShutUp
-//
-//  Created by Calle Höglund on 2022-04-26.
-//
+/**
+ 
+ - Description:
+ The AccountSettings.swift is a View that was supposed to handle user settings (such as changing username etc.)
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 

@@ -1,9 +1,14 @@
-//
-//  Conversation.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-03-28.
-//
+/**
+ 
+ - Description:
+ The Conversation.swift is a Model for a conversation object
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import Foundation
 import SwiftUI

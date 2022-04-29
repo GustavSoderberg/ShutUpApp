@@ -1,17 +1,20 @@
-//
-//  TitleRow.swift
-//  ShutUp
-//
-//  Created by Yolanda Jonasson on 2022-03-30.
-//
+/**
+ 
+ - Description:
+ A View for diplaying a user in the new conversation sheet
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 
-struct TitleRow: View {
+struct UserDisplay: View {
 
     var user: User
-
-    var imageURL = URL(string: "https://cdn.discordapp.com/attachments/958000950046494780/958656460068380702/modelpic2.png")
 
     var body: some View {
         HStack(spacing: 20) {

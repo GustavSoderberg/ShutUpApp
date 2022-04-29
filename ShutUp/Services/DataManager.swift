@@ -34,7 +34,7 @@ class DataManager {
                     
                 } else {
                     cm.listOfConversations.removeAll()
-                    print("## Successfully read users from firestore ##")
+                    print("## Successfully read convos from firestore ##")
                     
                     for document in snapshot.documents {
                         let result = Result {

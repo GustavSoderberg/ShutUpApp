@@ -214,10 +214,9 @@ struct ConversationView: View {
                                                 
                                                 
                                                 ChatPreview(convo: convo)
-                                                
                                                     .gesture(DragGesture(minimumDistance: 75, coordinateSpace: .local)
                                                         .onEnded({ value in
-                                                            if value.translation.width < 0 {
+                                                            if cm.isConnected && value.translation.width < 0 {
                                                                 
                                                                 selectedConvo = index
                                                                 withAnimation{
@@ -225,7 +224,7 @@ struct ConversationView: View {
                                                                 }
                                                                 
                                                             }
-                                                            if value.translation.width > 0 {
+                                                            if cm.isConnected && value.translation.width > 0 {
                                                                 withAnimation{
                                                                     showDelete = false
                                                                 }

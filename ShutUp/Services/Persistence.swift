@@ -1,9 +1,14 @@
-//
-//  Persistence.swift
-//  gsdx<g
-//
-//  Created by Gustav Söderberg on 2022-04-25.
-//
+/**
+ 
+ - Description:
+ The Persistance.swift is provided by Apple and handles the communication with CoreData
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import CoreData
 

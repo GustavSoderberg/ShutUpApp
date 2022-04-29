@@ -34,7 +34,7 @@ class ConversationManager: ObservableObject {
         let newMessage = Message(id: UUID(), timeStamp: Date.now, senderID: user.id, text: message)
         conversation.messages.append(newMessage)
         
-        dm.updateCoredata(conversation: conversation, message: newMessage)
+        //dm.updateCoredata(conversation: conversation, message: newMessage)
         dm.updateFirestore(conversation: conversation, message: newMessage)
         
     }

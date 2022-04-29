@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ConversationCOD" representedClassName="ConversationCOD" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="uid" optional="YES" attributeType="String"/>
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserCOD" inverseName="inverseMembers" inverseEntity="UserCOD"/>
-        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MessageCOD" inverseName="inverseMessages" inverseEntity="MessageCOD"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MessageCOD" inverseName="inverseMessages" inverseEntity="MessageCOD"/>
     </entity>
     <entity name="MessageCOD" representedClassName="MessageCOD" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -21,8 +20,8 @@
         <relationship name="inverseMembers" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConversationCOD" inverseName="members" inverseEntity="ConversationCOD"/>
     </entity>
     <elements>
-        <element name="UserCOD" positionX="229.640625" positionY="287.85546875" width="128" height="28"/>
-        <element name="ConversationCOD" positionX="270" positionY="351" width="128" height="104"/>
+        <element name="ConversationCOD" positionX="270" positionY="351" width="128" height="89"/>
         <element name="MessageCOD" positionX="297" positionY="369" width="128" height="104"/>
+        <element name="UserCOD" positionX="229.640625" positionY="287.85546875" width="128" height="28"/>
     </elements>
 </model>

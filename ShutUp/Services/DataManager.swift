@@ -1,9 +1,14 @@
-//
-//  DataManager.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-04-01.
-//
+/**
+ 
+ - Description:
+ The DataManager.swift handles the communication with Firestore and/or Core Data depending on the users internet connection
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import Foundation
 import Firebase
@@ -17,18 +22,19 @@ class DataManager {
     func listenToFirestore() {
         
         if cm.isConnected {
-            self.emptyCoredata(selection: (false, true))
-            print("hello from firestore")
+            
+            self.wipeCoredata(selection: (false, false))
             
             db.collection("convos").addSnapshotListener { snapshot, err in
+                
                 guard let snapshot = snapshot else { return }
                 
                 if let err = err {
                     print("Error getting convo document \(err)")
                     
                 } else {
-                    
                     cm.listOfConversations.removeAll()
+                    print("## Successfully read convos from firestore ##")
                     
                     for document in snapshot.documents {
                         let result = Result {
@@ -40,38 +46,7 @@ class DataManager {
                         switch result {
                         case.success(let convo) :
                             
-                            let convoCOD = ConversationCOD(context: pc)
-                            convoCOD.id = convo!.id
-                            convoCOD.uid = "\(convo!.uid)"
-                            convoCOD.name = convo!.name
-                            
-                            for member in convo!.members {
-                                let userCOD = UserCOD(context: pc)
-                                userCOD.id = member.id
-                                userCOD.username = member.username
-                                userCOD.photoUrl = member.photoUrl
-                                
-                                convoCOD.addToMembers(userCOD)
-                            }
-                            
-                            for message in convo!.messages {
-                                let messageCOD = MessageCOD(context: pc)
-                                messageCOD.id = message.id
-                                messageCOD.senderID = message.senderID
-                                messageCOD.timeStamp = message.timeStamp
-                                messageCOD.text = message.text
-                                
-                                convoCOD.addToMessages(messageCOD)
-                            }
-                            
-                            do {
-                                try pc.save()
-                                print("✔️ Conversation saved to coredata from firebase")
-                            }
-                            catch {
-                                print("E: DataManager - listenToFirestore(): Failed to fetch & save conversations")
-                            }
-                            
+                            self.saveToCoredata(conversation: convo!)
                             
                             cm.listOfConversations.append(convo!)
                             cm.refresh += 1
@@ -116,24 +91,23 @@ class DataManager {
             }
             
         }
-        else if !cm.isConnected { // COREDATA
+        else if !cm.isConnected {
             
-            self.emptyCoredata(selection: (false,false))
-            
-            print("hello from core data")
+            self.wipeCoredata(selection: (false,false))
             
             let fetchRequest1: NSFetchRequest<UserCOD> = UserCOD.fetchRequest()
             
             pc.perform {
                 do {
+                    
                     let result = try fetchRequest1.execute()
-                    print("## Successfully read users from coredata ##")
                     for user in result {
                         
                         um.listOfUsers.append(User(id: user.id!, username: user.username!, photoUrl: user.photoUrl!))
                         
                     }
                     
+                    print("## Successfully read users from coredata ##")
                     
                 } catch {
                     print("E: Failed to fetch users coredata \(error)")
@@ -160,14 +134,14 @@ class DataManager {
                             messagesDecoded.append(Message(id: message.id!, timeStamp: message.timeStamp!, senderID: message.senderID!, text: message.text!))
                         }
                         
-                        let conversation = Conversation(uid: (UUID(uuidString: convo.id!) ?? UUID()), name: convo.name!, members: membersDecoded, messages: messagesDecoded)
+                        let conversation = Conversation(uid: UUID(uuidString: convo.uid!)!, name: convo.name!, members: membersDecoded, messages: messagesDecoded)
                         
                         cm.listOfConversations.append(conversation)
                         
                         
                     }
                     
-                    print("Loaded \(cm.listOfConversations.count) conversations from coredata")
+                    print("Loaded \(cm.listOfConversations.count) conversation(s) from coredata")
                     
                     self.setCurrentUser()
                     
@@ -258,37 +232,84 @@ class DataManager {
     
     func saveToCoredata(conversation: Conversation) {
         
-        let convoCOD = ConversationCOD(context: pc)
-        convoCOD.id = "\(conversation.uid)"
-        convoCOD.name = conversation.name
-        print("\(convoCOD.id) \(conversation.uid)")
-        
-        for member in conversation.members {
-            let userCOD = UserCOD(context: pc)
-            userCOD.id = member.id
-            userCOD.username = member.username
-            userCOD.photoUrl = member.photoUrl
             
-            convoCOD.addToMembers(userCOD)
-        }
-        
-        for message in conversation.messages {
-            let messageCOD = MessageCOD(context: pc)
-            messageCOD.id = message.id
-            messageCOD.timeStamp = message.timeStamp
-            messageCOD.senderID = message.senderID
-            messageCOD.text = message.text
+            var existingConversation = false
+            let fetchRequest2: NSFetchRequest<ConversationCOD> = ConversationCOD.fetchRequest()
             
-            convoCOD.addToMessages(messageCOD)
-        }
-        
-        do {
-            try pc.save()
-            print("✔ Saved the conversation to coredata")
-        }
-        catch {
-            print("E: DataManager - saveToCoreData(): Error saving conversation \(error)")
-        }
+            pc.perform {
+                do {
+                    let result = try fetchRequest2.execute()
+                    
+                    for convo in result {
+                        
+                        
+                        if convo.uid! == "\(conversation.uid)" && convo.messages!.count < conversation.messages.count {
+                            let messageCOD = MessageCOD(context: pc)
+                            messageCOD.id = conversation.messages.last!.id
+                            messageCOD.timeStamp = conversation.messages.last!.timeStamp
+                            messageCOD.senderID = conversation.messages.last!.senderID
+                            messageCOD.text = conversation.messages.last!.text
+                            
+                            convo.addToMessages(messageCOD)
+                            
+                            do {
+                                try pc.save()
+                                existingConversation = true
+                                print("Message updated to the existing coredata conversation")
+                            }
+                            catch {
+                                print(error)
+                            }
+                            break
+                            
+                        } else if convo.uid! == "\(conversation.uid)"  {
+                            
+                            existingConversation = true
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    if !existingConversation {
+
+                        let convoCOD = ConversationCOD(context: pc)
+                        convoCOD.uid = "\(conversation.uid)"
+                        convoCOD.name = conversation.name
+
+                        for member in conversation.members {
+                            let userCOD = UserCOD(context: pc)
+                            userCOD.id = member.id
+                            userCOD.username = member.username
+                            userCOD.photoUrl = member.photoUrl
+
+                            convoCOD.addToMembers(userCOD)
+                        }
+
+                        for message in conversation.messages {
+                            let messageCOD = MessageCOD(context: pc)
+                            messageCOD.id = message.id
+                            messageCOD.timeStamp = message.timeStamp
+                            messageCOD.senderID = message.senderID
+                            messageCOD.text = message.text
+
+                            convoCOD.addToMessages(messageCOD)
+                        }
+
+                        do {
+                            try pc.save()
+                            print("✔ A conversation was saved to coredata")
+                        }
+                        catch {
+                            print("E: DataManager - saveToCoreData(): Error saving conversation \(error)")
+                        }
+
+                    }
+                    
+                } catch {
+                    print("E: Failed to fetch users coredata \(error)")
+                }
+            }
         
     }
     
@@ -317,7 +338,7 @@ class DataManager {
                 let result = try fetchRequest2.execute()
                 for convo in result {
                     
-                    if convo.id == "\(conversation.uid)" {
+                    if convo.uid == "\(conversation.uid)" {
                         
                         let messageCOD = MessageCOD(context: pc)
                         messageCOD.id = message.id
@@ -354,28 +375,25 @@ class DataManager {
                 let result = try fetchRequest2.execute()
                 for convo in result {
                     
-                    if convo.id == "\(conversation.uid)" {
+                    if convo.uid == "\(conversation.uid)" {
                         
                         pc.delete(convo)
                         print("⚠ Deleted conversation from coredata")
+                        cm.refresh += 1
                         
-                    }
-                    
-                    else {
-                        print("Couldnt find conversation to remove from coredata")
                     }
                     
                 }
                 try! pc.save()
                 
             } catch {
-                print("E: Failed to fetch users coredata \(error)")
+                print("E: Failed to delete conversation from coredata \(error)")
             }
         }
         
     }
     
-    func emptyCoredata(selection: (Bool,Bool)) { // selection.0 for users, selection.1 for conversations
+    func wipeCoredata(selection: (Bool,Bool)) {
         
         if selection.0 {
             
@@ -409,7 +427,6 @@ class DataManager {
             pc.perform {
                 do {
                     let result = try fetchRequest2.execute()
-                    print("## Successfully read conversations from coredata ##")
                     for convo in result {
                         
                         pc.delete(convo)
@@ -418,7 +435,7 @@ class DataManager {
                     
                     try! pc.save()
                     
-                    print("Coredata conversations is now empty")
+                    print("## Successfully deleted all conversations from coredata ##")
                     
                 } catch {
                     print("E: Failed to remove conversations coredata \(error)")

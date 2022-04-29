@@ -1,9 +1,14 @@
-//
-//  NetworkManager.swift
-//  ShutUp
-//
-//  Created by Calle Höglund on 2022-04-25.
-//
+/**
+ 
+ - Description:
+ The NetworkManager.swift determines if the user is connected to the internet or not and updates a bool accordingly
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import Foundation
 import Network
@@ -19,14 +24,14 @@ class NetworkManager: ObservableObject {
         monitor.pathUpdateHandler = { path in
             
             
-            if path.status != .satisfied{
-                print("not connected")
+            if path.status != .satisfied {
+                print("No Internet connection")
                 
                 self.isConnected = false
             }
-                
-            if path.status == .satisfied{
-                print("net u have")
+            
+            if path.status == .satisfied {
+                print("You're successfully connected to the Internet")
                 
                 self.isConnected = true
             }

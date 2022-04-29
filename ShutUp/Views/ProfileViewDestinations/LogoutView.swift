@@ -1,16 +1,14 @@
-//
-//  LogoutView.swift
-//  ShutUp
-//
-//  Created by Yolanda Jonasson on 2022-04-12.
-//
-
-//
-//  DarkModeSettings.swift
-//  ShutUp
-//
-//  Created by Yolanda Jonasson on 2022-04-10.
-//
+/**
+ 
+ - Description:
+ The LogoutView.swift is a View that handles the confirmation of signing out a User
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 import Firebase

@@ -1,9 +1,14 @@
-//
-//  UserManager.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-04-12.
-//
+/**
+ 
+ - Description:
+ The UserManager.swift is a ViewModel for the registration and logging in of a user
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import Foundation
 import CoreData
@@ -19,15 +24,18 @@ class UserManager {
     func register(username: String, uid: String, photoUrl: String) {
         
         let user = User(id: uid, username: username, photoUrl: photoUrl)
+        
         dm.saveUserToCoredata(user: user)
         dm.saveUserToFirestore(user: user)
         self.currentUser = User(id: uid, username: username, photoUrl: photoUrl)
         
-        
-        
     }
     
-    func loginCheck(uid: String) -> Bool {
+    /**
+     Since we want to match the logged in user from Firebase auth with the user object in our firestore we loop through them and sets the current user when the uid matches
+     */
+    
+    func loginCheck(uid: String, firstTime: Bool) -> Bool {
         
         
         for user in listOfUsers {
@@ -35,30 +43,14 @@ class UserManager {
             if user.id == uid {
                 
                 self.currentUser = user
+                if firstTime { dm.saveUserToCoredata(user: user) }
                 print("Logged in as \(user.username)")
                 return false
                 
             }
         }
         
-        
         return true
-        
-        
-    }
-    
-    func loginCoredata(uid: String) {
-        
-        for user in listOfUsers {
-            
-            if user.id == uid {
-                
-                print("Oh Coredata plz log me in it's my first time")
-                let user = User(id: user.id, username: user.username, photoUrl: user.photoUrl)
-                dm.saveUserToCoredata(user: user)
-                
-            }
-        }
         
     }
 }

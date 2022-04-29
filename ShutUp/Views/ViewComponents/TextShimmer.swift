@@ -1,9 +1,14 @@
-//
-//  RainbowShimmer.swift
-//  ShutUp
-//
-//  Created by Yolanda Jonasson on 2022-03-29.
-//
+/**
+ 
+ - Description:
+ Our continue button for creating a new conversation has a text shimmer made by this View
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 
@@ -16,6 +21,9 @@ struct TextShimmer: View {
 
         ZStack{
             Text(text)
+                .bold()
+            Text(text)
+                .bold()
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(Color.white.opacity(0.55))
 

@@ -1,9 +1,11 @@
-//
-//  CreditView.swift
-//  ShutUp
-//
-//  Created by Yolanda Jonasson on 2022-04-08.
-//
+/**
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 

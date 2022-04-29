@@ -1,9 +1,15 @@
-//
-//  ContentView.swift
-//  ShutUp
-//
-//  Created by Gustav Söderberg on 2022-03-28.
-//
+/**
+ 
+ - Description:
+ The ConversationView.swift is our app main View that displays the users conversation as well as buttons for creating a new conversation, a search function etc.
+ All our ViewModels are instanced from this view as singleton objects
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 import Firebase
@@ -15,11 +21,9 @@ import CoreData
 
 //Global instances of a Singleton object
 var cm = ConversationManager()
-//var sm = SettingsManager()
 var dm = DataManager()
 var um = UserManager()
 let pc = PersistenceController.shared.container.viewContext
-
 
 
 struct ConversationView: View {
@@ -214,10 +218,9 @@ struct ConversationView: View {
                                                 
                                                 
                                                 ChatPreview(convo: convo)
-                                                
                                                     .gesture(DragGesture(minimumDistance: 75, coordinateSpace: .local)
                                                         .onEnded({ value in
-                                                            if value.translation.width < 0 {
+                                                            if cm.isConnected && value.translation.width < 0 {
                                                                 
                                                                 selectedConvo = index
                                                                 withAnimation{
@@ -225,7 +228,7 @@ struct ConversationView: View {
                                                                 }
                                                                 
                                                             }
-                                                            if value.translation.width > 0 {
+                                                            if cm.isConnected && value.translation.width > 0 {
                                                                 withAnimation{
                                                                     showDelete = false
                                                                 }
@@ -327,6 +330,9 @@ struct ConversationView: View {
     }
 }
 
+/**
+ A View for selecting and creating a new conversation
+ */
 
 
 struct NewConversationView : View{
@@ -353,9 +359,9 @@ struct NewConversationView : View{
                 } label: {
                     
                     if !convoM.selectedUsers.contains(user) {
-                        TitleRow(user: user)
+                        UserDisplay(user: user)
                     } else if convoM.selectedUsers.contains(user) {
-                        TitleRow(user: user)
+                        UserDisplay(user: user)
                             .foregroundColor(Color.white)
                             .background(Color.blue)
                             .cornerRadius(20)
@@ -403,7 +409,9 @@ struct NewConversationView : View{
                 
             }
         } label: {
-            Text("Continue")
+            
+            TextShimmer(text: "Continue")
+            
         }
         
     }

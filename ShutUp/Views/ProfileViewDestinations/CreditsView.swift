@@ -1,9 +1,14 @@
-//
-//  CreditsView.swift
-//  ShutUp
-//
-//  Created by Calle Höglund on 2022-04-26.
-//
+/**
+ 
+ - Description:
+ The CreditsView.swift is a View that displays the app creators
+ 
+ - Authors:
+ Andreas J
+ Gustav S
+ Calle H
+ 
+ */
 
 import SwiftUI
 

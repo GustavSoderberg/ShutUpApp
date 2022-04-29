@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F05FDFF27FB0B550058FACF /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F05FDFE27FB0B550058FACF /* SettingsManager.swift */; };
 		3F05FE0127FB184D0058FACF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F05FE0027FB184D0058FACF /* SettingsView.swift */; };
 		3F1B83EF2816BB0200A411D0 /* ShutUpCD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B83ED2816BB0200A411D0 /* ShutUpCD.xcdatamodeld */; };
 		3F1B84102816BCEA00A411D0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B840F2816BCEA00A411D0 /* Persistence.swift */; };
@@ -53,7 +52,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F05FDFE27FB0B550058FACF /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		3F05FE0027FB184D0058FACF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3F1B83EE2816BB0200A411D0 /* ShutUpCD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShutUpCD.xcdatamodel; sourceTree = "<group>"; };
 		3F1B840F2816BCEA00A411D0 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 				3FE0BE8228116CED00196B2F /* Info.plist */,
 				3FCA499527FCCE560058A3B5 /* GoogleService-Info.plist */,
 				3FE554FB27F6E5B400325B17 /* Services */,
-				3FAE94D627F203D700957C61 /* ViewModels */,
 				3FAE94CF27F2019200957C61 /* Models */,
 				3FAE94CE27F2017A00957C61 /* Views */,
 				3FAE94C027F2012900957C61 /* ShutUpApp.swift */,
@@ -183,7 +180,6 @@
 		3FAE94D627F203D700957C61 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				3F05FDFE27FB0B550058FACF /* SettingsManager.swift */,
 				3FAE94D727F2044300957C61 /* ConversationManager.swift */,
 				3F664E072805937200EC6CE7 /* UserManager.swift */,
 			);
@@ -196,6 +192,7 @@
 				3F1B840F2816BCEA00A411D0 /* Persistence.swift */,
 				3FE554FC27F6E5DF00325B17 /* DataManager.swift */,
 				E546A952281690A3004F4458 /* NetworkManager.swift */,
+				3FAE94D627F203D700957C61 /* ViewModels */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -322,7 +319,6 @@
 				3FAE94C327F2012900957C61 /* ConversationView.swift in Sources */,
 				B359E8F42800369400035660 /* ActivityStatus.swift in Sources */,
 				B359E9372805B3E500035660 /* LogoutView.swift in Sources */,
-				3F05FDFF27FB0B550058FACF /* SettingsManager.swift in Sources */,
 				3FE0BE8D28116DDB00196B2F /* AppDelegate.swift in Sources */,
 				3FAE94D327F201B600957C61 /* Message.swift in Sources */,
 				3FAE94C127F2012900957C61 /* ShutUpApp.swift in Sources */,

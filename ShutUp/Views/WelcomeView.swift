@@ -80,13 +80,12 @@ struct WelcomeView: View {
         }
         .sheet(isPresented: $showLoginView, onDismiss: {
             
-            if firstTime && !um.loginCheck(uid: Auth.auth().currentUser?.uid ?? ""){
-                um.loginCoredata(uid: Auth.auth().currentUser!.uid)
+            if firstTime && !um.loginCheck(uid: Auth.auth().currentUser?.uid ?? "", firstTime: true){
                 firstTime = false
                 showWelcomeView = false
             }
             else {
-                showWelcomeView = um.loginCheck(uid: Auth.auth().currentUser?.uid ?? "")
+                showWelcomeView = um.loginCheck(uid: Auth.auth().currentUser?.uid ?? "", firstTime: false)
                 refresh += 1
             }
             

@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>FacebookAppID</key>
-    <string>516144160061159</string>
-    <key>FacebookClientToken</key>
-    <string>d4f42df47e4a0cf52053571a7e354ef8</string>
-    <key>FacebookDisplayName</key>
-    <string>ShutUpApp</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -15,7 +9,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.984895350843-on40anepkalppfrfnioh1au16uhvn9lh</string>
+				<string>com.googleusercontent.apps.984895350843-4f2oqet7qsg16ceung2oqjk8qmm21ue0</string>
 			</array>
 		</dict>
 		<dict>
@@ -27,5 +21,11 @@
 			</array>
 		</dict>
 	</array>
+	<key>FacebookAppID</key>
+	<string>516144160061159</string>
+	<key>FacebookClientToken</key>
+	<string>d4f42df47e4a0cf52053571a7e354ef8</string>
+	<key>FacebookDisplayName</key>
+	<string>ShutUpApp</string>
 </dict>
 </plist>

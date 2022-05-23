@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F1B83EF2816BB0200A411D0 /* ShutUpCD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B83ED2816BB0200A411D0 /* ShutUpCD.xcdatamodeld */; };
 		3F1B84102816BCEA00A411D0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B840F2816BCEA00A411D0 /* Persistence.swift */; };
+		3F406DC2283C0A9400D3EEF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F406DC1283C0A9400D3EEF2 /* GoogleService-Info.plist */; };
 		3F664E082805937200EC6CE7 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F664E072805937200EC6CE7 /* UserManager.swift */; };
 		3F7E753F2819A16E00D503BD /* FirebaseAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7E753E2819A16E00D503BD /* FirebaseAuthUI */; };
 		3F7E75412819A16E00D503BD /* FirebaseFacebookAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7E75402819A16E00D503BD /* FirebaseFacebookAuthUI */; };
@@ -26,7 +27,6 @@
 		3FAE94D527F201CD00957C61 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE94D427F201CD00957C61 /* Conversation.swift */; };
 		3FAE94D827F2044300957C61 /* ConversationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE94D727F2044300957C61 /* ConversationManager.swift */; };
 		3FAE94DA27F2123600957C61 /* SingleConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE94D927F2123600957C61 /* SingleConversationView.swift */; };
-		3FCA499627FCCE560058A3B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FCA499527FCCE560058A3B5 /* GoogleService-Info.plist */; };
 		3FE0BE8D28116DDB00196B2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE0BE8C28116DDA00196B2F /* AppDelegate.swift */; };
 		3FE554FD27F6E5DF00325B17 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE554FC27F6E5DF00325B17 /* DataManager.swift */; };
 		3FE554FF27F6E75F00325B17 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE554FE27F6E75F00325B17 /* WelcomeView.swift */; };
@@ -49,6 +49,7 @@
 /* Begin PBXFileReference section */
 		3F1B83EE2816BB0200A411D0 /* ShutUpCD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShutUpCD.xcdatamodel; sourceTree = "<group>"; };
 		3F1B840F2816BCEA00A411D0 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		3F406DC1283C0A9400D3EEF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F664E072805937200EC6CE7 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		3FAE94BD27F2012900957C61 /* ShutUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShutUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FAE94C027F2012900957C61 /* ShutUpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutUpApp.swift; sourceTree = "<group>"; };
@@ -60,7 +61,6 @@
 		3FAE94D427F201CD00957C61 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		3FAE94D727F2044300957C61 /* ConversationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationManager.swift; sourceTree = "<group>"; };
 		3FAE94D927F2123600957C61 /* SingleConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleConversationView.swift; sourceTree = "<group>"; };
-		3FCA499527FCCE560058A3B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3FE0BE8228116CED00196B2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3FE0BE8C28116DDA00196B2F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE554FC27F6E5DF00325B17 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				3FE0BE8228116CED00196B2F /* Info.plist */,
-				3FCA499527FCCE560058A3B5 /* GoogleService-Info.plist */,
+				3F406DC1283C0A9400D3EEF2 /* GoogleService-Info.plist */,
 				3FE554FB27F6E5B400325B17 /* Services */,
 				3FAE94CF27F2019200957C61 /* Models */,
 				3FAE94CE27F2017A00957C61 /* Views */,
@@ -290,7 +290,7 @@
 			files = (
 				3FAE94C827F2012A00957C61 /* Preview Assets.xcassets in Resources */,
 				3FAE94C527F2012A00957C61 /* Assets.xcassets in Resources */,
-				3FCA499627FCCE560058A3B5 /* GoogleService-Info.plist in Resources */,
+				3F406DC2283C0A9400D3EEF2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +456,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ShutUp/Preview Content\"";
-				DEVELOPMENT_TEAM = 4S7BBW6D46;
+				DEVELOPMENT_TEAM = KWQ4QJC9D4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShutUp/Info.plist;
@@ -471,7 +471,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gustavsoderberg.ShutUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gustavsoderberg.ShutUpApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -487,7 +487,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ShutUp/Preview Content\"";
-				DEVELOPMENT_TEAM = 4S7BBW6D46;
+				DEVELOPMENT_TEAM = KWQ4QJC9D4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShutUp/Info.plist;
@@ -502,7 +502,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gustavsoderberg.ShutUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gustavsoderberg.ShutUpApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

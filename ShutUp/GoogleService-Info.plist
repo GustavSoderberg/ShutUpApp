@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>984895350843-on40anepkalppfrfnioh1au16uhvn9lh.apps.googleusercontent.com</string>
+	<string>984895350843-4f2oqet7qsg16ceung2oqjk8qmm21ue0.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.984895350843-on40anepkalppfrfnioh1au16uhvn9lh</string>
+	<string>com.googleusercontent.apps.984895350843-4f2oqet7qsg16ceung2oqjk8qmm21ue0</string>
 	<key>API_KEY</key>
 	<string>AIzaSyD3yuoejmw7-pPq61qWytnjDV7EJ_i1HDM</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.gustavsoderberg.ShutUp</string>
+	<string>com.gustavsoderberg.ShutUpApp</string>
 	<key>PROJECT_ID</key>
 	<string>shutup-24693</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:984895350843:ios:9dd408d162dcc8fcf2d41e</string>
+	<string>1:984895350843:ios:c249d4361272546cf2d41e</string>
 </dict>
 </plist>
